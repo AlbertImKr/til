@@ -21,6 +21,14 @@ description: 노력은 배신하지 않는다.
 {% tab title="CS" %}
 [design-pattern.md](study/cs/design-pattern.md "mention")
 {% endtab %}
+
+{% tab title="Java" %}
+[java-collection-framework.md](study/java/java-collection-framework.md "mention")
+
+[annotation.md](study/java/annotation.md "mention")
+
+[generic.md](study/java/generic.md "mention")
+{% endtab %}
 {% endtabs %}
 
 
