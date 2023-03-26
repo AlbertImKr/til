@@ -1,35 +1,32 @@
 ---
-description: 노력은 배신하지 않는다.
+description: 학습한 내용을 정리하고 기록하는 공간입니다.
 ---
 
-# Efforts do not betray
+# README
 
-{% hint style="info" %}
-학습한 내용을 정리하고 기록하는 공간입니다.
-{% endhint %}
+## :man\_genie:Efforts do not betray
+
+### :man\_running:노력은 배신하지 않는다.
 
 
 
-{% tabs %}
-{% tab title="Spring" %}
-[odt](study/spring/odt/ "mention")
+## 목록:
 
-* [springcore](study/spring/odt/springcore/ "mention")
-  * [ioccontainer.md](study/spring/odt/springcore/ioccontainer.md "mention")
-{% endtab %}
+### [Spring](study/spring/)
 
-{% tab title="CS" %}
-[design-pattern.md](study/cs/design-pattern.md "mention")
-{% endtab %}
+* [스프링 공식문서 번역](study/spring/odt/)
+  * [SpringCore](study/spring/odt/springcore/)
+    * [IoCContainer](study/spring/odt/springcore/ioccontainer.md)
 
-{% tab title="Java" %}
-[java-collection-framework.md](study/java/java-collection-framework.md "mention")
+### [CS](study/cs/)
 
-[annotation.md](study/java/annotation.md "mention")
+* [디자인 패턴](study/cs/design-pattern.md)
 
-[generic.md](study/java/generic.md "mention")
-{% endtab %}
-{% endtabs %}
+### [Java](study/java/)
+
+* [Java Collection Framework](study/java/java-collection-framework.md)
+* [Annotation](study/java/annotation.md)
+* [Generic](study/java/generic.md)
 
 
 

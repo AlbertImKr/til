@@ -33,7 +33,7 @@ Annotations은 metadata를 구문과 연결하는 클래스 , 메서드 또는 �
 * @Repeatable&#x20;
   * 동일한 컨텍스트에서 여러 번 적용할 수 있을 나타냅니다. 즉 클래스는 동일한 주석을 두 번 이상 적용할 수 있습니다.
 
-
+## Reference
 
 > [https://github.com/JaeYeopHan/Interview\_Question\_for\_Beginner/tree/master/Java#annotation](https://github.com/JaeYeopHan/Interview\_Question\_for\_Beginner/tree/master/Java#annotation)
 >
