@@ -1,6 +1,6 @@
 # Annotation
 
-Annotation이란 주석이란 뜻으로, 인터페이스를 기반으로 한 문법이다. 주석과는 그 역할이 다르지만 주석처럼 코드에 달아 클래스에 특별한 의미를 부여하거나 기능을 주입할 수 있다. 또 해석되는 시점을 정할 수도 있다.(Rentention Policy) Annotation에는 크게 세 가지 종류가 존재한다. JDK 에 내장되어 있는 built-in annotation과 annotation에 대한 정보를 나타내기 위한 annotation인 Meta-annotation 그리고 개발자가 직접 만들어 내는 Custom Annotation이 있다. built-in annotation은 상속받아서 메서드를 오버라이드 할 때 나타나는 @Override annotation이 그 대표적인 예이다. 에노테이션의 동작 대상을 결정하는 Meta-Annotation에도 여러 가지가 존재한다.
+Annotation이란 주석이란 뜻으로, 인터페이스를 기반으로 한 문법이다. 주석과는 그 역할이 다르지만 주석처럼 코드에 달아 클래스에 특별한 의미를 부여하거나 기능을 주입할 수 있다. 또 해석되는 시점을 정할 수도 있다.(Rentention Policy) Annotation에는 크게 세 가지 종류가 존재한다. JDK 에 내장되어 있는 built-in annotation과 annotation에 대한 정보를 나타내기 위한 annotation인 Meta-annotation 그리고 개발자가 직접 만들어 내는 Custom Annotation이 있다.
 
 
 
@@ -28,8 +28,6 @@ Annotations은 metadata를 구문과 연결하는 클래스 , 메서드 또는 �
   * 컴파일러에 의해 유지되어야 하는 기간을 설명합니다.
 * @Inherited&#x20;
   * 상위 유형에 적용되는 경우 하위 유형에 의해 상속되어야 함을 나타냅니다.
-* @Deprecated&#x20;
-  * 더 이상 사용하지 않아야 함을 나타냅니다.
 * @Repeatable&#x20;
   * 동일한 컨텍스트에서 여러 번 적용할 수 있을 나타냅니다. 즉 클래스는 동일한 주석을 두 번 이상 적용할 수 있습니다.
 
