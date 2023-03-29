@@ -13,10 +13,15 @@ Annotations은 metadata를 구문과 연결하는 클래스 , 메서드 또는 �
 ## Built-in Annotation
 
 * @Override
-* @FunctionalInterface
+  * 메서드가 상속된 메서드의 동작을 재정의하거나 대체함을 나타내는 데 사용됩니다.
+* @FunctionalInterface&#x20;
+  * 인터페이스에 하나의 메서드를 나타내는 데 사용됩니다.
 * @SuppressWarnings
-* @SafeVarargs
+  * 코드의 일부에서 특정 경고를 무시하고 싶다는 것을 나타냅니다.
+* @SafeVarargs&#x20;
+  * varargs 사용과 관련된 경고 유형에 적용됩니다.
 * @Deprecated&#x20;
+  * API를 더 이상 사용하지 않도록 표시할 수 있습니다.
 
 
 
@@ -26,8 +31,14 @@ Annotations은 metadata를 구문과 연결하는 클래스 , 메서드 또는 �
   * 적용할 수 있는 대상을 설명합니다.
 * @Retention&#x20;
   * 컴파일러에 의해 유지되어야 하는 기간을 설명합니다.
+  * RetentionPolicy.SOURCE – 컴파일러와 런타임 모두에서 볼 수 없습니다.
+  * RetentionPolicy.CLASS – 컴파일러에서 볼 수 있음&#x20;
+  * RetentionPolicy.RUNTIME – 컴파일러와 런타임에서 볼 수 있습니다.
 * @Inherited&#x20;
   * 상위 유형에 적용되는 경우 하위 유형에 의해 상속되어야 함을 나타냅니다.
+* @Documented&#x20;
+  * 기본적으로 Java는 Javadocs에서 @Annotation 사용을 문서화하지 않습니다.
+  * 그러나 @Documented 주석을 사용하여 Java의 기본 동작을 변경할 수 있습니다.
 * @Repeatable&#x20;
   * 동일한 컨텍스트에서 여러 번 적용할 수 있을 나타냅니다. 즉 클래스는 동일한 주석을 두 번 이상 적용할 수 있습니다.
 
@@ -38,3 +49,5 @@ Annotations은 metadata를 구문과 연결하는 클래스 , 메서드 또는 �
 > [https://dzone.com/articles/5-annotations-every-java-developer-should-know](https://dzone.com/articles/5-annotations-every-java-developer-should-know)
 >
 > [https://dzone.com/articles/what-are-meta-annotations-in-java](https://dzone.com/articles/what-are-meta-annotations-in-java)
+>
+> [https://www.baeldung.com/java-default-annotations](https://www.baeldung.com/java-default-annotations)
