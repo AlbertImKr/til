@@ -584,5 +584,838 @@ Spring 문서에서 "factory bean"은 Spring 컨테이너에 구성되고 [insta
 
 
 
-**Comming Soon**
+## 4. Dependencies
+
+
+
+일반적으로 엔터프라이즈 애플리케이션은 단일 객체(또는 Spirng용어로 빈)로 구성되지 않습니다.  가장 단순한 애플리케이션이라도 최종 사용자에게 일관성 있는 애플리케이션을 보여주기 위하여 함께 작동하는 여러개의 개체가 있습니다.  다음 색션에서는 독립적인 여러 bean definitions을 defining하는 것부터 목표를 달성하기 위해 객체가 협력하는 완전히 구현된 애플리케이션으로 이동하는 방법을 설명합니다.
+
+
+
+## 4.1 Dependency Injection
+
+
+
+Dependency injection (DI)는 생성자 인수, 팩토리 메서드에 대한 인수 또는 팩토리 메서드에서 생성되거나 반환된 객체 인스턴스에 설정된 속성을 통해서만 객체의 의존성(즉 객체와 협업하고 있는 다른 객체)을 정의하는 프로세스입니다. 그런 다음 컨테이너는 빈을 생성할 때 이러한 의존성을 주입합니다. 이 프로세스는 기본적으로 클래스의 적집 구성 또는 서비스 로케이터 패턴을 사용하여 bean자체의 의존성 위치 또는 인스턴스화를 제어하는 bean 자체의 역전(따라서 이름, Inversion of Control)입니다. DI 원칙을 사용하면 코드가 더 깔끔해지며 객체에 의존성을 제공될 때 더 효과적으로 분리합니다. 객체는 의존성을 조회하지 않으면 의존성의 위치나 클래스를  알지 못합니다.  그 결과, 특히 의존성이 인터페이스 또는 추상 기본 클래스에 있을 때 클래스를 테스트하기가 더 숴워지며, 이를 통해 stub 또는 mock 구현을 단위테스트에 사용할 수 있습니다.
+
+
+
+DI는 두 가지 주요 변형으로 존재합니다. [Constructor-based dependency injection](ioccontainer.md#constructor-based-dependency-injection)과 [Setter-based dependency injection](ioccontainer.md#setter-based-dependency-injection) 이 있습니다.
+
+
+
+### **Constructor-based Dependency Injection**
+
+생성자 기반 DI은 각각 의존성을 나타내는 여러 인수를 사용하여 생성자를 호출하는 컨테이너에 의해 달성됩니다.  Bean을 구성하기 위해 특정 인수로 **static** 팩토리 메서드 호출하는 것은 거의 동일하며 이 토론에서는 생성자와 **static** 팩토리 메서드에 대한 인수를 유사하게 취급합니다. 다음 예제는 생성자 주입을 통해서만 의존성 주입이 가능한 클래스를 보여줍니다.
+
+```java
+public class SimpleMovieLister {
+
+    // SimpleMovieLister에는 MovieFinder에 대한 의존성이 있습니다.
+    private final MovieFinder movieFinder;
+
+    // Spring 컨테이너가 MovieFinder를 주입할 수 있도록 하는 생성자
+    public SimpleMovieLister(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    // 주입된 MovieFinder를 실제로 사용하는 비즈니스 로직은 생략
+}
+```
+
+이 클래스는 특별한 것이 없습니다. 컨테이너 특정 인터페이스, 기본 클래스 또는 annotations에 대한 의존성이 없는 POJO입니다.
+
+
+
+### Constructor Argument Resolution
+
+생성자 인수 Resolution은 인수 유형을 사용하여 매칭합니다. Bean definition의 생성자 인수에 잠재적인 모호성이 없는 경우, 생성자 인수가 bean definition에서 정의되는 순서는 Bean이 인스턴스화될 때 해당 인수가 적절한 생성자에게 제공되는 순서입니다. 다음 클래스를 고려합니다.
+
+```java
+package x.y;
+
+public class ThingOne {
+
+    public ThingOne(ThingTwo thingTwo, ThingThree thingThree) {
+        // ...
+    }
+}
+```
+
+ThingTwo 및 ThingThree 클래스가 상속에 의해 관련되지 않는다고 가정하면 잠재적 모호성이 존재하지 않습니다.  따라서 다음 구성은 제대로 작동하면 \<constructor-arg/>요소에 새성자 인수 인덱스 또는 유형을 명시적으로 지정할 필요가 없습니다.
+
+```xml
+<beans>
+    <bean id="beanOne" class="x.y.ThingOne">
+        <constructor-arg ref="beanTwo"/>
+        <constructor-arg ref="beanThree"/>
+    </bean>
+
+    <bean id="beanTwo" class="x.y.ThingTwo"/>
+
+    <bean id="beanThree" class="x.y.ThingThree"/>
+</beans>
+```
+
+다른 bean이 참조될 때 유형을 알고 있으면 매칭을 할 수 있습니다(이전 예제의 경우처럼). \<value>true\</value>와 같은 단순 유형을 사용하는 경우 Spring은 값의 유형을 판별할 수 업으므로 도움 없이 유형별로 매칭할수 없습니다. 다음 클래스를 고려합니다.
+
+```java
+package examples;
+
+public class ExampleBean {
+
+    // Ultimate Answer를 계산하는 데 걸리는 연수
+    private final int years;
+
+    // 생명,우주,모든것에 대한 해답
+    private final String ultimateAnswer;
+
+    public ExampleBean(int years, String ultimateAnswer) {
+        this.years = years;
+        this.ultimateAnswer = ultimateAnswer;
+    }
+}
+```
+
+
+
+#### 생성자 인수 유형 매칭
+
+__
+
+이전 시나리오에서 컨테이너는 다음 예제와 같이 **type** attribute을 사용하여 생성자 인수 type을 명시적으로 지정하는 경우 단순 타입과 타입 매칭을 사용할 수 있다.
+
+```java
+<bean id="exampleBean" class="examples.ExampleBean">
+    <constructor-arg type="int" value="7500000"/>
+    <constructor-arg type="java.lang.String" value="42"/>
+</bean>
+```
+
+__
+
+#### 생성자 인수 인덱스
+
+__
+
+다음 예제와 같이 **index** attribute를 사용하여 생성자 인수의 인덱스를 명시적으로 지정할 수 있습니다.
+
+```java
+<bean id="exampleBean" class="examples.ExampleBean">
+    <constructor-arg index="0" value="7500000"/>
+    <constructor-arg index="1" value="42"/>
+</bean>
+```
+
+여러 단순 값의 모호성을 해결하는 것 외에도 index를 지정하면 생성자에 동일한 유형의 두 인수를 갖는 모호성도 해결할 수 있습니다.
+
+
+
+{% hint style="info" %}
+index는 0부터 시작합니다.
+{% endhint %}
+
+#### 생성자 인수 이름
+
+
+
+다음 예제와 같이 값 명확성을 위해 생성자 매개 변수 이름을 사용할 수도 있습니다
+
+```java
+<bean id="exampleBean" class="examples.ExampleBean">
+    <constructor-arg name="years" value="7500000"/>
+    <constructor-arg name="ultimateAnswer" value="42"/>
+</bean>
+```
+
+이 작업을 즉시 수행하려면 Spring이 생성자에서 매개변수 이름을 조회할 수 있도록 디버그 플래그를 사용하여 코드를 컴파일해야 합니다. 디버그 플래그로 코드를 컴파일할 수 없거나 컴파일하지 않으려면 [@ConstructorProperties ](https://docs.oracle.com/javase/8/docs/api/java/beans/ConstructorProperties.html)JDK annotation을 사용하여 생성자 인수의 이름을 명시적으로 지정할 수 있습니다. 그러면 샘플 클래스는 다음과 같아야 합니다.
+
+```java
+package examples;
+
+public class ExampleBean {
+
+    // 생략된 Fields
+
+    @ConstructorProperties({"years", "ultimateAnswer"})
+    public ExampleBean(int years, String ultimateAnswer) {
+        this.years = years;
+        this.ultimateAnswer = ultimateAnswer;
+    }
+}
+
+
+```
+
+****
+
+### **Setter-based Dependency Injection**
+
+setter기반 DI는 컨테이너가 빈을 인스턴스화하기 위해 인수 없는 생성자 또는 인수 없는 **static** 팩토리 메서드를 호출한 후 빈의 세터 메서드를 통하여 달성합니다. 다음 예제에서는 순수한 setter 주입을 사용해야만 의존성 주입할 수 있는 클래스를 보여 주입니다. 이 클래스는 일반적으로 Java입니다. 컨테이너 특정 인터페이스, 기본 클래스 또는 annotation에 대한 의존성이 없는 POJO입니다.
+
+```java
+public class SimpleMovieLister {
+
+    // SimpleMovieLister에는 MovieFinder에 대한 의존성이 있습니다.r
+    private MovieFinder movieFinder;
+
+    // Spring 컨테이너가 MovieFinder를 주입할 수 있도록 하는 setter 메서드
+    public void setMovieFinder(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    // 주입된 MovieFinder를 실제로 사용하는 비즈니스 로직은 생략...
+}
+```
+
+ApplicationContext는 관리하는 Bean에 대해 생성자 기반 및 setter기반 DI를 지원합니다. 또한 생성자 접근 방식을 통해 일부 의존성이 이미 주입된 후 setter기반 DI를 지원합니다.  속성을 한 형식에서 다른 형식으로 변환하기 위해 PropertyEdito 인스턴스와 함께 사용하는 BeanDefinition 형식으로 의존성을 구성합니다.  그러나 대부분 Spring 사용자는 이러한 클래스를 직접(즉,프로그래밍 방삭으로) 작업하지 않고 XML bean definitions, annotatied 구성 요서(즉 @Component, @Controller 등으로 주석이 달린 클래스) 또는 Java기반 @Configuration 클래스의 @Bean 메서드를 사용합니다. 그런 다음 이러한 소스는 내부적으로 BeanDefinitiond의 인스턴스로 변환되고 전체 Spring IoC 컨테이너 인스턴스를 로드하는 데 사용됩니다.
+
+{% hint style="info" %}
+### 생성자 기반 or setter 기반 DI?
+
+생성자 기반 DI와 setter 기반 DI를 혼합할 수 있으므로 필수 의존성에 대해서는 생성자를 사용하고 선택적  의존성에 대해서는 setter 메서드 또는 configuration 메서드를 사용하는것이 좋습니다. setter 메서드에서 @Autowired annotation을 사용하여 속성을 필수 의존성으로 만들 수 있습니다. 그러나 프로그래밍 방식으로 인수를 검증하는 생성자 주입이 더 좋습니다.
+
+
+
+Spring 팀은 일반적으로 생성자 주입을 옹호하는데, 이는 애플리케이션 구성 요소를 불변 객체로 구현하고 필수 의존성이 null이 아님을 보장하기 때문이다. 또한 생성자 주입 구성 요소는 항상 완전히 초기화된 상태로 클라이언트(호출)코드에 반환됩니다. 참고로 많은 수의 생성자 인수는 나쁜 코드 냄새 입니다. 즉 클래스에 너무 많은 책임이 있을 수 있으며 문제의 적절한 분리를 더 잘 해결하기 위해 리팩토링해야 합니다.
+
+
+
+Setter 주입은 기본적으로 클래스 내에서 합리적인 기본 값을 할당할 수 있는 선택적 의존성에만 사용해야 합니다. 그렇지 않으면 코드가 의존성을 사용하는 모든 곳에서 null이 아닌 검사를 수행해야 합니다. setter주입의 한 가지 이점은 setter 메서드가 해당 클래스 개체를 나중에 재구성하거나 다시 주입할 수 있도록 만든다는 것입니다. 따라서 [JMX MBeans](https://docs.spring.io/spring-framework/docs/current/reference/html/integration.html#jmx)를 통해 관리는 setter 주입에 대한 강력한 사용 사례입니다.
+
+
+
+특정 클래스에 가장 적합한 DI 스타일을 사용합니다. 때로는 소스가 없는 타사 클래스를 처리할 때 선택이 이루어집니다. 예를 들어 타사 클래스가 setter 메서드를 노출하지 않는 경우 생성자 주입이 유일하게 사용 가능한 DI 형식일 수 있습니다.
+{% endhint %}
+
+### **Dependency Resolution Process**
+
+컨테이너는 다음과 같이 Bean 의존성 Resolution을 수행합니다.
+
+* Application는 모든 bean을 설명하는 configuration metadata로 생성되고 초기화됩니다. Configuration metadata은 XML,Java 코드 또는 annotations로 지정할 수 있습니다.
+* 각 빈에 대해 해당 의존성은 속성, 생성자 인수 또는 static-factory 메서드에 대한 인수의 형태로 표현됩니다.(일반 생성자 대신 사용하는 겨우). 이러한 의존성은 bean이 실제로 생성될 때 bean에 제공됩니다.
+* 각 속성 또는 생성자 인수는 설정할 값의 실제 definition이거나 컨테이너의 다른 빈에 대한 참조입니다.&#x20;
+* 값인 각 속성 또는 생성자 인수는 지정된 형식에서 해당 속성의 실제 타입으로 변환됩니다. 기본적으로 Spring은 문자열 형식으로 제공된 값을 int,long,String,boolean 등과 같은 모든 내장 유형으로 변환할 수 있습니다.
+
+Spring 컨테이너는 컨테이너가 생성될 때 각 빈의 구성을 검증합니다. 그러나 bean 속성 자체는 bean이 실제로 생성될 때까지 설정되지 않습니다. 싱글톤 범위이고 pre-instantiated(기본값)로 설정된 Bean은 컨테이너가 생성될 때 생성됩니다.  범위는 [Bean Scopes](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes)에서 정의됩니다. 그렇지 않으면 요청될 때만 Bean이 생성됩니다. bean의 생성은 잠재적으로 bean의 의존성 및 해당 의존성의 의존성(등)이 생성되고 할당됨에 따라 bean의 그래프가 생성됩니다.  이러한 의존성 간의 해결 불일치는 늦게 나타날 수 있습니다. 즉, 영향을 받는 Bean을 처음 생성할 때 나타날 수 있습니다.
+
+{% hint style="info" %}
+### Circular dependencies
+
+주로 생성자 주입을 사용하는 경우 행결할 수 없는 순환 의존성 시나리오를 만들 수 있습니다.
+
+
+
+예를 들어 클래스 A에는 생성자 주입을 통해 클래스 B의 인스턴스가 필요하고 클래스 B에는 생성자 주입을 통해 클래스 A의 인스턴스가 필요합니다. 클래스 A와  B가 서로 주입되도록 빈을 구성하면 Spring IoC 컨테이너는 러타임에 이 순환을 참조를 감지하고 **BeanCurrentlyInCreationException**을 발생시킵니다.
+
+
+
+한 가지 가능한 해결책은 생성자 아닌 setter가 구성할 일부 클래스의 소스 코드를 편집하는 것입니다. 또는 생성자 주입을 피하고 setter 주입만 사용합니다. 즉 권자하지는 않지만 setter 주입으로 순환 의존성을 구성할 수 있습니다.
+
+
+
+일반적인 경우(순환 의존성이 없음)와 달리 bean A와 bean B 간의 순환 의존성은 bean 중 하나가 완전히 초기화되기 전에 다른 bean에 주입되도록 강제합니다.(전통적인 닭과 달걀의 시나리오)
+{% endhint %}
+
+일반적으로 Spring이 올바른 일을 한다고 믿을 수 있습니다. 컨테이너 로드 시 존재하지 않은 Bean 및 순환 의존성에 대한 참조와 같은 구성 문제를 감지하빈다. Spring은 Bean이 실제로 생성될 때 가능한 한 늦게 속성을 설정하고 의존성을 해결합니다. 즉 올바르게 로드된 Spring 컨테이너는 해당 객체 또는 해당 의존성 중 하나를 생성하는 데 문제가 있는 경우 객체를 요청할 때 나중에 예외를 생성할 수 있음을 의미합니다- 예를 들어 bean은 누락되거나 잘못된 속성의 결과로 예외를 던집니다. 일부 구성 문제에 대한 잠재적으로 지연된 가시성은 ApplicationContext 구현이 기본적으로 싱글톤 빈을 미리 인스턴스화하는 이유입니다. 실제로 필요하기 전에 이러한 빈을 생성하기 위한 약간의 선행 시간과 메모리 비용으로 나중에가 아니라 ApplicationContext가 생성될 때 구성 문제를 발견합니다. 이 기본 동작을 제정의하여 싱글톤 빈이 열심히 미리 인스턴스화되지 않고 느리게 초기화되도록 할 수 있습니다.
+
+
+
+순환 의존성이 없는 경우 하나 이상의 협력 빈이 의존빈에 주입될 때 각 협력 빈은 의존 빈에 주입되기 전에 완전히 구성됩니다. 즉 bean A가 bean B에 대한 의존성을 가지고 있으면 Spring IoC 컨테이너는 bean A에서 setter 메서드를 호출하기 전에 bean B를 완전히 구성합니다. 즉 빈이 인스턴스화되고(미리 인스턴스화된 싱글톤이 아닌 경우) 해당 의존성이 설정되며 관련 수명 주기 메서드(예: [configured init method](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle-initializingbean) 또는 [InitializaingBean callback method](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle-initializingbean))가 호출됩니다.
+
+### **Examples of Dependency Injection**
+
+다음 예에서는 setter 기반 DI에 XML 기반 configuration metadata를 사용합니다. Spring XML 구성 파일의 작은 부분은 다음과 같이 일부 bean 정의를 지정합니다.
+
+```xml
+<bean id="exampleBean" class="examples.ExampleBean">
+    <!-- 중첩된 ref 요소를 사용한 setter 주입 -->
+    <property name="beanOne">
+        <ref bean="anotherExampleBean"/>
+    </property>
+
+    <!-- 더 깔금한 ref속서을 사용한 주입 -->
+    <property name="beanTwo" ref="yetAnotherBean"/>
+    <property name="integerProperty" value="1"/>
+</bean>
+
+<bean id="anotherExampleBean" class="examples.AnotherBean"/>
+<bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
+```
+
+다음 예제는 해당하는 ExampleBean 클래스를 보여줍니다.
+
+```java
+public class ExampleBean {
+
+    private AnotherBean beanOne;
+
+    private YetAnotherBean beanTwo;
+
+    private int i;
+
+    public void setBeanOne(AnotherBean beanOne) {
+        this.beanOne = beanOne;
+    }
+
+    public void setBeanTwo(YetAnotherBean beanTwo) {
+        this.beanTwo = beanTwo;
+    }
+
+    public void setIntegerProperty(int i) {
+        this.i = i;
+    }
+}
+```
+
+
+
+앞의 예에서 setter는 XML 파일에 지정된 속성과 일치하도록 선언됩니다. 다음 예에서는 생성자 기반 DI를 사용합니다.
+
+```xml
+<bean id="exampleBean" class="examples.ExampleBean">
+    <!-- 중첩된 ref 요소를 사용한 setter 주입 -->
+    <constructor-arg>
+        <ref bean="anotherExampleBean"/>
+    </constructor-arg>
+
+    <!-- 더 깔금한 ref속서을 사용한 주입 -->
+    <constructor-arg ref="yetAnotherBean"/>
+    <constructor-arg type="int" value="1"/>
+</bean>
+
+<bean id="anotherExampleBean" class="examples.AnotherBean"/>
+<bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
+
+```
+
+다음 예제는 해당하는 ExampleBean 클래스를 보여줍니다.
+
+```java
+public class ExampleBean {
+
+    private AnotherBean beanOne;
+
+    private YetAnotherBean beanTwo;
+
+    private int i;
+
+    public ExampleBean(AnotherBean anotherBean, YetAnotherBean yetAnotherBean, int i) {
+        this.beanOne = anotherBean;
+        this.beanTwo = yetAnotherBean;
+        this.i = i;
+    }
+}
+```
+
+Bean definition에 지정된 생성자 인수는 ExampleBean의 생성자에 대한 인수로 사용됩니다.
+
+
+
+이제 생성자를 사용하는 대신 객체의 인스턴스를 반환하기 위해 정적 팩토리 메서드를 호출하도록 Spring에 지시하는 이 예제의 변형을 고려합니다.
+
+```xml
+<bean id="exampleBean" class="examples.ExampleBean" factory-method="createInstance">
+    <constructor-arg ref="anotherExampleBean"/>
+    <constructor-arg ref="yetAnotherBean"/>
+    <constructor-arg value="1"/>
+</bean>
+
+<bean id="anotherExampleBean" class="examples.AnotherBean"/>
+<bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
+```
+
+다음 예제는 해당하는 ExampleBean 클래스를 보여줍니다.
+
+```java
+public class ExampleBean {
+
+    // private 생성자
+    private ExampleBean(...) {
+        ...
+    }
+
+    // 정적 팩토리 메소드; 이 메소드에 대한 인수는
+    // 해당 인수가 실제로 사용되는 방법에 관계없이 반환되는
+    // Bean의 의존성으로 간주될 수 있습니다.
+    public static ExampleBean createInstance (
+        AnotherBean anotherBean, YetAnotherBean yetAnotherBean, int i) {
+
+        ExampleBean eb = new ExampleBean (...);
+        // 다른 작업...
+        return eb;
+    }
+}
+```
+
+**static** 팩터리 메서드에 대한 인수는 **\<constructor-arg/>** 요소에 의해 제공되며 마치 생성자가 실제로 사용된 것과 정확히 동일합니다. 팩터리 메서드에서 반환되는 클래스의 타입은 **static** 팩터리 메서드를 포함하는 클래스와 같은 **타입**일 필요는 없습니다(이 예제에서는 동일하지만). 인스턴스(non-static) 팩토리 메서드는 본질적으로 동일한 방식으로 사용될 수 있으므로(class 속성 대신 factory-bean 속성을 사용하는 것 제외) 여기서는 이러한 세부 사항을 노의하지 않습니다.
+
+
+
+## 4.2 Dependencies and Configuration in Detail
+
+[이전 섹션](ioccontainer.md#4.1-dependency-injection)에서 언급한 것 처럼 다른 빈(협력자)에 대한 참조 또는 인라인으로 정의된 값으로 빈 속성 및 생성자 인수를 정의할 수 있습니다. Spring의 XML 기반 configuration metadata는 이러한 목적을 위해 \<property/>및 \<constructor-arg/> 요소 내의 하위 요소 유형을 지원합니다.
+
+
+
+### **Straight Values (Primitives, Strings, and so on)**
+
+\<property/> 요소의 값 특성은 사람이 읽을 수 있는 문자열 표현으로 속성 또는 생성자 인수를 지정합니다. Spring의  [conversion service](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#core-convert-ConversionService-API)는 이러한 값을 문자열에서 속성 또는 인수의 실제 유형으로 변환하는 데 사용됩니다. 다음 예에서는 설정되는 다양한 값을 보여줍니다.
+
+```java
+<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <!-- setDriverClassName(String) 호출 결과 -->
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+    <property name="username" value="root"/>
+    <property name="password" value="misterkaoli"/>
+</bean>
+```
+
+다음 예제에서는 훨씬 더 간결한 XML 구성을 위해 p-namespace를 사용합니다.
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+        destroy-method="close"
+        p:driverClassName="com.mysql.jdbc.Driver"
+        p:url="jdbc:mysql://localhost:3306/mydb"
+        p:username="root"
+        p:password="misterkaoli"/>
+
+</beans>
+```
+
+앞의 XML이 더 간결합니다. 그러나 bean definitions를 생성할 때 자동 속성 완성을 지원하는 IDE(예: IntelliJ IDEA 또는 Spring Tools for Eclipse)를 사용하지 않는 한 디자인 타임이 아닌 런타임에 오타가 발견됩니다. 이러한 IDE 보조를 적극 권장합니다.
+
+
+
+다음과 같이 **java.util.Properties** 인스턴스를 구성할 수도 있습니다.
+
+```xml
+<bean id="mappings"
+    class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+
+    <!-- java.util.Properties로 입력됨 -->
+    <property name="properties">
+        <value>
+            jdbc.driver.className=com.mysql.jdbc.Driver
+            jdbc.url=jdbc:mysql://localhost:3306/mydb
+        </value>
+    </property>
+</bean>
+```
+
+
+
+Spring 컨테이너는 JavaBeans **PropertyEditor** 메커니즘을 사용하여 **\<value/>** 요소 내부의 텍스트를 **java.util.Properties** 인스턴스로 변환합니다. 이것은 좋은 지름길이며 Spring 팀이 **value** 속성 스타일보다 중첩된 \<value/> 요소의 사용을 선호하는 몇 가지 중의 하나입니다.
+
+
+
+### The iderf element
+
+**idref** 요소는 컨테이너에 있는 다른 빈의 id(참조가 아닌 문자열 값)를 \<constructor-arg/>또는 \<property/> 요소로 전달하는 오류 방지 방법입니다. 다음 예제는 사용 방법을 보여줍니다.
+
+```xml
+<bean id="theTargetBean" class="..."/>
+
+<bean id="theClientBean" class="...">
+    <property name="targetName">
+        <idref bean="theTargetBean"/>
+    </property>
+</bean>
+```
+
+앞의 빈 정의 스니펫은 다음 스니펫과 정확히 (런타임 시)동일합니다.
+
+```xml
+<bean id="theTargetBean" class="..." />
+
+<bean id="client" class="...">
+    <property name="targetName" value="theTargetBean"/>
+</bean>
+```
+
+첫 번째 형식은 두 번째 형식보다 선호되는데, **idref** 태그를 사용하면 배포 시 컨테이너가 참조되고 명명된 bean이 실제로 존재하는지 확인할 수 있기 때문입니다. 두 번째 변형에서는 클라이언트 빈의 targetName 속성에 전달된 값에 대해 유효성 검사가 수행되지 않습니다. 오타는 클라이언트 빈이 실제로 인스턴스화될 때만 발견됩니다(치명적인 결과가 발생할 가능성이 가장 높음). 클라이언트 빈이 [prototype](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes) 빈인 경우 이 오타와 그에 따른 예외는 컨테이너가 배포된 후 오랜 시간이 지난 후에야 발견될 수 있습니다.
+
+{% hint style="info" %}
+**idref** 요소의 로컬 속성은 더 이상 일반 bean 참조에 대한 값을 제공하지 않으므로 4.0 bean XSD에서 더 이상 지원되지 않습니다. 4.0 스키마로 업그레이드할 때 기존 **idref local** 참조를 **idref bean**으로 변경해야 한다.
+{% endhint %}
+
+\<idref/> 요소가 값을 가져오는 일반적인 위치(최소한 Spring 2.0 이전 버전에서)는 **ProxyFactoryBean** bean definition의 [AOP Interceptors](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-pfb-1) 구성에 있습니다. 인터셉터 이름을 지정할 때 \<idref/>요소를 사용하면 인터셉터 ID의 오타를 방지할 수 있습니다.
+
+
+
+### **References to Other Beans (Collaborators)**
+
+ref 요소는 \<constructor-arg/> 또는 \<property/> 정의 요소 내부의 마지막 요소입니다. 여기에서 빈의 지정된 속성 값을 컨테이너가 관리하는 다른 빈(협력자)에 대한 참조로 설정합니다. 참조된 Bean은 속성을 설정할 Bean의 의존성이며 속성이 설정되기 전에 필요에 따라 초기화됩니다. (협력자가 싱글톤 빈인 경우 이미 컨테이너에 의해 초기화되었을 수 있습니다.). 모든 참조는 궁극적으로 다른 개체에 대한 참조입니다. 범위 지정 및 유효성 검증은 **bean** 또는 **parent** 속성을 통해 다른 오브젝트의 ID 또는 이름을 지정하는지 여부에 따라 다릅니다.
+
+
+
+**\<ref>** 태그의 **bean** 속성을 통해 대상 bean을 지정하는 것은 가장 일반적인 형식이며 동일한 XML 파일에 있는지 여부에 관계없이 동일한 컨테이너 또는 부모 컨테이너의 모든 bean에 대한 참조를 생성할 수 있습니다. **Bean** 속성의 값은 대상 Bean의 **id** 속성과 동일하거나 대상 Bean의 **name** 속성 값 중 하나와 동일할 수 있습니다. 다음 예제에서는 **ref** 요소를 사용하는 방법을 보여줍니다.
+
+```xml
+<ref bean="someBean"/>
+```
+
+**parent** 속성을 통해 대상 bean을 지정하면 현재 컨테이너의 상위 컨테이너에 있는 bean에 대한 참조가 생성됩니다. **parent** 속성의 값은 대상 Bean의 id 속성 또는 대상 Bean의 **name** 속성 값 중 하나와 동일할 수 있습니다.  대상 빈은 현재 빈의 상위 컨테이너에 있어야 합니다. 컨테이너의 계층 구조가 있고 부모 빈과 동일한 이름을 가진 프록시를 사용하여 부모 컨테이너의 기존 빈을 래핑하려는 경우 주로 이 빈 참조 변형을 사용해야 합니다. 다음 두가지 내용은 parent 속성을 사용하는 방법을 보여줍니다.
+
+```xml
+<!-- 상위 컨텍스트에서 -->
+<bean id="accountService" class="com.something.SimpleAccountService">
+    <!-- 여기에 필요에 따라 의존성을 삽입합니다. -->
+</bean>
+```
+
+```xml
+<!-- 하위(하위) 컨텍스트에서 -->
+<bean id="accountService" <!-- bean name is the same as the parent bean -->
+    class="org.springframework.aop.framework.ProxyFactoryBean">
+    <property name="target">
+        <ref parent="accountService"/> <!-- 부모 bean을 참조하는 방법에 주목합니다. -->
+    </property>
+    <!-- 여기에 필요에 따라 다른 구성 및 의존성을 삽입합니다. -->
+</bean>
+```
+
+{% hint style="info" %}
+**ref** 요소의 **local** 속성은 더 이상 일반 bean 참조에 대한 값을 제공하지 않기 때문에 4.0 bean XSD에서 더 이상 지원되지 않습니다. 4.0 스키마로 업그레이드할 때 기존 **ref local** 참조를 **ref bean**으로 변경하십시오.
+{% endhint %}
+
+
+
+### Inner Beans
+
+\<proerty/> 또는 \<constructor-arg/> 요소 내부의 \<bean/>요소는 다음 예제와 같이 내부 빈을 정의합니다. 다음 예를 볼 수 있듯이:
+
+```xml
+<bean id="outer" class="...">
+    <!-- 대상 bean에 대한 참조를 사용하는 대신 대상 bean을 인라인으로 간단히 정의합니다 -->
+    <property name="target">
+        <bean class="com.example.Person"> <!-- 이것이 inner bean -->
+            <property name="name" value="Fiona Apple"/>
+            <property name="age" value="25"/>
+        </bean>
+    </property>
+</bean>
+```
+
+inner bean definition에는 정의된 ID나 이름이 필요하지 않습니다. 지정된 경우 컨테이너는 이러한 값을 식별자로 사용하지 않습니다. Inner bean은 항상 익명이고 항상 외부 빈과 함께 생성되기 때문에 컨테이너는 생성 시 **scope** 플래그도 무시합니다. Inner bean에 독립적으로 액세스하거나 Inner bean의 enclosing bean이 아닌 협력 bean에 주입할 수 없습니다.
+
+
+
+특수한 경우로 사용자 scope에서 파괴 콜백을 받을 수 있습니다. (예를 들어 요청 범위의 싱글톤 bean에 포함된  inner bean의 경우). 내부 bean 인스턴스의 생성은 포함하는 bean에 연결되어 있지만 파괴 콜백을 통해 요청 범위의 수명 주기에 참여할 수 있습니다. 이것은 일반적인 시나리오가 아닙니다. Inner bean은 일반적으로 단순히 포함하는 빈의 범위를 공유합니다
+
+
+
+### Collections
+
+\<list/>,\<set/> ,\<map/> 및 \<props/> 요소는 각각 Java 컬렉션 유형 List, Set, Map 및 Properties의 속성 및 인수를 설정합니다. 다음 예에서는 사용 방법을 보여줍니다.
+
+```xml
+<bean id="moreComplexObject" class="example.ComplexObject">
+    <!-- setAdminEmails(java.util.Properties) 호출 결과 -->
+    <property name="adminEmails">
+        <props>
+            <prop key="administrator">administrator@example.org</prop>
+            <prop key="support">support@example.org</prop>
+            <prop key="development">development@example.org</prop>
+        </props>
+    </property>
+    <!-- setSomeList(java.util.List) 호출 결과 -->
+    <property name="someList">
+        <list>
+            <value>a list element followed by a reference</value>
+            <ref bean="myDataSource" />
+        </list>
+    </property>
+    <!-- setSomeMap(java.util.Map) 호출 결과 -->
+    <property name="someMap">
+        <map>
+            <entry key="an entry" value="just some string"/>
+            <entry key="a ref" value-ref="myDataSource"/>
+        </map>
+    </property>
+    <!-- setSomeSet(java.util.Set) 호출 결과 -->
+    <property name="someSet">
+        <set>
+            <value>just some string</value>
+            <ref bean="myDataSource" />
+        </set>
+    </property>
+</bean>
+```
+
+Map key나 value 또는 설정 value의 값은 다음 요소 중 하나일 수도 있습니다
+
+```xml
+bean | ref | idref | list | set | map | props | value | null
+```
+
+
+
+#### Collection Merging
+
+Spring 컨테이너는 컬렉션 병합도 지원합니다. 애플리케이션 개발자는 상위 \<list/>,\<map/>,\<set/> 또는 \<props/> 요소를 정의하고 상위 컬렉션에서 값을 상속하고 override한 하위 \<list/>,\<map/>,\<set/> 또는 \<props/> 요소를 가질 수 있습니다. 즉, 하위 컬렉션의 값은 상위 컬렉션과 하위 컬렉션의 요소를 병합한 결과이며 하위 컬렉션 요소는 상위 컬렉션에 지정된 값보다 우선합니다.
+
+
+
+병합에 대한 이 섹션에서는 parent-child bean 메커니즘에 대해 설명합니다. Parent and child Bean 정의에 익숙하지 않은 독자는 계속하기 전에 [관련 섹션](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-child-bean-definitions)을 읽어보기를 원할 수 있습니다.
+
+
+
+다음 예제에서는 컬렉션 병합을 보여줍니다.
+
+```xml
+<beans>
+    <bean id="parent" abstract="true" class="example.ComplexObject">
+        <property name="adminEmails">
+            <props>
+                <prop key="administrator">administrator@example.com</prop>
+                <prop key="support">support@example.com</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="child" parent="parent">
+        <property name="adminEmails">
+            <!-- 병합은 하위 컬렉션 정의에 지정됩니다. -->
+            <props merge="true">
+                <prop key="sales">sales@example.com</prop>
+                <prop key="support">support@example.co.uk</prop>
+            </props>
+        </property>
+    </bean>
+<beans>
+```
+
+자식 빈 정의의 **adminEmails** 속성의 **\<props/>**요소에서 **merge=true** 속성의 사용에 주목하세요. **Child** bean이 컨테이너에 의해 확인되고 인스턴스화되면 결과 인스턴스에는 자식의 **adminEmails** 컬렉션을 부모의 **adminEmails** 컬렉션과 병합한 결과가 포함된 **adminEmails** **Properties** 컬렉션이 있습니다. 다음 목록은 결과를 보여줍니다.
+
+```
+administrator=administrator@example.com
+sales=sales@example.com
+support=support@example.co.uk
+```
+
+child **Properties** 컬렉션의 값 집합은 parent \<props/>의 모든 속성 요소를 상속하며 **support** 값에 대한 child 값은 상위 컬렉션의 값을 재정의합니다.
+
+
+
+이 병합 동작은 \<list/>,\<map/> 및 \<set/> 컬렉션 유형에 유사하게 적용됩니다. \<list/>요소의 특정한 경우에 List 컬렉션 유형(즉, 정렬된 값 컬렉션의 개념)과 관련된 의미 체계가 유지됩니다. Parent의 값은 child 목록의 모든 값보다 우선합니다. Map, Set 및 Properties 컬렉션 유형의 경우 순서가 없습니다. 따라서 컨테이너가 내부적으로 사용하는 연결된 Map, Set 및 Properties 구현 유형의 기반이 되는 컬렉션 유형에 대해 순서 지정 의미 체계가 적용되지 않습니다.
+
+
+
+#### Limitations of Collection Merging
+
+서로 다른 컬렉션 유형(예: **Map** 및 **List**)을 병합할 수 없습니다. 그렇게 하려고 하면 적절한 예외가 발생합니다. **merge** 속성은 하위의 상속된 chiled definition에 지정되어야 합니다. 상위 컬렉션 definition에 **merge** 속성을 지정하는 것은 중복되며 원하는 병합으로 이어지지 않습니다.
+
+
+
+#### Strongly-typed collection
+
+generic types 대한 Java의 지원 덕분에 강력한 타입의 collections을 사용할 수 있습니다. 즉, (예를 들어) **String** 요소만 포함할 수 있도록 Collection 타입을 선언할 수 있습니다.  Spring을 사용하여 강력한 타입의 Collection을 bean에 의존성 주입하는 경우 강력한 타입의 Collection 인스턴스 요소가 Collection에 추가되기 전에 적절한 타입으로 변환되도록 Spring의 타입 변환 지원을 활용할 수 있습니다. 다음 Java 클래스 및 bean definition는 이를 수행하는 방법을 보여줍니다.
+
+```java
+public class SomeClass {
+
+    private Map<String, Float> accounts;
+
+    public void setAccounts(Map<String, Float> accounts) {
+        this.accounts = accounts;
+    }
+}
+```
+
+```xml
+<beans>
+    <bean id="something" class="x.y.SomeClass">
+        <property name="accounts">
+            <map>
+                <entry key="one" value="9.99"/>
+                <entry key="two" value="2.75"/>
+                <entry key="six" value="3.99"/>
+            </map>
+        </property>
+    </bean>
+</beans>
+```
+
+**something** 빈의 **accounts** 속성이 주입을 위해 준비되면 강력한 타입의 Map\<String, Float> 요소 유형에 대한 제네릭 정보를 리플렉션을 통해 사용할 수 있습니다. 따라서 Spring의 타입 변환 인프라는 다양한 값 요소를 Float 유형으로 인식하고 문자열 값(9.99, 2.75 및 3.99)을 실제 Float 유형으로 변환합니다.
+
+
+
+### **Null and Empty String Values**
+
+Spring은 속성 등에 대한 빈 인수를 빈 **Strings**로 취급합니다. 다음 XML 기반 configuration metadata 조각은 **email** 속성을 빈 **String** 값("")으로 설정합니다.
+
+```xml
+<bean class="ExampleBean">
+    <property name="email" value=""/>
+</bean>
+```
+
+앞의 예제는 다음 Java 코드와 동일합니다
+
+```java
+exampleBean.setEmail("");
+```
+
+\<null/>요소는 null 값을 처리합니다. 다음 목록은 예를 보여줍니다.
+
+```xml
+<bean class="ExampleBean">
+    <property name="email">
+        <null/>
+    </property>
+</bean>
+```
+
+앞의 구성은 다음 Java 코드와 동일합니다
+
+```java
+exampleBean.setEmail(null);
+```
+
+
+
+### **XML Shortcut with the p-namespace**
+
+p-namespace를 사용하면 **bean** 요소의 속성(중첩된 **\<property/>**요소 대신)을 사용하여 속성 값,협업 빈 또는 둘 다 설명할 수 있습니다.&#x20;
+
+
+
+Spring은 XML 스키마 definition를 기반으로 하는 [namespaces](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#core.appendix.xsd-schemas)로 확장 가능한 구성 형식을 지원합니다. 이 장에서 설명하는 **benas** 구성 형식은 XML 스키마 문서에 정의되어 있습니다. 그러나 p-namespace는 XSD 파일에 정의되어 있지 않으며 Spring의 코어에만 존재합니다.
+
+
+
+다음 예는 동일한 결과로 확인되는 두 개의 XML 스니펫(첫 번째는 표준 XML 형식을 사용하고 두 번째는 p-namespace를 사용함)을 보여줍니다.
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="classic" class="com.example.ExampleBean">
+        <property name="email" value="someone@somewhere.com"/>
+    </bean>
+
+    <bean name="p-namespace" class="com.example.ExampleBean"
+        p:email="someone@somewhere.com"/>
+</beans>
+```
+
+예제는 bean definition에서 **email**이라는 p-namespace의 속성을 보여줍니다. 이것은 속성 선언을 포함하도록 Spring에 지시합니다. 앞에서 언급했듯이 p-namespace에는 스키마 정의가 없으므로 특성 이름을 속성 이름으로 설정할 수 있습니다.
+
+
+
+이 다음 예제는 다른 bean에 대한 참조가 있는 두 개의 추가 bean 정의를 포함합니다.
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="john-classic" class="com.example.Person">
+        <property name="name" value="John Doe"/>
+        <property name="spouse" ref="jane"/>
+    </bean>
+
+    <bean name="john-modern"
+        class="com.example.Person"
+        p:name="John Doe"
+        p:spouse-ref="jane"/>
+
+    <bean name="jane" class="com.example.Person">
+        <property name="name" value="Jane Doe"/>
+    </bean>
+</beans>
+```
+
+이 예제에는 p-namespace를 사용하는 속성 값뿐만 아니라 속성 참조를 선언하는 특수 형식도 사용됩니다. 첫 번째 bean definition는 **\<property name="spouse" ref="jane"/>**을 사용하여 bean **john**에서 bean **jane**으로의 참조를 생성하는 반면 두 번째 bean definition는 **p:spouse-ref="jane"**를 속성으로 사용하여 똑같은 일을 수행합니다. 이 경우 **spouse**는 속성 이름인 반면 **-ref** 부분은 이것이 적접 값이 아니라 다른 빈에 대한 참조임을 나타냅니다.
+
+{% hint style="info" %}
+p-namespace은 표준 XML 형식만큼 유연하지 않습니다. 예를 들어 속성 ​​참조를 선언하는 형식은 **Ref**로 끝나는 속성과 충돌하지만 표준 XML 형식은 그렇지 않습니다. 세 가지 접근 방식을 모두 동시에 사용하는 XML 문서를 생성하지 않도록 접근 방식을 신중하게 선택하고 이를 팀원에게 전달하는 것이 좋습니다.
+{% endhint %}
+
+
+
+### **XML Shortcut with the c-namespace**
+
+[XML shortcut with the p-namespace](ioccontainer.md#xml-shortcut-with-the-p-namespace)를 비스한 Spring 3.1에 도입된 c-네임스페이스는 중첩된 **constructor-arg** 요소가 아닌 생성자 인수를 구성하기 위한 인라인 속성을 허용합니다.
+
+
+
+다음 예제에서는 **c:** namespace 사용하여 from [Constructor-based Dependency Injection](ioccontainer.md#constructor-based-dependency-injection)과 동일한 작업을 수행합니다.
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="beanTwo" class="x.y.ThingTwo"/>
+    <bean id="beanThree" class="x.y.ThingThree"/>
+
+    <!-- 선택적 인수 이름이 있는 전통적인 선언 -->
+    <bean id="beanOne" class="x.y.ThingOne">
+        <constructor-arg name="thingTwo" ref="beanTwo"/>
+        <constructor-arg name="thingThree" ref="beanThree"/>
+        <constructor-arg name="email" value="something@somewhere.com"/>
+    </bean>
+
+    <!-- 인수 이름이 있는 c-namespace 선언 -->
+    <bean id="beanOne" class="x.y.ThingOne" c:thingTwo-ref="beanTwo"
+        c:thingThree-ref="beanThree" c:email="something@somewhere.com"/>
+
+</beans>
+```
+
+**c:** namespace 이름으로 생성자 인수를 설정하기 위해 **p:** (bean 참조에 대한 후행 **-ref**)과 동일한 규칙을 사용합니다. 마찬가지로 XSD 스키마에 정의되어 있지 않더라도 XML 파일에 선언해야 합니다(스프링 코어 내부에 존재).
+
+
+
+드물게 생성자 인수 이름을 사용할 수 없는 경우(일반적으로 바이트코드가 디버깅 정보 없이 컴파일된 경우) 다음과 같이 인수 인덱스에 대한 fallback을 사용할 수 있습니다.
+
+```xml
+<!-- c-namespace index declaration -->
+<bean id="beanOne" class="x.y.ThingOne" c:_0-ref="beanTwo" c:_1-ref="beanThree"
+    c:_2="something@somewhere.com"/>
+```
+
+{% hint style="info" %}
+XML 문법으로 인해 index 표기법에는 XML 속성 이름이 숫자로 시작할 수 없기 때문에(일부 IDE에서 허용하더라도) 앞에 \_가 있어야 합니다. 해당 index 표기법은 **\<constructor-arg>** 요소에도 사용할 수 있지만 일반적으로 일반 선언 순서로 충분하기 때문에 일반적으로 사용되지 않습니다.
+{% endhint %}
+
+
+
+실제로 [constructor resolution mechanism](ioccontainer.md#constructor-argument-resolution)은 인수를 매칭시키는 데 매우 효율적이므로 실제로 필요한 경우가 아니면 구성 전체에서 이름 표기법을 사용하는 것이 좋습니다.
+
+
+
+### **Compound Property Names**
+
+최종 속성 이름을 제외한 경로의 모든 구성 요소가 **null**이 아닌 한 빈 속성을 설정할 때 복합 또는 중첩 속성 이름을 사용할 수 있습니다. 다음 bean definition를 고려합니다.
+
+```xml
+<bean id="something" class="things.ThingOne">
+    <property name="fred.bob.sammy" value="123" />
+</bean>
+```
+
+**Something** 빈은 **fred** 속성을 가지고 있습니다. **bob** 속성은 **sammy** 속성을 가지고 있고 최종 **sammy** 속성은 값 **123**으로 설정됩니다. 이것이 작동하려면 무언가의 **fred** 속성과 **fred**의 **bob** 속성이 **bean**이 생성된 후 **null**이 아니어야 합니다. 그렇지 않으면 **NullPointerException**이 발생합니다.
+
+
+
+
+
+#### **Comming Soon**
 
