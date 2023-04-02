@@ -12,16 +12,16 @@ description: Version 6.0.7
 
 
 
-<mark style="background-color:yellow;">**org.springframeworkd.beans**</mark> 및 <mark style="background-color:yellow;">**org.springframework.context**</mark> 패키지는 Spring Framework의 IoC 컨테이너의 기반입니다. [BeanFactory](https://docs.spring.io/spring-framework/docs/6.0.7/javadoc-api/org/springframework/beans/factory/BeanFactory.html) 인터페이스는 모든 유형의 객체를 관리할 수 있는 고급 구성 메커니즘을 제공합니다. [ApplicationContext](https://docs.spring.io/spring-framework/docs/6.0.7/javadoc-api/org/springframework/context/ApplicationContext.html)는 <mark style="background-color:yellow;">**BeanFactory**</mark>의 하위 인터페이스입니다.
+`org.springframeworkd.beans` 및 `org.springframework.context` 패키지는 Spring Framework의 IoC 컨테이너의 기반입니다. [BeanFactory](https://docs.spring.io/spring-framework/docs/6.0.7/javadoc-api/org/springframework/beans/factory/BeanFactory.html) 인터페이스는 모든 유형의 객체를 관리할 수 있는 고급 구성 메커니즘을 제공합니다. [ApplicationContext](https://docs.spring.io/spring-framework/docs/6.0.7/javadoc-api/org/springframework/context/ApplicationContext.html)는 `BeanFactory`의 하위 인터페이스입니다.
 
 ApplicationContext 다음을 추가한다.
 
 * Spring의 AOP 기능과 더 쉽게 통합
 * 메시지 리소스 처리(국제화에 사용)
 * 이벤트 발행
-* 애플리케이션 계층 특정 Context 예를 들어 웹 애플리케이션에서 사용하는 <mark style="background-color:yellow;">**webApplicationContext**</mark>
+* 애플리케이션 계층 특정 Context 예를 들어 웹 애플리케이션에서 사용하는 `webApplicationContext`
 
-즉, <mark style="background-color:yellow;">**BeanFactory**</mark>는 구성 프레임워크와 기본 기능을 제공하고 <mark style="background-color:yellow;">**ApplicationContext**</mark> 더 많은 enterprise-specific 기능을 추가합니다. <mark style="background-color:yellow;">**ApplicationContext**</mark>는 <mark style="background-color:yellow;">**BeanFactory**</mark>의 완성된 상위집합이며 이 장에서는 오직 Spring의 IoC컨테이너를 설명하기 위해 사용됩니다. <mark style="background-color:yellow;">**BeanFactory**</mark> 대신 <mark style="background-color:yellow;">**ApplicationContext**</mark> 사용에 대한 자세한 내용은 [BeanFactory API](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-beanfactory) 섹션을 참조하십시오.
+즉, `BeanFactory`는 구성 프레임워크와 기본 기능을 제공하고 `ApplicationContext` 더 많은 enterprise-specific 기능을 추가합니다. `ApplicationContext`는 `BeanFactory`의 완성된 상위집합이며 이 장에서는 오직 Spring의 IoC컨테이너를 설명하기 위해 사용됩니다. `BeanFactory` 대신 `ApplicationContext` 사용에 대한 자세한 내용은 [BeanFactory API](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-beanfactory) 섹션을 참조하십시오.
 
 
 
@@ -33,18 +33,18 @@ Spring에서 애플리케이션의 중추를 형성하고 Spring IoC 컨테이�
 
 
 
-<mark style="background-color:yellow;">**org.springframework.context.ApplicationContext**</mark> 인터페이스는 Spring IoC 컨테이너를 표현하며 beans 인스턴스화, 구성 및 조립을 담당합니다. 컨테이너는 Configuration Metadata를 읽어 객체를 인스턴스화, 구성 및 어셈블리한다. Configuration Metadata는 XML , Java annotations 또는 Java코드로 표시한다. application을 구성하는 객체와 객체 간의 풍부한 상호 의존성을 표현할 수 있습니다.\
+`org.springframework.context.ApplicationContext` 인터페이스는 Spring IoC 컨테이너를 표현하며 beans 인스턴스화, 구성 및 조립을 담당합니다. 컨테이너는 Configuration Metadata를 읽어 객체를 인스턴스화, 구성 및 어셈블리한다. Configuration Metadata는 XML , Java annotations 또는 Java코드로 표시한다. application을 구성하는 객체와 객체 간의 풍부한 상호 의존성을 표현할 수 있습니다.\
 
 
-<mark style="background-color:yellow;">**ApplicationContext**</mark> 인터페이스의 여러 구현은 Spring과 함께 제공됩니다. 독립 실행형 Applications에서는 일반적으로 [ClassPathXmlApplicationContext](https://docs.spring.io/spring-framework/docs/6.0.7/javadoc-api/org/springframework/context/support/ClassPathXmlApplicationContext.html) 또는 [FileSystemXmlApplicationContext](https://docs.spring.io/spring-framework/docs/6.0.7/javadoc-api/org/springframework/context/support/FileSystemXmlApplicationContext.html)의 인스턴스를 만든다. XML은 Configuration Metadata를 정의하는 전통적인 형식이지만 소량의 XML 구성을 통하여 컨테이너에 Java annotations 또는 코드 같은 추가된 Metadata 형식을 사용할 수 있도록 할 수 있다.
-
-
-
-대부분의 애플리케이션 시나리오에서 하나 이상의 Spring IoC 컨테이너 인스턴스를 인스턴스화하는 데 명시적인 사용자 코드가 필요하지 않습니다. 예를 들어, 웹 애플리케이션 시나리오에서 일반적으로 애플리케이션의 <mark style="background-color:yellow;">**web.xml**</mark> 파일에 있는 간단한 8줄 정도의 상용구 웹 설명자의 XML로도 충분합니다([Convenient ApplicationContext Instantiation for Web Applications](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-create) 참조). [Spring Tools for Eclipse](https://spring.io/tools)(Eclispse 기반 개발 환경)을 사용하면 몇 번의 마우스 클릭이나 키 입력으로 이 상용구 구성을 쉽게 만들 수 있습니다.
+`ApplicationContext` 인터페이스의 여러 구현은 Spring과 함께 제공됩니다. 독립 실행형 Applications에서는 일반적으로 [ClassPathXmlApplicationContext](https://docs.spring.io/spring-framework/docs/6.0.7/javadoc-api/org/springframework/context/support/ClassPathXmlApplicationContext.html) 또는 [FileSystemXmlApplicationContext](https://docs.spring.io/spring-framework/docs/6.0.7/javadoc-api/org/springframework/context/support/FileSystemXmlApplicationContext.html)의 인스턴스를 만든다. XML은 Configuration Metadata를 정의하는 전통적인 형식이지만 소량의 XML 구성을 통하여 컨테이너에 Java annotations 또는 코드 같은 추가된 Metadata 형식을 사용할 수 있도록 할 수 있다.
 
 
 
-다음 다이어그램은 Spring이 작동하는 방식에 대한 높은 수준의 뷰를 보여줍니다. 애플리케이션 클래스는 Configuration Metadata와 결합되어 <mark style="background-color:yellow;">**ApplicationContext**</mark>를 생성하고 초기화된 후 완전히 구성되고 실행 가능한 시스템 또는 애플리케이션을 만든다.
+대부분의 애플리케이션 시나리오에서 하나 이상의 Spring IoC 컨테이너 인스턴스를 인스턴스화하는 데 명시적인 사용자 코드가 필요하지 않습니다. 예를 들어, 웹 애플리케이션 시나리오에서 일반적으로 애플리케이션의 `web.xml` 파일에 있는 간단한 8줄 정도의 상용구 웹 설명자의 XML로도 충분합니다([Convenient ApplicationContext Instantiation for Web Applications](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-create) 참조). [Spring Tools for Eclipse](https://spring.io/tools)(Eclispse 기반 개발 환경)을 사용하면 몇 번의 마우스 클릭이나 키 입력으로 이 상용구 구성을 쉽게 만들 수 있습니다.
+
+
+
+다음 다이어그램은 Spring이 작동하는 방식에 대한 높은 수준의 뷰를 보여줍니다. 애플리케이션 클래스는 Configuration Metadata와 결합되어 `ApplicationContext`를 생성하고 초기화된 후 완전히 구성되고 실행 가능한 시스템 또는 애플리케이션을 만든다.
 
 <figure><img src="https://blog.kakaocdn.net/dn/cQmWQz/btr5R1y8QQ7/QKNik0K3USF3e95uzrVqNk/img.png" alt=""><figcaption></figcaption></figure>
 
@@ -73,11 +73,11 @@ Spring 컨테이너에서 다른 형식의 metadata를 사용하는 방법에 �
 
 
 
-Spring configuraion은 컨테이너가 관리해야 하는 적어도 하나 일반적으로 둘 이상의 bean definition로 구성됩니다. XML-based configuration metadata는 이러한 빈을 최상위 요소 <mark style="background-color:yellow;">**\<beans/>**</mark>내의 <mark style="background-color:yellow;">**\<bean/>**</mark>요소로 구성됩니다. Java configuration은 일반적으로 <mark style="background-color:yellow;">**@Configuration**</mark> 클래스 내에서 <mark style="background-color:yellow;">**@Bean**</mark> -annotated 메서드를 사용합니다.
+Spring configuraion은 컨테이너가 관리해야 하는 적어도 하나 일반적으로 둘 이상의 bean definition로 구성됩니다. XML-based configuration metadata는 이러한 빈을 최상위 요소 `<beans/>`내의 `<bean/>`요소로 구성됩니다. Java configuration은 일반적으로 `@Configuration` 클래스 내에서 `@Bean` -annotated 메서드를 사용합니다.
 
 
 
-이러한 bean definitions는 애플리케이션을 구성하는 실제 객체에 해당합니다. 일반적으로 서비스 계층 객체, 저장소 또는 DAO(데이터 액세스 개체)와 같은 지속성 계층 객체, 웹 컨트롤러와 같은 프레젠테이션 객체, JPA <mark style="background-color:yellow;">**EntityManagerFactory**</mark>와 같은 인프라 객체, JMS 대기열 등을 정의합니다. 일반적으로 도메인 객체를 만들고 로드하는 것은 repositories와 비즈니스 로직의 책임이기 때문에 컨테이너에 세부적인 도메인 객체를 구성하지 않습니다.
+이러한 bean definitions는 애플리케이션을 구성하는 실제 객체에 해당합니다. 일반적으로 서비스 계층 객체, 저장소 또는 DAO(데이터 액세스 개체)와 같은 지속성 계층 객체, 웹 컨트롤러와 같은 프레젠테이션 객체, JPA `EntityManagerFactory`와 같은 인프라 객체, JMS 대기열 등을 정의합니다. 일반적으로 도메인 객체를 만들고 로드하는 것은 repositories와 비즈니스 로직의 책임이기 때문에 컨테이너에 세부적인 도메인 객체를 구성하지 않습니다.
 
 
 
@@ -117,7 +117,7 @@ id 속성의 값은 협업 객체를 참조하는 데 사용할 수 있습니다
 
 ****
 
-<mark style="background-color:yellow;">**ApplicationContext**</mark> 생성자에 제공되는 위치 경로는 컨테이너가 로컬 파일 시스템, Java <mark style="background-color:yellow;">**CLASSPATH**</mark> 등과 같은 다양한 외부 리소스에서 configuration metadata를 로드할 수 있도록 하는 리소스 문자열입니다.
+`ApplicationContext` 생성자에 제공되는 위치 경로는 컨테이너가 로컬 파일 시스템, Java `CLASSPATH` 등과 같은 다양한 외부 리소스에서 configuration metadata를 로드할 수 있도록 하는 리소스 문자열입니다.
 
 ```java
 ApplicationContext context = new ClassPathXmlApplicationContext("services.xml", "daos.xml");
@@ -130,7 +130,7 @@ Spring의 IoC 컨테이너에 대해 배운 후 URI 구문에 정의된 위치�
 
 
 
-다음 예는 서비스 계층 객체(<mark style="background-color:yellow;">**services.xml**</mark>) configuration 파일을 보여줍니다.
+다음 예는 서비스 계층 객체(`services.xml`) configuration 파일을 보여줍니다.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -152,7 +152,7 @@ Spring의 IoC 컨테이너에 대해 배운 후 URI 구문에 정의된 위치�
 </beans>
 ```
 
-다음 예는 데이터 액세스 객체 <mark style="background-color:yellow;">**daos.xml**</mark> 파일을 보여줍니다.
+다음 예는 데이터 액세스 객체 `daos.xml` **** 파일을 보여줍니다.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -175,7 +175,7 @@ Spring의 IoC 컨테이너에 대해 배운 후 URI 구문에 정의된 위치�
 </beans>
 ```
 
-앞의 예에서 서비스 계층은 <mark style="background-color:yellow;">**PetStoreServiceImpl**</mark> 클래스와 <mark style="background-color:yellow;">**JpaAccountDao**</mark> 및 <mark style="background-color:yellow;">**JpaItemDao**</mark> 유형의 두 데이터 액세스 객체(JPA 객체-관계형 매핑 표준 기반)로 구성됩니다. <mark style="background-color:yellow;">**property name**</mark> 요소는 JavaBean 속성의 이름을 참조하고 <mark style="background-color:yellow;">**ref**</mark> 요소는 다른 bean정의의 이름을 참조합니다. <mark style="background-color:yellow;">**id**</mark>와 <mark style="background-color:yellow;">**ref**</mark> 요소 간의 이러한 연결은 공통 작업 개체 간의 의족성을 나타냅니다. 객체의 의존성 구성에 대한 자세한 내용은 [Dependencies을](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-dependencies) 참조하십시오.
+앞의 예에서 서비스 계층은 `PetStoreServiceImpl` 클래스와 `JpaAccountDao` 및 `JpaItemDao` 유형의 두 데이터 액세스 객체(JPA 객체-관계형 매핑 표준 기반)로 구성됩니다. `property name` 요소는 JavaBean 속성의 이름을 참조하고 `ref` 요소는 다른 bean정의의 이름을 참조합니다. `id`와 `ref` 요소 간의 이러한 연결은 공통 작업 개체 간의 의족성을 나타냅니다. 객체의 의존성 구성에 대한 자세한 내용은 [Dependencies을](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-dependencies) 참조하십시오.
 
 
 
@@ -187,7 +187,7 @@ Bean definitions가 여러 XML 파일에 걸쳐 있는 것이 유용할 수 있�
 
 
 
-애플리케이션 context 생성자를 사용하여 이러한 모든 XML 조각에서 bean definitions을 로드할 수 있습니다. 이 생성자는 [이전 세션](ioccontainer.md#2.2)에 표시된 것처럼 여러 <mark style="background-color:yellow;">**Resource**</mark> 위치를 사용합니다. 또는 하나 이상의 <mark style="background-color:yellow;">**\<import/>**</mark> 요소를 사용하여 다른 파일에서 bean definitions를 정의합니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.
+애플리케이션 context 생성자를 사용하여 이러한 모든 XML 조각에서 bean definitions을 로드할 수 있습니다. 이 생성자는 [이전 세션](ioccontainer.md#2.2)에 표시된 것처럼 여러 `Resource` 위치를 사용합니다. 또는 하나 이상의 `<import/>` 요소를 사용하여 다른 파일에서 bean definitions를 정의합니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.
 
 ```xml
 <beans>
@@ -200,17 +200,17 @@ Bean definitions가 여러 XML 파일에 걸쳐 있는 것이 유용할 수 있�
 </beans>
 ```
 
-예제에서 외부 bean definitions는 <mark style="background-color:yellow;">**services.xml**</mark>, <mark style="background-color:yellow;">**messageSource.xml**</mark> 및 <mark style="background-color:yellow;">**themeSource.xml**</mark>의 세 파일에서 로드됩니다. 모든 위치 경로는 importing을 수행하는 definition파일과 관계있다. 즉 <mark style="background-color:yellow;">**services.xml**</mark>은 importing을 수행하는 파일과 동일한 디렉터리 또는 클래스 위치에 있어야 하며 <mark style="background-color:yellow;">**messageSource.xml**</mark> 및 <mark style="background-color:yellow;">**themeSource.xml**</mark>은 importing 파일 위치 아래의 <mark style="background-color:yellow;">**resources**</mark> 위치 안에 있어야 한다. 보시다시피 선행 슬래시는 무시됩니다. 그러나 이러한 경로가 상대적인 경우 슬래시를 전형 사용하지 않는 것이 더 좋습니다. 최상위 레벨 <mark style="background-color:yellow;">**\<beans/>**</mark> 요소를 포함하여 imported 한 파일의 내용은 Spring Schema에 따라 유효한 XML bean definitions여야 한다.
+예제에서 외부 bean definitions는 `services.xml`, `messageSource.xml` 및 `themeSource.xml`의 세 파일에서 로드됩니다. 모든 위치 경로는 importing을 수행하는 definition파일과 관계있다. 즉 `services.xml`은 importing을 수행하는 파일과 동일한 디렉터리 또는 클래스 위치에 있어야 하며 `messageSource.xml` 및 `themeSource.xml`은 importing 파일 위치 아래의 `resources` 위치 안에 있어야 한다. 보시다시피 선행 슬래시는 무시됩니다. 그러나 이러한 경로가 상대적인 경우 슬래시를 전형 사용하지 않는 것이 더 좋습니다. 최상위 레벨 `<beans/>` 요소를 포함하여 imported 한 파일의 내용은 Spring Schema에 따라 유효한 XML bean definitions여야 한다.
 
 
 
 {% hint style="info" %}
-상대 "../" 경로 사용하여 상위 디렉터리의 파일을 참조하는 것은 가능하지만 권장하지 않습니다. 이렇게 하면 현재 응용 프로그램 외부에 있는 파일에 대한 의존성이 생성됩니다. 특히 런타임 확인 프로세서를 통하여 "가장 가까운" 클래스 경로 root를 선택 후 다음 상위 디렉터리를 찾는 <mark style="background-color:yellow;">**classpath:**</mark> URLs(예: <mark style="background-color:yellow;">**classpath:../services.xml**</mark>)의 참조를 권장하지 않습니다. Classpath configuration 변경으로 인한 다른 잘못된 디렉터리가 선택될 수 있습니다.\
+상대 "../" 경로 사용하여 상위 디렉터리의 파일을 참조하는 것은 가능하지만 권장하지 않습니다. 이렇게 하면 현재 응용 프로그램 외부에 있는 파일에 대한 의존성이 생성됩니다. 특히 런타임 확인 프로세서를 통하여 "가장 가까운" 클래스 경로 root를 선택 후 다음 상위 디렉터리를 찾는 <mark style="background-color:yellow;">****</mark>`classpath`: URLs(예: `classpath:../services.xml`)의 참조를 권장하지 않습니다. Classpath configuration 변경으로 인한 다른 잘못된 디렉터리가 선택될 수 있습니다.\
 \
-상대 경로 대신 정규회 된 리소스 위치를 사용할 수 있습니다. 예: <mark style="background-color:yellow;">**file:C:/config/services.xml**</mark> or <mark style="background-color:yellow;">**classpath:/config/services.xml**</mark>. 그러나 애플리케이션의 configuration을 특정 절대 위치에 연결하고 있다는 점에 유의하십시오.  일반적으로 이러한 절대 위치에 대한 간접 참조를 유지하는 것이 좋습니다.  예를 들어 런타임 시 JVM 시스템 속성으로  확인하는  "${... }" placeholders를 사용한다.
+상대 경로 대신 정규회 된 리소스 위치를 사용할 수 있습니다. 예: `file:C:/config/services.xml` or `classpath:/config/services.xml`. 그러나 애플리케이션의 configuration을 특정 절대 위치에 연결하고 있다는 점에 유의하십시오.  일반적으로 이러한 절대 위치에 대한 간접 참조를 유지하는 것이 좋습니다.  예를 들어 런타임 시 JVM 시스템 속성으로  확인하는  "${... }" placeholders를 사용한다.
 {% endhint %}
 
-namespace 자체는 import 지시 기능을 제공합니다.  일반 bean definitions을 넘어서는 추가 기능은 Spring에서 제공하는 XML namespaces(예: <mark style="background-color:yellow;">**context**</mark> 및 <mark style="background-color:yellow;">**util**</mark> namespaces)에서 사용할 수 있습니다.
+namespace 자체는 import 지시 기능을 제공합니다.  일반 bean definitions을 넘어서는 추가 기능은 Spring에서 제공하는 XML namespaces(예: `context` 및 `util` namespaces)에서 사용할 수 있습니다.
 
 ### **The Groovy Bean Definition DSL**
 
@@ -238,7 +238,7 @@ beans {
 }
 ```
 
-이 configuration 스타일은 대체로 XML bean definitions와 동일하며 Spring의 XML configuration namespaces도 지원합니다.또한 <mark style="background-color:yellow;">**importBeans**</mark> 명령을 통해 XML bean definition 파일을 imporing할 수 있습니다.
+이 configuration 스타일은 대체로 XML bean definitions와 동일하며 Spring의 XML configuration namespaces도 지원합니다.또한 `importBeans` 명령을 통해 XML bean definition 파일을 imporing할 수 있습니다.
 
 
 
@@ -246,10 +246,10 @@ beans {
 
 ****
 
-<mark style="background-color:yellow;">**ApplicationContext**</mark>는 서로 다른 beans과 그 의존성의 레지스트리를 잘 유지할 수 있는 고급 factory 인터페이스입니다. <mark style="background-color:yellow;">**T getBean(String name, Class \<T> requiredType)**</mark> 메서드를 사용하여 beans의 인스턴스룰 검색할 수 있습니다.\
+`ApplicationContext`는 서로 다른 beans과 그 의존성의 레지스트리를 잘 유지할 수 있는 고급 factory 인터페이스입니다. `T getBean(String name, Class <T> requiredType)` <mark style="background-color:yellow;">****</mark> 메서드를 사용하여 beans의 인스턴스룰 검색할 수 있습니다.\
 
 
-<mark style="background-color:yellow;">**ApplicationContext**</mark>를 사용하면 다음 예제와 같이 bean definitions를 읽고 액세스 할 수 있습니다.
+`ApplicationContext`를 사용하면 다음 예제와 같이 bean definitions를 읽고 액세스 할 수 있습니다.
 
 ```java
 // beans 생성 및 구성
@@ -268,7 +268,7 @@ Groovy configuraion 사용도 bootstrapping은 매우 유사해 보입니다. G
 ApplicationContext context = new GenericGroovyApplicationContext("services.groovy", "daos.groovy");
 ```
 
-가장 유연한 변형은 reader delegates와 결합된 <mark style="background-color:yellow;">**GenericApplicationContext**</mark>입니다. 예를 들어 다음 예제와 같이 XML 파일용 <mark style="background-color:yellow;">**XmlBeanDefinitionReader**</mark>를 사용합니다.
+가장 유연한 변형은 reader delegates와 결합된 `GenericApplicationContext`입니다. 예를 들어 다음 예제와 같이 XML 파일용 `XmlBeanDefinitionReader`를 사용합니다.
 
 ```java
 GenericApplicationContext context = new GenericApplicationContext();
@@ -276,7 +276,7 @@ new XmlBeanDefinitionReader(context).loadBeanDefinitions("services.xml", "daos.x
 context.refresh();
 ```
 
-다음 예제와 같이 Groovy 파일용 <mark style="background-color:yellow;">**GroovyBeanDefinitionReader**</mark>를 사용할 수도 있습니다.
+다음 예제와 같이 Groovy 파일용 `GroovyBeanDefinitionReader`를 사용할 수도 있습니다.
 
 ```java
 GenericApplicationContext context = new GenericApplicationContext();
@@ -284,11 +284,11 @@ new GroovyBeanDefinitionReader(context).loadBeanDefinitions("services.groovy", "
 context.refresh();
 ```
 
-동일한 <mark style="background-color:yellow;">**ApplicationContext**</mark>에서 이러한 reader delegates를 믹스 및 매치하여 다양한 구성 소스에서 bean definitions을 읽어 올 수 있습니다.
+동일한 `ApplicationContext`에서 이러한 reader delegates를 믹스 및 매치하여 다양한 구성 소스에서 bean definitions을 읽어 올 수 있습니다.
 
 
 
-그런 다음 <mark style="background-color:yellow;">**getBean**</mark>을 사용하여 beans의 인스턴스를 검색할 수 있습니다. <mark style="background-color:yellow;">**ApplicationContext**</mark> 인터페이스는 bean을 검색하기 위한 몇가지 다른 메서드가 있지만 이상적으로 애플리케이션 코드에서 이를 사용해서는 안 됩니다. 실제로 애플이케이션 코드에는 <mark style="background-color:yellow;">**getBean()**</mark> 메서드에 대한 호출이 전혀 없어야 하며 따라서 Spring API에 대한 의존성이 전혀 없어야 한다.  예를 들어 Spring의 웹 프레임워크의 통합은 컨트롤러 및 JSF-managed beans과 같은 다양한 웹 프레임워크 구성 요소에 대한 의존성 주입을 제공하여 metadata(예: autowiring annotation)를 통해 특정 bean에 대한 의존성을 선언할 수 있습니다.
+그런 다음 `getBean`을 사용하여 beans의 인스턴스를 검색할 수 있습니다. `ApplicationContext` 인터페이스는 bean을 검색하기 위한 몇가지 다른 메서드가 있지만 이상적으로 애플리케이션 코드에서 이를 사용해서는 안 됩니다. 실제로 애플이케이션 코드에는 `getBean()` 메서드에 대한 호출이 전혀 없어야 하며 따라서 Spring API에 대한 의존성이 전혀 없어야 한다.  예를 들어 Spring의 웹 프레임워크의 통합은 컨트롤러 및 JSF-managed beans과 같은 다양한 웹 프레임워크 구성 요소에 대한 의존성 주입을 제공하여 metadata(예: autowiring annotation)를 통해 특정 bean에 대한 의존성을 선언할 수 있습니다.
 
 
 
@@ -296,11 +296,11 @@ context.refresh();
 
 
 
-Spring IoC 컨테이너는 하나 이상의 빈을 관리합니다. 이러한 beans는 컨테이너에 제공하는 configuration metadata(예: XML <mark style="background-color:yellow;">**\<bean/>**</mark> definitions의 형식)로 생성됩니다.
+Spring IoC 컨테이너는 하나 이상의 빈을 관리합니다. 이러한 beans는 컨테이너에 제공하는 configuration metadata(예: XML `<bean/>` definitions의 형식)로 생성됩니다.
 
 
 
-컨테이너 자체 내에서 이러한 beans definitions는 <mark style="background-color:yellow;">**BeanDefinition**</mark> objects로 표현되고 아래와 같은(기타 정보 중) metadata가 포함된다.
+컨테이너 자체 내에서 이러한 beans definitions는 `BeanDefinition` objects로 표현되고 아래와 같은(기타 정보 중) metadata가 포함된다.
 
 * A package-qualified class name: 일반적으로 정의되는 Bean의 실제 구현 클래스입니다.
 * Bean이 컨테이너에서 어떻게 동작해야 하는지를 나타내는 Bean 동작 구성 요소 (scope, lifecycle callbacks 등)
@@ -326,7 +326,7 @@ _Table 1. The bean definition_
 | Destruction method        | Destruction Callbacks                                                                                                    |
 
 \
-특정 bean을 생성하는 방법에 대한 정보를 포함하는 bean definitions 외에도 <mark style="background-color:yellow;">**ApplicationContext**</mark> 구현은 (사용자에 의해) 컨테이너 외부에서 생성된 기존 객체의 등록을 허용합니다. 이는 <mark style="background-color:yellow;">**DefaultListableBeanFactory**</mark> 구현을 반환하는 <mark style="background-color:yellow;">**getBeanFactory()**</mark> 메서드를 통해 ApplicationContext의 <mark style="background-color:yellow;">**BeanFactory**</mark>에 accessing 하여 실행합니다. <mark style="background-color:yellow;">**DefaultListableBeanFactory**</mark>는 <mark style="background-color:yellow;">**registerSingleton(..)**</mark>** ** 및 <mark style="background-color:yellow;">**registerBeanDefinition(..)**</mark> 메서드를 통해 이 등록을 지원합니다.&#x20;
+특정 bean을 생성하는 방법에 대한 정보를 포함하는 bean definitions 외에도 `ApplicationContext` 구현은 (사용자에 의해) 컨테이너 외부에서 생성된 기존 객체의 등록을 허용합니다. 이는 `DefaultListableBeanFactory` 구현을 반환하는 `getBeanFactory()` 메서드를 통해 ApplicationContext의 `BeanFactory`에 accessing 하여 실행합니다. `DefaultListableBeanFactory`는 `registerSingleton(..)` **** 및 `registerBeanDefinition(..)` 메서드를 통해 이 등록을 지원합니다.&#x20;
 
 
 
@@ -344,11 +344,11 @@ Bean metadata와 수동으로 제공된 싱글톤 인스턴스는 컨테이너�
 
 
 
-XML-based configuration medata에서 <mark style="background-color:yellow;">**id**</mark> 속성, <mark style="background-color:yellow;">**name**</mark> 속성 또는 둘 다 사용하여 bean 식별자를 지정합니다.  <mark style="background-color:yellow;">**id**</mark> 속성을 사용하면 정확히 하나의 <mark style="background-color:yellow;">**id**</mark>를 지정할 수 있습니다. 일반적으로 이러한 영숫자 ('myBean', 'someService' 등)이지만 특수 문자도 포함할 수 있습니다. bean에 대한 다른 별칭을 도입하려는 경우 <mark style="background-color:yellow;">**name**</mark> 속성에 쉼표(<mark style="background-color:yellow;">**,**</mark>), 세미콜론(<mark style="background-color:yellow;">**;**</mark>) 또는 공백으로 구분하여 지정할 수도 있습니다. id 속성은 <mark style="background-color:yellow;">**xsd:string**</mark> 타입으로 지정되지만 bean <mark style="background-color:yellow;">**id**</mark> 고유성은 XML 파서가 아니라 컨테이너에 의해 강제됩니다.
+XML-based configuration medata에서 `id` 속성, `name` 속성 또는 둘 다 사용하여 bean 식별자를 지정합니다.  `id` 속성을 사용하면 정확히 하나의 `id`를 지정할 수 있습니다. 일반적으로 이러한 영숫자 ('myBean', 'someService' 등)이지만 특수 문자도 포함할 수 있습니다. bean에 대한 다른 별칭을 도입하려는 경우 `name` 속성에 쉼표(`,`), 세미콜론(`;`) 또는 공백으로 구분하여 지정할 수도 있습니다. id 속성은 `xsd:string` 타입으로 지정되지만 bean `id` 고유성은 XML 파서가 아니라 컨테이너에 의해 강제됩니다.
 
 
 
-Bean의 <mark style="background-color:yellow;">**name**</mark>이나 <mark style="background-color:yellow;">**id**</mark>를 제공할 필요가 없습니다. <mark style="background-color:yellow;">**name**</mark>이나 <mark style="background-color:yellow;">**id**</mark> 를 명시적으로 제공하지 않으면 컨테이너는 해당 빈에 대해 고유한 이름을 생성합니다. 그러나 <mark style="background-color:yellow;">**ref**</mark> 요소 또는 Service Locator 스타일로 조회를 사용하여 해당 bean을 이름으로 참조하려면 이름을 반드시 제공해야 합니다. 이름을 제공하지 않아도 되는 원인은 [inner beans](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-inner-beans) 및 [autowiring collaborators](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-autowire) 과 관련이 있습니다.
+Bean의 `name`이나 `id`를 제공할 필요가 없습니다. `name`이나 `id` 를 명시적으로 제공하지 않으면 컨테이너는 해당 빈에 대해 고유한 이름을 생성합니다. 그러나 `ref` 요소 또는 Service Locator 스타일로 조회를 사용하여 해당 bean을 이름으로 참조하려면 이름을 반드시 제공해야 합니다. 이름을 제공하지 않아도 되는 원인은 [inner beans](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-inner-beans) 및 [autowiring collaborators](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-autowire) 과 관련이 있습니다.
 
 
 
@@ -384,11 +384,11 @@ bean definition 자체에서 id 속성에 의해 지정한 최대 하나의 name
 
 
 
-이 경우 <mark style="background-color:yellow;">**forName**</mark>이라는 빈(동일한 컨테이너에 있음)은 alias definition를 사용한 후 <mark style="background-color:yellow;">**toName**</mark>으로 참조될 수도 있습니다.
+이 경우 `forName`이라는 빈(동일한 컨테이너에 있음)은 alias definition를 사용한 후 `toName`으로 참조될 수도 있습니다.
 
 
 
-예를 들어 하위 시스템 A의 configuration metadata는 <mark style="background-color:yellow;">**subsystemA-dataSource**</mark>라는 이름으로 DataSource를 참조할 수 있습니다. 서브시스템 B에 configuration metadata는 <mark style="background-color:yellow;">**subsystemB-dataSource**</mark>라는 이름으로 DataSource를 참조할 수 있습니다. 이 두 하위 시스템을 모두 사용하는 main 애플리케이션을 구성할 때 main 애플리케이션은 <mark style="background-color:yellow;">**myApp-dataSource**</mark>라는 이름으로 DataSource를 참조합니다.  세 개의 이름이 모두 동일한 개체를 참조하도록 하려면 다음 alias definitions를 configuration metadata에 추가할 수 있습니다.
+예를 들어 하위 시스템 A의 configuration metadata는 `subsystemA-dataSource`라는 이름으로 DataSource를 참조할 수 있습니다. 서브시스템 B에 configuration metadata는 `subsystemB-dataSource`라는 이름으로 DataSource를 참조할 수 있습니다. 이 두 하위 시스템을 모두 사용하는 main 애플리케이션을 구성할 때 main 애플리케이션은 `myApp-dataSource`라는 이름으로 DataSource를 참조합니다.  세 개의 이름이 모두 동일한 개체를 참조하도록 하려면 다음 alias definitions를 configuration metadata에 추가할 수 있습니다.
 
 ```xml
 <alias name="myApp-dataSource" alias="subsystemA-dataSource"/>
@@ -415,10 +415,10 @@ bean definition는 기본적으로 하나 이상의 객체를 생성하기 위�
 
 
 
-XML-based configuration metadata를 사용하는 경우 <mark style="background-color:yellow;">**\<bean/>**</mark> 요소의 <mark style="background-color:yellow;">**class**</mark> 속성에 인스턴스화할 객체의 타입(또는 클래스)을 지정합니다. 이 클래스 속성 (내부적으로 BeanDefinition 인스턴스의 Class 속성)은 일반적으로 필수입니다. (예외는 [Instantiation by Using an Instancee Factory Method](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-class-instance-factory-method)와 [Bean Definition Inheritance](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-child-bean-definitions) 참조하십시오). 두 가지 방법 중 하나로 Class 속성을 사용할 수 있습니다.
+XML-based configuration metadata를 사용하는 경우 `<bean/>`요소의 `class` 속성에 인스턴스화할 객체의 타입(또는 클래스)을 지정합니다. 이 클래스 속성 (내부적으로 BeanDefinition 인스턴스의 Class 속성)은 일반적으로 필수입니다. (예외는 [Instantiation by Using an Instancee Factory Method](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-class-instance-factory-method)와 [Bean Definition Inheritance](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-child-bean-definitions) 참조하십시오). 두 가지 방법 중 하나로 Class 속성을 사용할 수 있습니다.
 
-* 일반적으로 컨테이너 자체가 직접 반사적으로 생성자를 호출하여 bean을 직접 생성하는 경우에 생성될 bean 클래스를 지정하기 위해 <mark style="background-color:yellow;">**new**</mark> 연산자를 사용하는 Java 코드와 다소 동일합니다.
-* 덜 일반적인 경우 객체를 생성하기 위해 호출되는 <mark style="background-color:yellow;">**static**</mark> 팩토리 메서드를 포함하는 실제 클래스를 지정하기 위해 컨테이너가 bean을 생성하기 위해 클래스에서 <mark style="background-color:yellow;">**static**</mark> 팩토리 메서드를 호출한다. <mark style="background-color:yellow;">**static**</mark> 팩토리 메서드 호출에서 반환된 객체 타입은 동일한 클래스이거나 완전히 다른 클래스일 수 있습니다.
+* 일반적으로 컨테이너 자체가 직접 반사적으로 생성자를 호출하여 bean을 직접 생성하는 경우에 생성될 bean 클래스를 지정하기 위해 `new` 연산자를 사용하는 Java 코드와 다소 동일합니다.
+* 덜 일반적인 경우 객체를 생성하기 위해 호출되는 `static` 팩토리 메서드를 포함하는 실제 클래스를 지정하기 위해 컨테이너가 bean을 생성하기 위해 클래스에서 `static` 팩토리 메서드를 호출한다. `static` 팩토리 메서드 호출에서 반환된 객체 타입은 동일한 클래스이거나 완전히 다른 클래스일 수 있습니다.
 
 
 
@@ -429,7 +429,7 @@ XML-based configuration metadata를 사용하는 경우 <mark style="background-
 
 
 
-예를 들어 com.example 패키지에 <mark style="background-color:yellow;">**SomeThing**</mark>이라는 클래스가 있고 이 <mark style="background-color:yellow;">**SomeThing**</mark> 클래스에 <mark style="background-color:yellow;">**OtherThing**</mark>이라는 중첩 <mark style="background-color:yellow;">**static**</mark> 클래스가 있는 경우 달러 기호(<mark style="background-color:yellow;">**$**</mark>) 또는 점(<mark style="background-color:yellow;">**.**</mark>)으로 구분할 수 있습니다. 따라서 bean definition에서 클래스 속성의 값은 <mark style="background-color:yellow;">**com.example.SomeThing$OtherThing**</mark> 또는 <mark style="background-color:yellow;">**com.example.SomeThing.OtherThing**</mark>이 됩니다.
+예를 들어 com.example 패키지에 `SomeThing`이라는 클래스가 있고 이 `SomeThing` 클래스에 `OtherThing`이라는 중첩 `static` 클래스가 있는 경우 달러 기호(`$`) 또는 점(`.`)으로 구분할 수 있습니다. 따라서 bean definition에서 클래스 속성의 값은 `com.example.SomeThing$OtherThing` 또는 `com.example.SomeThing.OtherThing`이 됩니다.
 {% endhint %}
 
 
@@ -464,11 +464,11 @@ XML-based configuration metadata를 사용하여 다음과 같이 Bean 클래스
 
 
 
-<mark style="background-color:yellow;">**static**</mark> 팩토리 메서드로 생성하는 bean을 정의할 때 클래스 속성을 사용하여 <mark style="background-color:yellow;">**static**</mark> 메소드를 포함하는 클래스를 지정하고 <mark style="background-color:yellow;">**factory-method**</mark>라는 속성을 사용하여 팩토리 메서드 자체의 이름을 지정합니다. (나중에 설명하는 선택적 인수를 사용하여) 이 메서드를 호출하고 활성 객체를 반환할 수 있어야 합니다. 이후에 이 객체는 생성자를 통해 생성된 것처럼 처리됩니다. 이러한 bean definition의 한 가지 용도는 레거시 코드에서 <mark style="background-color:yellow;">**static**</mark> 팩토리를 호출하는 것입니다.
+`static` 팩토리 메서드로 생성하는 bean을 정의할 때 클래스 속성을 사용하여 `static` 메소드를 포함하는 클래스를 지정하고 `factory-method`라는 속성을 사용하여 팩토리 메서드 자체의 이름을 지정합니다. (나중에 설명하는 선택적 인수를 사용하여) 이 메서드를 호출하고 활성 객체를 반환할 수 있어야 합니다. 이후에 이 객체는 생성자를 통해 생성된 것처럼 처리됩니다. 이러한 bean definition의 한 가지 용도는 레거시 코드에서 `static` 팩토리를 호출하는 것입니다.
 
 
 
-다음 bean definition는 팩토리 메서드를 호출하여 빈이 생성되도록 지정합니다. definition은 반환된 객체의 타입(클래스)을 지정하지 않고 오히려 팩토리 메서드를 포함하는 클래스를 지정합니다. 이 예제에서 <mark style="background-color:yellow;">**createInstance()**</mark> 메서드는 <mark style="background-color:yellow;">**static**</mark> 메서드여야 한다. 다음 예제에서는 팩토리 메서드를 지정하는 방법을 보여줍니다.
+다음 bean definition는 팩토리 메서드를 호출하여 빈이 생성되도록 지정합니다. definition은 반환된 객체의 타입(클래스)을 지정하지 않고 오히려 팩토리 메서드를 포함하는 클래스를 지정합니다. 이 예제에서 `createInstance()` 메서드는 `static` 메서드여야 한다. 다음 예제에서는 팩토리 메서드를 지정하는 방법을 보여줍니다.
 
 ```xml
 <bean id="clientService"
@@ -495,7 +495,7 @@ public class ClientService {
 
 ### 인스턴스 팩토리 메서드를 사용한 인스턴스화
 
-[정적 팩토리 메서드를 통한 인스턴스화](ioccontainer.md#undefined-1)와 유사하게 인스턴스 팩토리 메서드를 사용한 인스턴스화는 컨테이너에서 기존 빈의 비정적 메서드를 호출하여 새 bean을 생성합니다. 이 메커니즘을 사용하려면 <mark style="background-color:yellow;">**class**</mark> 속성을 비워두고 <mark style="background-color:yellow;">**factory-bean**</mark> 속성에서 객체를 생성하기 위해 호출할 인스턴스 메서드를 포함하는 현재(또는 부모 또는 조상) 컨테이너의 빈 이름을 지정합니다. <mark style="background-color:yellow;">**fatory-method**</mark> 속성으로 팩토리 메서드 자체의 이름을 설정합니다.&#x20;
+[정적 팩토리 메서드를 통한 인스턴스화](ioccontainer.md#undefined-1)와 유사하게 인스턴스 팩토리 메서드를 사용한 인스턴스화는 컨테이너에서 기존 빈의 비정적 메서드를 호출하여 새 bean을 생성합니다. 이 메커니즘을 사용하려면 `class` 속성을 비워두고 `factory-bean` 속성에서 객체를 생성하기 위해 호출할 인스턴스 메서드를 포함하는 현재(또는 부모 또는 조상) 컨테이너의 빈 이름을 지정합니다. `fatory-method` 속성으로 팩토리 메서드 자체의 이름을 설정합니다.&#x20;
 
 다음 예제는 이러한 bean을 구성하는 방법을 보여줍니다.
 
@@ -576,11 +576,11 @@ Spring 문서에서 "factory bean"은 Spring 컨테이너에 구성되고 [insta
 
 ### Bean의 런타임 타입을 결정
 
-특정 빈의 런타임 타입은 결정하기 쉽지 않습니다. bean metadata definition에 지정된 클래스는 초기 클래스 참조일 뿐이며 선언된 팩토리 메서드와 결합되거나 또는 bean의 다른 런타임 타입으로 이어질 수 있는 <mark style="background-color:yellow;">**FactoryBean**</mark> 클래스이거나 인스턴스 레벨 팩토리 메서드(대신 지정된 factory-bean 이름을 통해 해결됩니다.)의 경우 전형 설정되지 않는다.  또한 AOP 프록싱은 대상 빈의 실제 유형(구현된 인터페이스만)을 제한적으로 노출하는 interface-based 프록시로 bean 인스턴스를 래핑 할 수 있습니다.
+특정 빈의 런타임 타입은 결정하기 쉽지 않습니다. bean metadata definition에 지정된 클래스는 초기 클래스 참조일 뿐이며 선언된 팩토리 메서드와 결합되거나 또는 bean의 다른 런타임 타입으로 이어질 수 있는 `FactoryBean` 클래스이거나 인스턴스 레벨 팩토리 메서드(대신 지정된 factory-bean 이름을 통해 해결됩니다.)의 경우 전형 설정되지 않는다.  또한 AOP 프록싱은 대상 빈의 실제 유형(구현된 인터페이스만)을 제한적으로 노출하는 interface-based 프록시로 bean 인스턴스를 래핑 할 수 있습니다.
 
 
 
-특정 bean의 실제 런타임 타입을 찾는 권장 방법은 지정된 bean 이름에 대한 <mark style="background-color:yellow;">**BeanFactory.getType**</mark> 호출입니다. 이것은 위의 모든 경우를 고려하고 BeanFactory.getBean 호출이 동일한 빈 이름에 대해 반환할 객체 타입을 반환합니다.
+특정 bean의 실제 런타임 타입을 찾는 권장 방법은 지정된 bean 이름에 대한 `BeanFactory.getType` 호출입니다. 이것은 위의 모든 경우를 고려하고 BeanFactory.getBean 호출이 동일한 빈 이름에 대해 반환할 객체 타입을 반환합니다.
 
 
 
@@ -606,7 +606,7 @@ DI는 두 가지 주요 변형으로 존재합니다. [Constructor-based depende
 
 ### **Constructor-based Dependency Injection**
 
-생성자 기반 DI은 각각 의존성을 나타내는 여러 인수를 사용하여 생성자를 호출하는 컨테이너에 의해 달성됩니다.  Bean을 구성하기 위해 특정 인수로 **static** 팩토리 메서드 호출하는 것은 거의 동일하며 이 토론에서는 생성자와 **static** 팩토리 메서드에 대한 인수를 유사하게 취급합니다. 다음 예제는 생성자 주입을 통해서만 의존성 주입이 가능한 클래스를 보여줍니다.
+생성자 기반 DI은 각각 의존성을 나타내는 여러 인수를 사용하여 생성자를 호출하는 컨테이너에 의해 달성됩니다.  Bean을 구성하기 위해 특정 인수로 `static` 팩토리 메서드 호출하는 것은 거의 동일하며 이 토론에서는 생성자와 `static` 팩토리 메서드에 대한 인수를 유사하게 취급합니다. 다음 예제는 생성자 주입을 통해서만 의존성 주입이 가능한 클래스를 보여줍니다.
 
 ```java
 public class SimpleMovieLister {
@@ -642,7 +642,7 @@ public class ThingOne {
 }
 ```
 
-ThingTwo 및 ThingThree 클래스가 상속에 의해 관련되지 않는다고 가정하면 잠재적 모호성이 존재하지 않습니다.  따라서 다음 구성은 제대로 작동하면 \<constructor-arg/>요소에 새성자 인수 인덱스 또는 유형을 명시적으로 지정할 필요가 없습니다.
+ThingTwo 및 ThingThree 클래스가 상속에 의해 관련되지 않는다고 가정하면 잠재적 모호성이 존재하지 않습니다.  따라서 다음 구성은 제대로 작동하면 `<constructor-arg/>`요소에 새성자 인수 인덱스 또는 유형을 명시적으로 지정할 필요가 없습니다.
 
 ```xml
 <beans>
@@ -657,7 +657,7 @@ ThingTwo 및 ThingThree 클래스가 상속에 의해 관련되지 않는다고 
 </beans>
 ```
 
-다른 bean이 참조될 때 유형을 알고 있으면 매칭을 할 수 있습니다(이전 예제의 경우처럼). \<value>true\</value>와 같은 단순 유형을 사용하는 경우 Spring은 값의 유형을 판별할 수 업으므로 도움 없이 유형별로 매칭할수 없습니다. 다음 클래스를 고려합니다.
+다른 bean이 참조될 때 유형을 알고 있으면 매칭을 할 수 있습니다(이전 예제의 경우처럼). `<value>true</value>`와 같은 단순 유형을 사용하는 경우 Spring은 값의 유형을 판별할 수 업으므로 도움 없이 유형별로 매칭할수 없습니다. 다음 클래스를 고려합니다.
 
 ```java
 package examples;
@@ -683,7 +683,7 @@ public class ExampleBean {
 
 __
 
-이전 시나리오에서 컨테이너는 다음 예제와 같이 **type** attribute을 사용하여 생성자 인수 type을 명시적으로 지정하는 경우 단순 타입과 타입 매칭을 사용할 수 있다.
+이전 시나리오에서 컨테이너는 다음 예제와 같이 `type` attribute을 사용하여 생성자 인수 type을 명시적으로 지정하는 경우 단순 타입과 타입 매칭을 사용할 수 있다.
 
 ```java
 <bean id="exampleBean" class="examples.ExampleBean">
@@ -698,7 +698,7 @@ __
 
 __
 
-다음 예제와 같이 **index** attribute를 사용하여 생성자 인수의 인덱스를 명시적으로 지정할 수 있습니다.
+다음 예제와 같이 `index` attribute를 사용하여 생성자 인수의 인덱스를 명시적으로 지정할 수 있습니다.
 
 ```java
 <bean id="exampleBean" class="examples.ExampleBean">
@@ -751,7 +751,7 @@ public class ExampleBean {
 
 ### **Setter-based Dependency Injection**
 
-setter기반 DI는 컨테이너가 빈을 인스턴스화하기 위해 인수 없는 생성자 또는 인수 없는 **static** 팩토리 메서드를 호출한 후 빈의 세터 메서드를 통하여 달성합니다. 다음 예제에서는 순수한 setter 주입을 사용해야만 의존성 주입할 수 있는 클래스를 보여 주입니다. 이 클래스는 일반적으로 Java입니다. 컨테이너 특정 인터페이스, 기본 클래스 또는 annotation에 대한 의존성이 없는 POJO입니다.
+setter기반 DI는 컨테이너가 빈을 인스턴스화하기 위해 인수 없는 생성자 또는 인수 없는 `static` 팩토리 메서드를 호출한 후 빈의 세터 메서드를 통하여 달성합니다. 다음 예제에서는 순수한 setter 주입을 사용해야만 의존성 주입할 수 있는 클래스를 보여 주입니다. 이 클래스는 일반적으로 Java입니다. 컨테이너 특정 인터페이스, 기본 클래스 또는 annotation에 대한 의존성이 없는 POJO입니다.
 
 ```java
 public class SimpleMovieLister {
@@ -948,19 +948,19 @@ public class ExampleBean {
 }
 ```
 
-**static** 팩터리 메서드에 대한 인수는 **\<constructor-arg/>** 요소에 의해 제공되며 마치 생성자가 실제로 사용된 것과 정확히 동일합니다. 팩터리 메서드에서 반환되는 클래스의 타입은 **static** 팩터리 메서드를 포함하는 클래스와 같은 **타입**일 필요는 없습니다(이 예제에서는 동일하지만). 인스턴스(non-static) 팩토리 메서드는 본질적으로 동일한 방식으로 사용될 수 있으므로(class 속성 대신 factory-bean 속성을 사용하는 것 제외) 여기서는 이러한 세부 사항을 노의하지 않습니다.
+`static` 팩터리 메서드에 대한 인수는 `<constructor-arg/>` 요소에 의해 제공되며 마치 생성자가 실제로 사용된 것과 정확히 동일합니다. 팩터리 메서드에서 반환되는 클래스의 타입은 `static` 팩터리 메서드를 포함하는 클래스와 같은 `type`일 필요는 없습니다(이 예제에서는 동일하지만). 인스턴스(non-static) 팩토리 메서드는 본질적으로 동일한 방식으로 사용될 수 있으므로(class 속성 대신 factory-bean 속성을 사용하는 것 제외) 여기서는 이러한 세부 사항을 노의하지 않습니다.
 
 
 
 ## 4.2 Dependencies and Configuration in Detail
 
-[이전 섹션](ioccontainer.md#4.1-dependency-injection)에서 언급한 것 처럼 다른 빈(협력자)에 대한 참조 또는 인라인으로 정의된 값으로 빈 속성 및 생성자 인수를 정의할 수 있습니다. Spring의 XML 기반 configuration metadata는 이러한 목적을 위해 \<property/>및 \<constructor-arg/> 요소 내의 하위 요소 유형을 지원합니다.
+[이전 섹션](ioccontainer.md#4.1-dependency-injection)에서 언급한 것 처럼 다른 빈(협력자)에 대한 참조 또는 인라인으로 정의된 값으로 빈 속성 및 생성자 인수를 정의할 수 있습니다. Spring의 XML 기반 configuration metadata는 이러한 목적을 위해 `<property/>`및 `<constructor-arg/>` 요소 내의 하위 요소 유형을 지원합니다.
 
 
 
 ### **Straight Values (Primitives, Strings, and so on)**
 
-\<property/> 요소의 값 특성은 사람이 읽을 수 있는 문자열 표현으로 속성 또는 생성자 인수를 지정합니다. Spring의  [conversion service](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#core-convert-ConversionService-API)는 이러한 값을 문자열에서 속성 또는 인수의 실제 유형으로 변환하는 데 사용됩니다. 다음 예에서는 설정되는 다양한 값을 보여줍니다.
+`<property/>` 요소의 값 특성은 사람이 읽을 수 있는 문자열 표현으로 속성 또는 생성자 인수를 지정합니다. Spring의  [conversion service](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#core-convert-ConversionService-API)는 이러한 값을 문자열에서 속성 또는 인수의 실제 유형으로 변환하는 데 사용됩니다. 다음 예에서는 설정되는 다양한 값을 보여줍니다.
 
 ```java
 <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -1013,13 +1013,13 @@ public class ExampleBean {
 
 
 
-Spring 컨테이너는 JavaBeans **PropertyEditor** 메커니즘을 사용하여 **\<value/>** 요소 내부의 텍스트를 **java.util.Properties** 인스턴스로 변환합니다. 이것은 좋은 지름길이며 Spring 팀이 **value** 속성 스타일보다 중첩된 \<value/> 요소의 사용을 선호하는 몇 가지 중의 하나입니다.
+Spring 컨테이너는 JavaBeans `PropertyEditor` 메커니즘을 사용하여 `<value/>` **** 요소 내부의 텍스트를 `java.util.Properties` 인스턴스로 변환합니다. 이것은 좋은 지름길이며 Spring 팀이 `value` 속성 스타일보다 중첩된 \<value/> 요소의 사용을 선호하는 몇 가지 중의 하나입니다.
 
 
 
 ### The iderf element
 
-**idref** 요소는 컨테이너에 있는 다른 빈의 id(참조가 아닌 문자열 값)를 \<constructor-arg/>또는 \<property/> 요소로 전달하는 오류 방지 방법입니다. 다음 예제는 사용 방법을 보여줍니다.
+`idref` 요소는 컨테이너에 있는 다른 빈의 id(참조가 아닌 문자열 값)를 `<constructor-arg/>`또는 `<property/>` 요소로 전달하는 오류 방지 방법입니다. 다음 예제는 사용 방법을 보여줍니다.
 
 ```xml
 <bean id="theTargetBean" class="..."/>
@@ -1041,29 +1041,29 @@ Spring 컨테이너는 JavaBeans **PropertyEditor** 메커니즘을 사용하여
 </bean>
 ```
 
-첫 번째 형식은 두 번째 형식보다 선호되는데, **idref** 태그를 사용하면 배포 시 컨테이너가 참조되고 명명된 bean이 실제로 존재하는지 확인할 수 있기 때문입니다. 두 번째 변형에서는 클라이언트 빈의 targetName 속성에 전달된 값에 대해 유효성 검사가 수행되지 않습니다. 오타는 클라이언트 빈이 실제로 인스턴스화될 때만 발견됩니다(치명적인 결과가 발생할 가능성이 가장 높음). 클라이언트 빈이 [prototype](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes) 빈인 경우 이 오타와 그에 따른 예외는 컨테이너가 배포된 후 오랜 시간이 지난 후에야 발견될 수 있습니다.
+첫 번째 형식은 두 번째 형식보다 선호되는데, `idref` 태그를 사용하면 배포 시 컨테이너가 참조되고 명명된 bean이 실제로 존재하는지 확인할 수 있기 때문입니다. 두 번째 변형에서는 클라이언트 빈의 targetName 속성에 전달된 값에 대해 유효성 검사가 수행되지 않습니다. 오타는 클라이언트 빈이 실제로 인스턴스화될 때만 발견됩니다(치명적인 결과가 발생할 가능성이 가장 높음). 클라이언트 빈이 [prototype](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes) 빈인 경우 이 오타와 그에 따른 예외는 컨테이너가 배포된 후 오랜 시간이 지난 후에야 발견될 수 있습니다.
 
 {% hint style="info" %}
-**idref** 요소의 로컬 속성은 더 이상 일반 bean 참조에 대한 값을 제공하지 않으므로 4.0 bean XSD에서 더 이상 지원되지 않습니다. 4.0 스키마로 업그레이드할 때 기존 **idref local** 참조를 **idref bean**으로 변경해야 한다.
+`idref` 요소의 로컬 속성은 더 이상 일반 bean 참조에 대한 값을 제공하지 않으므로 4.0 bean XSD에서 더 이상 지원되지 않습니다. 4.0 스키마로 업그레이드할 때 기존 `idref local` 참조를 `idref bean`으로 변경해야 한다.
 {% endhint %}
 
-\<idref/> 요소가 값을 가져오는 일반적인 위치(최소한 Spring 2.0 이전 버전에서)는 **ProxyFactoryBean** bean definition의 [AOP Interceptors](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-pfb-1) 구성에 있습니다. 인터셉터 이름을 지정할 때 \<idref/>요소를 사용하면 인터셉터 ID의 오타를 방지할 수 있습니다.
+\<idref/> 요소가 값을 가져오는 일반적인 위치(최소한 Spring 2.0 이전 버전에서)는 `ProxyFactoryBean` bean definition의 [AOP Interceptors](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-pfb-1) 구성에 있습니다. 인터셉터 이름을 지정할 때 \<idref/>요소를 사용하면 인터셉터 ID의 오타를 방지할 수 있습니다.
 
 
 
 ### **References to Other Beans (Collaborators)**
 
-ref 요소는 \<constructor-arg/> 또는 \<property/> 정의 요소 내부의 마지막 요소입니다. 여기에서 빈의 지정된 속성 값을 컨테이너가 관리하는 다른 빈(협력자)에 대한 참조로 설정합니다. 참조된 Bean은 속성을 설정할 Bean의 의존성이며 속성이 설정되기 전에 필요에 따라 초기화됩니다. (협력자가 싱글톤 빈인 경우 이미 컨테이너에 의해 초기화되었을 수 있습니다.). 모든 참조는 궁극적으로 다른 개체에 대한 참조입니다. 범위 지정 및 유효성 검증은 **bean** 또는 **parent** 속성을 통해 다른 오브젝트의 ID 또는 이름을 지정하는지 여부에 따라 다릅니다.
+ref 요소는 \<constructor-arg/> 또는 \<property/> 정의 요소 내부의 마지막 요소입니다. 여기에서 빈의 지정된 속성 값을 컨테이너가 관리하는 다른 빈(협력자)에 대한 참조로 설정합니다. 참조된 Bean은 속성을 설정할 Bean의 의존성이며 속성이 설정되기 전에 필요에 따라 초기화됩니다. (협력자가 싱글톤 빈인 경우 이미 컨테이너에 의해 초기화되었을 수 있습니다.). 모든 참조는 궁극적으로 다른 개체에 대한 참조입니다. 범위 지정 및 유효성 검증은 `bean` 또는 `parent` 속성을 통해 다른 오브젝트의 ID 또는 이름을 지정하는지 여부에 따라 다릅니다.
 
 
 
-**\<ref>** 태그의 **bean** 속성을 통해 대상 bean을 지정하는 것은 가장 일반적인 형식이며 동일한 XML 파일에 있는지 여부에 관계없이 동일한 컨테이너 또는 부모 컨테이너의 모든 bean에 대한 참조를 생성할 수 있습니다. **Bean** 속성의 값은 대상 Bean의 **id** 속성과 동일하거나 대상 Bean의 **name** 속성 값 중 하나와 동일할 수 있습니다. 다음 예제에서는 **ref** 요소를 사용하는 방법을 보여줍니다.
+`<ref>` 태그의 `bean` 속성을 통해 대상 bean을 지정하는 것은 가장 일반적인 형식이며 동일한 XML 파일에 있는지 여부에 관계없이 동일한 컨테이너 또는 부모 컨테이너의 모든 bean에 대한 참조를 생성할 수 있습니다. `Bean` 속성의 값은 대상 Bean의 `id` 속성과 동일하거나 대상 Bean의 `name` 속성 값 중 하나와 동일할 수 있습니다. 다음 예제에서는 `ref` 요소를 사용하는 방법을 보여줍니다.
 
 ```xml
 <ref bean="someBean"/>
 ```
 
-**parent** 속성을 통해 대상 bean을 지정하면 현재 컨테이너의 상위 컨테이너에 있는 bean에 대한 참조가 생성됩니다. **parent** 속성의 값은 대상 Bean의 id 속성 또는 대상 Bean의 **name** 속성 값 중 하나와 동일할 수 있습니다.  대상 빈은 현재 빈의 상위 컨테이너에 있어야 합니다. 컨테이너의 계층 구조가 있고 부모 빈과 동일한 이름을 가진 프록시를 사용하여 부모 컨테이너의 기존 빈을 래핑하려는 경우 주로 이 빈 참조 변형을 사용해야 합니다. 다음 두가지 내용은 parent 속성을 사용하는 방법을 보여줍니다.
+`parent` 속성을 통해 대상 bean을 지정하면 현재 컨테이너의 상위 컨테이너에 있는 bean에 대한 참조가 생성됩니다. `parent` 속성의 값은 대상 Bean의 id 속성 또는 대상 Bean의 `name` 속성 값 중 하나와 동일할 수 있습니다.  대상 빈은 현재 빈의 상위 컨테이너에 있어야 합니다. 컨테이너의 계층 구조가 있고 부모 빈과 동일한 이름을 가진 프록시를 사용하여 부모 컨테이너의 기존 빈을 래핑하려는 경우 주로 이 빈 참조 변형을 사용해야 합니다. 다음 두가지 내용은 parent 속성을 사용하는 방법을 보여줍니다.
 
 ```xml
 <!-- 상위 컨텍스트에서 -->
@@ -1084,14 +1084,14 @@ ref 요소는 \<constructor-arg/> 또는 \<property/> 정의 요소 내부의 �
 ```
 
 {% hint style="info" %}
-**ref** 요소의 **local** 속성은 더 이상 일반 bean 참조에 대한 값을 제공하지 않기 때문에 4.0 bean XSD에서 더 이상 지원되지 않습니다. 4.0 스키마로 업그레이드할 때 기존 **ref local** 참조를 **ref bean**으로 변경하십시오.
+`ref` 요소의 `local` 속성은 더 이상 일반 bean 참조에 대한 값을 제공하지 않기 때문에 4.0 bean XSD에서 더 이상 지원되지 않습니다. 4.0 스키마로 업그레이드할 때 기존 `ref local` 참조를 `ref bean`으로 변경하십시오.
 {% endhint %}
 
 
 
 ### Inner Beans
 
-\<proerty/> 또는 \<constructor-arg/> 요소 내부의 \<bean/>요소는 다음 예제와 같이 내부 빈을 정의합니다. 다음 예를 볼 수 있듯이:
+`<proerty/>` 또는 `<constructor-arg/>` 요소 내부의 `<bean/>`요소는 다음 예제와 같이 내부 빈을 정의합니다. 다음 예를 볼 수 있듯이:
 
 ```xml
 <bean id="outer" class="...">
@@ -1105,7 +1105,7 @@ ref 요소는 \<constructor-arg/> 또는 \<property/> 정의 요소 내부의 �
 </bean>
 ```
 
-inner bean definition에는 정의된 ID나 이름이 필요하지 않습니다. 지정된 경우 컨테이너는 이러한 값을 식별자로 사용하지 않습니다. Inner bean은 항상 익명이고 항상 외부 빈과 함께 생성되기 때문에 컨테이너는 생성 시 **scope** 플래그도 무시합니다. Inner bean에 독립적으로 액세스하거나 Inner bean의 enclosing bean이 아닌 협력 bean에 주입할 수 없습니다.
+inner bean definition에는 정의된 ID나 이름이 필요하지 않습니다. 지정된 경우 컨테이너는 이러한 값을 식별자로 사용하지 않습니다. Inner bean은 항상 익명이고 항상 외부 빈과 함께 생성되기 때문에 컨테이너는 생성 시 `scope` 플래그도 무시합니다. Inner bean에 독립적으로 액세스하거나 Inner bean의 enclosing bean이 아닌 협력 bean에 주입할 수 없습니다.
 
 
 
@@ -1115,7 +1115,7 @@ inner bean definition에는 정의된 ID나 이름이 필요하지 않습니다.
 
 ### Collections
 
-\<list/>,\<set/> ,\<map/> 및 \<props/> 요소는 각각 Java 컬렉션 유형 List, Set, Map 및 Properties의 속성 및 인수를 설정합니다. 다음 예에서는 사용 방법을 보여줍니다.
+`<list/>`,`<set/>` ,`<map/>` 및 `<props/>` 요소는 각각 Java 컬렉션 유형 List, Set, Map 및 Properties의 속성 및 인수를 설정합니다. 다음 예에서는 사용 방법을 보여줍니다.
 
 ```xml
 <bean id="moreComplexObject" class="example.ComplexObject">
@@ -1161,7 +1161,7 @@ bean | ref | idref | list | set | map | props | value | null
 
 #### Collection Merging
 
-Spring 컨테이너는 컬렉션 병합도 지원합니다. 애플리케이션 개발자는 상위 \<list/>,\<map/>,\<set/> 또는 \<props/> 요소를 정의하고 상위 컬렉션에서 값을 상속하고 override한 하위 \<list/>,\<map/>,\<set/> 또는 \<props/> 요소를 가질 수 있습니다. 즉, 하위 컬렉션의 값은 상위 컬렉션과 하위 컬렉션의 요소를 병합한 결과이며 하위 컬렉션 요소는 상위 컬렉션에 지정된 값보다 우선합니다.
+Spring 컨테이너는 컬렉션 병합도 지원합니다. 애플리케이션 개발자는 상위 `<list/>`,`<map/>`,`<set/>` 또는 `<props/>` 요소를 정의하고 상위 컬렉션에서 값을 상속하고 override한 하위 `<list/>`,`<map/>`,`<set/>` 또는 `<props/>` 요소를 가질 수 있습니다. 즉, 하위 컬렉션의 값은 상위 컬렉션과 하위 컬렉션의 요소를 병합한 결과이며 하위 컬렉션 요소는 상위 컬렉션에 지정된 값보다 우선합니다.
 
 
 
@@ -1193,7 +1193,7 @@ Spring 컨테이너는 컬렉션 병합도 지원합니다. 애플리케이션 �
 <beans>
 ```
 
-자식 빈 정의의 **adminEmails** 속성의 **\<props/>**요소에서 **merge=true** 속성의 사용에 주목하세요. **Child** bean이 컨테이너에 의해 확인되고 인스턴스화되면 결과 인스턴스에는 자식의 **adminEmails** 컬렉션을 부모의 **adminEmails** 컬렉션과 병합한 결과가 포함된 **adminEmails** **Properties** 컬렉션이 있습니다. 다음 목록은 결과를 보여줍니다.
+자식 빈 정의의 `adminEmails` 속성의 `<props/>`요소에서 `merge=true` 속성의 사용에 주목하세요. `Child` bean이 컨테이너에 의해 확인되고 인스턴스화되면 결과 인스턴스에는 자식의 `adminEmails` 컬렉션을 부모의 `adminEmails` 컬렉션과 병합한 결과가 포함된 `adminEmails Properties` 컬렉션이 있습니다. 다음 목록은 결과를 보여줍니다.
 
 ```
 administrator=administrator@example.com
@@ -1201,7 +1201,7 @@ sales=sales@example.com
 support=support@example.co.uk
 ```
 
-child **Properties** 컬렉션의 값 집합은 parent \<props/>의 모든 속성 요소를 상속하며 **support** 값에 대한 child 값은 상위 컬렉션의 값을 재정의합니다.
+child `Properties` 컬렉션의 값 집합은 parent \<props/>의 모든 속성 요소를 상속하며 `support` 값에 대한 child 값은 상위 컬렉션의 값을 재정의합니다.
 
 
 
@@ -1211,13 +1211,13 @@ child **Properties** 컬렉션의 값 집합은 parent \<props/>의 모든 속�
 
 #### Limitations of Collection Merging
 
-서로 다른 컬렉션 유형(예: **Map** 및 **List**)을 병합할 수 없습니다. 그렇게 하려고 하면 적절한 예외가 발생합니다. **merge** 속성은 하위의 상속된 chiled definition에 지정되어야 합니다. 상위 컬렉션 definition에 **merge** 속성을 지정하는 것은 중복되며 원하는 병합으로 이어지지 않습니다.
+서로 다른 컬렉션 유형(예: `Map` 및 `List`)을 병합할 수 없습니다. 그렇게 하려고 하면 적절한 예외가 발생합니다. `merge` 속성은 하위의 상속된 chiled definition에 지정되어야 합니다. 상위 컬렉션 definition에 `merge` 속성을 지정하는 것은 중복되며 원하는 병합으로 이어지지 않습니다.
 
 
 
 #### Strongly-typed collection
 
-generic types 대한 Java의 지원 덕분에 강력한 타입의 collections을 사용할 수 있습니다. 즉, (예를 들어) **String** 요소만 포함할 수 있도록 Collection 타입을 선언할 수 있습니다.  Spring을 사용하여 강력한 타입의 Collection을 bean에 의존성 주입하는 경우 강력한 타입의 Collection 인스턴스 요소가 Collection에 추가되기 전에 적절한 타입으로 변환되도록 Spring의 타입 변환 지원을 활용할 수 있습니다. 다음 Java 클래스 및 bean definition는 이를 수행하는 방법을 보여줍니다.
+generic types 대한 Java의 지원 덕분에 강력한 타입의 collections을 사용할 수 있습니다. 즉, (예를 들어) `String` 요소만 포함할 수 있도록 `Collection` 타입을 선언할 수 있습니다.  `Spring`을 사용하여 강력한 타입의 Collection을 bean에 의존성 주입하는 경우 강력한 타입의 `Collection` 인스턴스 요소가 `Collection`에 추가되기 전에 적절한 타입으로 변환되도록 `Spring`의 타입 변환 지원을 활용할 수 있습니다. 다음 Java 클래스 및 bean definition는 이를 수행하는 방법을 보여줍니다.
 
 ```java
 public class SomeClass {
@@ -1244,13 +1244,13 @@ public class SomeClass {
 </beans>
 ```
 
-**something** 빈의 **accounts** 속성이 주입을 위해 준비되면 강력한 타입의 Map\<String, Float> 요소 유형에 대한 제네릭 정보를 리플렉션을 통해 사용할 수 있습니다. 따라서 Spring의 타입 변환 인프라는 다양한 값 요소를 Float 유형으로 인식하고 문자열 값(9.99, 2.75 및 3.99)을 실제 Float 유형으로 변환합니다.
+`something` 빈의 `accounts` 속성이 주입을 위해 준비되면 강력한 타입의 `Map<String, Float>` 요소 유형에 대한 제네릭 정보를 리플렉션을 통해 사용할 수 있습니다. 따라서 Spring의 타입 변환 인프라는 다양한 값 요소를 Float 유형으로 인식하고 문자열 값(9.99, 2.75 및 3.99)을 실제 Float 유형으로 변환합니다.
 
 
 
 ### **Null and Empty String Values**
 
-Spring은 속성 등에 대한 빈 인수를 빈 **Strings**로 취급합니다. 다음 XML 기반 configuration metadata 조각은 **email** 속성을 빈 **String** 값("")으로 설정합니다.
+Spring은 속성 등에 대한 빈 인수를 빈 `Strings`로 취급합니다. 다음 XML 기반 configuration metadata 조각은 `email` 속성을 빈 `String` 값("")으로 설정합니다.
 
 ```xml
 <bean class="ExampleBean">
@@ -1284,11 +1284,11 @@ exampleBean.setEmail(null);
 
 ### **XML Shortcut with the p-namespace**
 
-p-namespace를 사용하면 **bean** 요소의 속성(중첩된 **\<property/>**요소 대신)을 사용하여 속성 값,협업 빈 또는 둘 다 설명할 수 있습니다.&#x20;
+p-namespace를 사용하면 `bean` 요소의 속성(중첩된 `<property/>`요소 대신)을 사용하여 속성 값,협업 빈 또는 둘 다 설명할 수 있습니다.&#x20;
 
 
 
-Spring은 XML 스키마 definition를 기반으로 하는 [namespaces](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#core.appendix.xsd-schemas)로 확장 가능한 구성 형식을 지원합니다. 이 장에서 설명하는 **benas** 구성 형식은 XML 스키마 문서에 정의되어 있습니다. 그러나 p-namespace는 XSD 파일에 정의되어 있지 않으며 Spring의 코어에만 존재합니다.
+Spring은 XML 스키마 definition를 기반으로 하는 [namespaces](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#core.appendix.xsd-schemas)로 확장 가능한 구성 형식을 지원합니다. 이 장에서 설명하는 `beans` 구성 형식은 XML 스키마 문서에 정의되어 있습니다. 그러나 p-namespace는 XSD 파일에 정의되어 있지 않으며 Spring의 코어에만 존재합니다.
 
 
 
@@ -1310,7 +1310,7 @@ Spring은 XML 스키마 definition를 기반으로 하는 [namespaces](https://d
 </beans>
 ```
 
-예제는 bean definition에서 **email**이라는 p-namespace의 속성을 보여줍니다. 이것은 속성 선언을 포함하도록 Spring에 지시합니다. 앞에서 언급했듯이 p-namespace에는 스키마 정의가 없으므로 특성 이름을 속성 이름으로 설정할 수 있습니다.
+예제는 bean definition에서 `email`이라는 p-namespace의 속성을 보여줍니다. 이것은 속성 선언을 포함하도록 Spring에 지시합니다. 앞에서 언급했듯이 p-namespace에는 스키마 정의가 없으므로 특성 이름을 속성 이름으로 설정할 수 있습니다.
 
 
 
@@ -1339,17 +1339,17 @@ Spring은 XML 스키마 definition를 기반으로 하는 [namespaces](https://d
 </beans>
 ```
 
-이 예제에는 p-namespace를 사용하는 속성 값뿐만 아니라 속성 참조를 선언하는 특수 형식도 사용됩니다. 첫 번째 bean definition는 **\<property name="spouse" ref="jane"/>**을 사용하여 bean **john**에서 bean **jane**으로의 참조를 생성하는 반면 두 번째 bean definition는 **p:spouse-ref="jane"**를 속성으로 사용하여 똑같은 일을 수행합니다. 이 경우 **spouse**는 속성 이름인 반면 **-ref** 부분은 이것이 적접 값이 아니라 다른 빈에 대한 참조임을 나타냅니다.
+이 예제에는 p-namespace를 사용하는 속성 값뿐만 아니라 속성 참조를 선언하는 특수 형식도 사용됩니다. 첫 번째 bean definition는 `<property name="spouse" ref="jane"/>`을 사용하여 bean `john`에서 bean `jane`으로의 참조를 생성하는 반면 두 번째 bean definition는 `p:spouse-ref="jane"`를 속성으로 사용하여 똑같은 일을 수행합니다. 이 경우 `spouse`는 속성 이름인 반면 `-ref` 부분은 이것이 적접 값이 아니라 다른 빈에 대한 참조임을 나타냅니다.
 
 {% hint style="info" %}
-p-namespace은 표준 XML 형식만큼 유연하지 않습니다. 예를 들어 속성 ​​참조를 선언하는 형식은 **Ref**로 끝나는 속성과 충돌하지만 표준 XML 형식은 그렇지 않습니다. 세 가지 접근 방식을 모두 동시에 사용하는 XML 문서를 생성하지 않도록 접근 방식을 신중하게 선택하고 이를 팀원에게 전달하는 것이 좋습니다.
+p-namespace은 표준 XML 형식만큼 유연하지 않습니다. 예를 들어 속성 ​​참조를 선언하는 형식은 `Ref`로 끝나는 속성과 충돌하지만 표준 XML 형식은 그렇지 않습니다. 세 가지 접근 방식을 모두 동시에 사용하는 XML 문서를 생성하지 않도록 접근 방식을 신중하게 선택하고 이를 팀원에게 전달하는 것이 좋습니다.
 {% endhint %}
 
 
 
 ### **XML Shortcut with the c-namespace**
 
-[XML shortcut with the p-namespace](ioccontainer.md#xml-shortcut-with-the-p-namespace)를 비스한 Spring 3.1에 도입된 c-네임스페이스는 중첩된 **constructor-arg** 요소가 아닌 생성자 인수를 구성하기 위한 인라인 속성을 허용합니다.
+[XML shortcut with the p-namespace](ioccontainer.md#xml-shortcut-with-the-p-namespace)를 비스한 Spring 3.1에 도입된 c-네임스페이스는 중첩된 `constructor-arg` **** 요소가 아닌 생성자 인수를 구성하기 위한 인라인 속성을 허용합니다.
 
 
 
@@ -1379,7 +1379,7 @@ p-namespace은 표준 XML 형식만큼 유연하지 않습니다. 예를 들어 
 </beans>
 ```
 
-**c:** namespace 이름으로 생성자 인수를 설정하기 위해 **p:** (bean 참조에 대한 후행 **-ref**)과 동일한 규칙을 사용합니다. 마찬가지로 XSD 스키마에 정의되어 있지 않더라도 XML 파일에 선언해야 합니다(스프링 코어 내부에 존재).
+`c:` **** namespace 이름으로 생성자 인수를 설정하기 위해 `p:`(bean 참조에 대한 후행 `-ref`)과 동일한 규칙을 사용합니다. 마찬가지로 XSD 스키마에 정의되어 있지 않더라도 XML 파일에 선언해야 합니다(스프링 코어 내부에 존재).
 
 
 
@@ -1392,7 +1392,7 @@ p-namespace은 표준 XML 형식만큼 유연하지 않습니다. 예를 들어 
 ```
 
 {% hint style="info" %}
-XML 문법으로 인해 index 표기법에는 XML 속성 이름이 숫자로 시작할 수 없기 때문에(일부 IDE에서 허용하더라도) 앞에 \_가 있어야 합니다. 해당 index 표기법은 **\<constructor-arg>** 요소에도 사용할 수 있지만 일반적으로 일반 선언 순서로 충분하기 때문에 일반적으로 사용되지 않습니다.
+XML 문법으로 인해 index 표기법에는 XML 속성 이름이 숫자로 시작할 수 없기 때문에(일부 IDE에서 허용하더라도) 앞에 \_가 있어야 합니다. 해당 index 표기법은 `<constructor-arg>` **** 요소에도 사용할 수 있지만 일반적으로 일반 선언 순서로 충분하기 때문에 일반적으로 사용되지 않습니다.
 {% endhint %}
 
 
@@ -1403,7 +1403,7 @@ XML 문법으로 인해 index 표기법에는 XML 속성 이름이 숫자로 시
 
 ### **Compound Property Names**
 
-최종 속성 이름을 제외한 경로의 모든 구성 요소가 **null**이 아닌 한 빈 속성을 설정할 때 복합 또는 중첩 속성 이름을 사용할 수 있습니다. 다음 bean definition를 고려합니다.
+최종 속성 이름을 제외한 경로의 모든 구성 요소가 `null`이 아닌 한 빈 속성을 설정할 때 복합 또는 중첩 속성 이름을 사용할 수 있습니다. 다음 bean definition를 고려합니다.
 
 ```xml
 <bean id="something" class="things.ThingOne">
@@ -1411,11 +1411,361 @@ XML 문법으로 인해 index 표기법에는 XML 속성 이름이 숫자로 시
 </bean>
 ```
 
-**Something** 빈은 **fred** 속성을 가지고 있습니다. **bob** 속성은 **sammy** 속성을 가지고 있고 최종 **sammy** 속성은 값 **123**으로 설정됩니다. 이것이 작동하려면 무언가의 **fred** 속성과 **fred**의 **bob** 속성이 **bean**이 생성된 후 **null**이 아니어야 합니다. 그렇지 않으면 **NullPointerException**이 발생합니다.
+`Something` 빈은 `fred` 속성을 가지고 있습니다. `bob` 속성은 `sammy` 속성을 가지고 있고 최종 `sammy` 속성은 값 `123`으로 설정됩니다. 이것이 작동하려면 무언가의 `fred` 속성과 `fred`의 `bob` 속성이 `bean`이 생성된 후 `null`이 아니어야 합니다. 그렇지 않으면 `NullPointerException`이 발생합니다.
 
 
 
+## 4.3 Using depends-on
 
 
-#### **Comming Soon**
+
+빈이 다른 빈의 의존성인 경우 일반적으로 한 빈이 다른 빈의 속성으로 설정됨을 의미합니다. 일반적으로 XML 기반 metadata의 [\<ref/> element](ioccontainer.md#references-to-other-beans-collaborators)하여 이를 수행합니다. 그러나 때로는 빈 간의 의존성이 덜 직접적입니다. 데이터베이스 드라이버 등록과 같이 클래스의 정적 초기화 프로그램을 트리거해야 하는 경우를 예로 들 수 있습니다. `depends-on` 속성은 이 요소를 사용하는 bean이 초기화되기 전에 초기화될 하나 이상의 bean을 명시적으로 강제할 수 있습니다. 다음 예제에서는 `depends-on` 속성을 사용하여 단일 빈에 대한 의존성을 표현합니다.
+
+```xml
+<bean id="beanOne" class="ExampleBean" depends-on="manager"/>
+<bean id="manager" class="ManagerBean" />
+```
+
+여러 bean에 대한 의존성을 표현하려면 depends-on 속성의 값으로 bean 이름 list을 제공합니다(쉼표, 공백 및 세미콜론은 유효한 구분 기호입니다).
+
+```xml
+<bean id="beanOne" class="ExampleBean" depends-on="manager,accountDao">
+    <property name="manager" ref="manager" />
+</bean>
+
+<bean id="manager" class="ManagerBean" />
+<bean id="accountDao" class="x.y.jdbc.JdbcAccountDao" />
+```
+
+{% hint style="info" %}
+`depends-on` 속성은 초기화 타임의 의존성과 또 싱글톤 빈의 경우 해당 파괴 타임 의존성을 모두 지정할 수 있습니다. 주어진 bean과 `depends-on`를 정의하는 종속 bean은 주어진 bean 자체가 파괴되기 전에 먼저 파괴됩니다. 따라서 `depends-on`은 종료 순서도 제어할 수 있습니다.
+{% endhint %}
+
+
+
+## 4.4 Lazy-initialized Beans
+
+기본적으로 `ApplicationContext` 구현은 초기화 프로세스의 일부로 모든 [싱글톤](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-singleton) 빈을 열심히 만들고 구성합니다. 일반적으로 이러한 사전 인스턴스화는 구성 또는 주변 환경의 오류가 몇 시간 또는 며칠 후에 발견되는 것이 아니라 즉시 발견되기 때문에 바람직합니다. 이 동작이 바람직하지 않은 경우 bean definition을 지연 초기화로 표시하여 싱글톤 bean의 미리 인스턴스화를 방지할 수 있습니다. Lazy-initialized 빈은 IoC 컨테이너가 시작할 때가 아니라 처음 요청될 때 빈 인스턴스를 생성하도록 지시합니다.
+
+
+
+XML에서 이 동작은 다음 예제와 같이 `<bean/>`요소의 `lazy-init` 속성에 의해 제어됩니다.
+
+```xml
+<bean id="lazy" class="com.something.ExpensiveToCreateBean" lazy-init="true"/>
+<bean name="not.lazy" class="com.something.AnotherBean"/>
+```
+
+
+
+앞의 구성이 `ApplicationContext`에 의해 소비될 때 `lazy` 빈은 `ApplicationContext`가 시작될 때 열심히 미리 인스턴스화되지 않는 반면 `not.lazy` 빈은 열심히 미리 인스턴스화됩니다.
+
+
+
+그러나 lazy-initialized된 빈이 지연 초기화되지 않은 싱글톤 빈의 의존성인 경우 `ApplicationContext`는 시작 시 지연 초기화된 빈을 생성합니다. 왜냐하면 싱글톤의 의존성을 충족해야 하기 때문입니다. lazy-initialized bean은 not lazy-initialized 다른 곳의 싱글톤 bean에 주입됩니다.
+
+
+
+다음 예제와 같이 `<beans/>`요소의 `default-lazy-init` 속성을 사용하여 컨테이너 수준에서 lazy-initialization를 제어할 수도 있습니다.
+
+```xml
+<beans default-lazy-init="true">
+    <!-- 어떤 빈도 미리 인스턴스화되지 않습니다.... -->
+</beans>
+```
+
+
+
+## 4.5 Autowiring Collaborators
+
+
+
+Spring 컨테이너는 협업 빈 사이의 관계를 자동으로 연결할 수 있습니다. Spring이 `ApplicationContext`의 내용을 검사하여 빈에 대해 자동으로 협력자(다른 빈)를 해결하도록 할 수 있습니다. Autowiring에는 다음과 같은 이점이 있습니다.
+
+* Autowiring은 속성 또는 생성자 인수를 지정해야 하는 필요성을 크게 줄일 수 있습니다. ([이 장의 다른 곳](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-child-bean-definitions)에서 논의된 bean 템플릿과 같은 다른 메커니즘도 이와 관련하여 가치가 있습니다.)
+* Autowiring은 객체가 개선함에 따라 구성을 업데이트할 수 있습니다. 예를 들어 클래스에 의존성을 추가해야 하는 경우 구성을 수정하지 않고도 해당 의존성을 자동으로 충족할 수 있습니다. 따라서 autowiring은 코드 베이스가 더 안정될 때 명시적 연결로 전환하는 옵션을 부정하지 않아 개발 중에 특히 유용할 수 있습니다.
+
+
+
+XML 기반 configuration metadat([Dependency Injection](ioccontainer.md#4.1-dependency-injection) 참조)를 사용할 때 `<bean/>`요소의 `autowire` 속성을 사용하여 빈 정의에 대한 autowire 모드를 지정할 수 있습니다. 자동 연결 기능에는 네 가지 모드가 있습니다. bean별로 autowiring을 지정하고 따라서 autowiring할 항목을 선택할 수 있습니다. 다음 표는 네 가지 자동 연결 모드를 설명합니다.
+
+
+
+_Table 2. Autowiring modes_
+
+| Mode          | 설명                                                                                                                                                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `no`          | (기본값) 자동 연결 없음. Bean 참조는 `ref` 요소에 의해 정의되어야 합니다. 공동 작업자를 명시적으로 지정하면 더 많은 제어와 명확성을 제공하므로 대규모 배포에는 기본 설정을 변경하지 않는 것이 좋습니다. 어느 정도까지는 시스템의 구조를 문서화합니다.                                                                       |
+| `byName`      | 속성 이름으로 Autowiring. Spring은 autowired가 필요한 프로퍼티와 같은 이름을 가진 빈을 찾습니다. 예를 들어 bean definition가 이름으로 autowire로 설정되고 `master` 속성(즉, `setMaster(..)` 메서드가 있음)을 포함하는 경우 Spring은 `master`라는 bean definition를 찾고 속성을 설정하는 데 사용합니다. |
+| `byType`      | 컨테이너에 속성 타입이 정확히 하나의 빈이  존재하는 경우 속성이 자동 연결되도록 합니다. 둘 이상이 존재하면 치명적인 예외가 발생하여 해당 빈에 대해 `byType` autowiring을 사용할 수 없게 된다. 일치하는 빈이 없으면 아무 일도 일어나지 않습니다(속성이 설정되지 않음).                                                         |
+| `constructor` | `byType`과 유사하지만 생성자 인수에 적용됩니다. 컨테이너에 생성자 인수 타입의 빈이 정확히 하나도 없으면 치명적인 오류가 발생합니다.                                                                                                                                           |
+
+`byType` 또는 `constructor` 자동 연결 모드를 사용하면 배열 및 타입이 지정된 컬렉션을 연결할 수 있습니다.  이러한 경우 예상 타입과 일치하는 컨테이너 내의 모든 autowire 후보가 의존성을 충족하도록 제공됩니다. 예상되는 키 타입이 `String`인 경우 강력한 타입의 `map` 인스턴스를 자동으로 연결할 수 있습니다. autowired `map` 인스턴스의 값은 예상되는 타입과 일치하는 모든 빈 인스턴스로 구성되며 `map` 인스턴스의 키에는 해당 빈 이름이 포함됩니다
+
+
+
+**Limitations and Disadvantages of Autowiring**
+
+Autowiring은 프로젝트 전체에서 일관되게 사용될 때 가장 잘 작동합니다. autowiring이 일반적으로 사용되지 않는 경우 한두 개의 빈 정의만 연결하는 데 사용하는 것이 개발자가 혼란스러울 수 있습니다.
+
+
+
+autowiring의 한계와 단점:
+
+* `property` 및 `constructor-arg` 설정의 명시적 의존성은 항상 autowiring을 재정의합니다. `primitives`, `Strings`  및 `Classes`(및 이러한 단순 속성의 `arrays`)와 같은 단순 속성을 자동으로 연결할 수 없습니다.이 제한은 의도적으로 설계된 것입니다
+* 자동 연결은 명시적 연결보다 덜 정확합니다. 앞의 표에서 언급한 것처럼 Spring은 예기치 않은 결과가 발생할 수 있는 모호한 경우 추측을 피하도록 주의합니다. Spring 관리 객체 간의 관계는 더 이상 명시적으로 문서화되지 않습니다.
+* Spring 컨테이너에서 문서를 생성할 수 있는 도구에는 연결 정보가 제공되지 않을 수 있습니다.
+* 컨테이너 내의 여러 bean definations는 autowired될 setter 메서드 또는 생성자 인수에 의해 지정된 타입과 매칭할 수 있습니다. 배열, 컬렉션 또는 `map` 인스턴스의 경우 이것이 반드시 문제가 되는 것은 아닙니다. 그러나 단일 값을 예상하는 의존성의 경우 이 모호성이 독단적으로 해결되지 않습니다. 고유한 bean definition를 사용할 수 없으면 예외가 발생합니다.
+
+
+
+후자의 시나리오에는 다음과 같은 몇 가지 옵션이 있습니다.
+
+* explicit wiring을 위해 autowiring을 포기합니다.
+* [다음 섹션](ioccontainer.md#excluding-a-bean-from-autowiring)에서 설명하는 것처럼 `autowire-candidate` 속성을 `false`로 설정하여 bean definition에 대한 자동 연결을 피합니다.
+* `<bean/>`요소의 기본 속성을 `true`로 설정하여 단일 bean definition를 `primary` 후보로 지정합니다.
+* [Annotation-based 컨테이너 구성](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-annotation-config)에 설명된 대로 annotation-based 구성으로 보다 세분화된 구현을 제어 가능합니다.
+
+
+
+### **Excluding a Bean from Autowiring**
+
+Bean 단위로 autowiring에서 bean을 제외할 수 있습니다. Spring의 XML 형식에서 `<bean/>`요소의 `autowire-candidate` 속성을 `false`로 설정합니다. 컨테이너는 특정 bean definition을 자동 연결 인프라([@Autowired](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-autowired-annotation)와 같은 annotation 스타일 구성 포함)에서 사용할 수 없게 만듭니다.
+
+
+
+{% hint style="info" %}
+`Autowire-candidate` 속성은 타입 기반 autowiring에만 영향을 미치도록 설계되었습니다. 지정된 bean이 autowire 후보로 표시되지 않더라도 해결되는 이름에 의한 명시적 참조에는 영향을 미치지 않습니다. 결과적으로 이름에 의한 autowiring은 그럼에도 불구하고 이름이 일치하면 bean을 주입합니다.
+{% endhint %}
+
+또한 bean 이름에 대한 패턴 일치를 기반으로 autowire 후보를 제한할 수 있습니다. 최상위 `<beans/>`요소는 `default-autowire-candidates` 속성 내에서 하나 이상의 패턴을 허용합니다. 예를 들어 이름이 `Repository`로 끝나는 빈으로 autowire 후보 상태를 제한하려면 `*Repository` 값을 제공합니다. 여러 패턴을 제공하려면 쉼표로 구분된 list으로 정의합니다. Bean definition의 `autowire-candidate` 속성에 대한 `true` 또는 `false`의 명시적 값이 항상 우선합니다. 이러한 빈의 경우 패턴 일치 규칙이 적용되지 않습니다.
+
+
+
+이러한 기술은 autowiring에 의해 다른 bean에 주입되고 싶지 않은 bean에 유용합니다. autowiring을 사용하여 제외된 bean 자체를 구성할 수 없다는 의미는 아닙니다. bean 자체가 다른 bean을 autowiring하기 위한 후보가 아니라는 의미입니다.
+
+
+
+## **4.6. Method Injection**
+
+대부분의 애플리케이션 시나리오에서 컨테이너의 대부분의 빈은 [싱글톤](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-singleton)입니다. 싱글톤 bean이 다른 싱글톤 bean과 협업해야 하거나 비 싱글톤 bean이 다른 비 싱글톤 bean과 협업해야 하는 경우 일반적으로 한 bean을 다른 bean의 속성으로 정의하여 의존성을 처리합니다. 빈 라이프사이클이 다를 때 문제가 발생합니다. 싱글톤 빈 A가 싱글톤이 아닌(프로토타입) 빈 B를 사용해야 한다고 가정하자. 컨테이너는 싱글톤 빈 A를 한 번만 생성하므로 속성을 설정할 수 있는 기회는 한 번뿐입니다. 컨테이너는 필요할 때마다 Bean B의 새 인스턴스를 Bean A에 제공할 수 없습니다.
+
+
+
+해결책은 제어 역전을 포기하는 것입니다.`ApplicationContextAware` 인터페이스를 구현하고 [컨테이너에 대한 getBean("B") 호출](ioccontainer.md#2.3)을 수행하여 bean A가 필요할 때마다 (일반적으로 새로운) bean B 인스턴스를 요청함으로써 [bean A가 컨테이너를 인식](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-aware)하도록 할 수 있습니다. 다음 예에서는 이 접근 방식을 보여줍니다.
+
+```java
+package fiona.apple;
+
+// Spring-API imports
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
+/**
+ * 일부 처리를 수행하기 위해 상태 저장 명령 스타일 클래스를 사용하는 클래스
+ */
+public class CommandManager implements ApplicationContextAware {
+
+    private ApplicationContext applicationContext;
+
+    public Object process(Map commandState) {
+        // 적절한 명령의 새 인스턴스를 가져옵니다.
+        Command command = createCommand();
+        // (완전히 새로운) 명령 인스턴스에 상태를 설정합니다
+        command.setState(commandState);
+        return command.execute();
+    }
+
+    protected Command createCommand() {
+        // Spring API 종속성을 확인하세요!
+        return this.applicationContext.getBean("command", Command.class);
+    }
+
+    public void setApplicationContext(
+            ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+}
+```
+
+비즈니스 코드가 Spring Framework를 인식하고 결합하기 때문에 앞의 내용은 바람직하지 않습니다. Spring IoC 컨테이너의 고급 기능인 메서드 주입을 사용하면 이 사용 사례를 깔끔하게 처리할 수 있습니다.
+
+{% hint style="info" %}
+이 [블로그 항목](https://spring.io/blog/2004/08/06/method-injection)에서 메소드 주입의 동기에 대해 자세히 읽을 수 있습니다.
+{% endhint %}
+
+### **Lookup Method Injection**
+
+조회 메소드 주입은 컨테이너가 관리하는 Bean의 메서드를 대체하고 컨테이너의 다른 명명된 Bean에 대한 조회 결과를 리턴하는 컨테이너의 기능입니다. 조회에는 [이전 섹션](ioccontainer.md#4.6.-method-injection)에서 설명한 시나리오에서와 같이 일반적으로 프로토타입 빈이 포함됩니다. Spring Framework는 메서드를 재정의하는 하위 클래스를 동적으로 생성하기 위해 CGLIB 라이브러리의 바이트 코드 생성을 사용하여 이 메서드 주입을 구현합니다.
+
+
+
+{% hint style="info" %}
+* 이 동적 하위 클래스가 작동하려면 Spring Bean 컨테이너 하위 클래스가 `final` 클래스가 될 수 없으며 재정의되는 메서드도 `final` 클래스가 될 수 없습니다.
+* `abstract` 메서드가 있는 클래스를 단위 테스트하려면 클래스를 직접 하위 클래스로 만들고 `abstract` 메서드의 스텁 구현을 제공해야 합니다.
+* 구체적인 클래스를 선택해야 하는 구성 요소 스캔에도 구체적인 메서드가 필요합니다.
+* 추가 주요 제한 사항은 조회 메서드가 팩토리 메서드, 특히 구성 클래스의 `@Bean` 메서드와 함께 작동하지 않는다는 것입니다. 이 경우 컨테이너는 인스턴스 생성을 담당하지 않으므로 런타임 생성 하위 클래스를 즉시 생성할 수 없습니다.
+{% endhint %}
+
+
+
+이전 코드 스니펫의 `CommandManager` 클래스의 경우 Spring 컨테이너는 `createCommand()` 메서드의 구현을 동적으로 재정의합니다. 재작업된 예제에서 볼 수 있듯이 CommandManager 클래스에는 Spring 종속성이 없습니다.
+
+```java
+package fiona.apple;
+
+// no more Spring imports!
+
+public abstract class CommandManager {
+
+    public Object process(Object commandState) {
+        // 적절한 명령 인터페이스의 새 인스턴스를 가져옵니다.
+        Command command = createCommand();
+        // (완전히 새로운) 명령 인스턴스에 상태를 설정합니다.
+        command.setState(commandState);
+        return command.execute();
+    }
+
+    // 알겠습니다... 하지만 이 방법의 구현은 어디에 있습니까?
+    protected abstract Command createCommand();
+}
+```
+
+주입할 메서드(이 경우 `CommandManager`)가 포함된 클라이언트 클래스에서 주입할 메서드에는 다음 형식의 서명이 필요합니다.
+
+```xml
+<public|protected> [abstract] <return-type> theMethodName(no-arguments);
+```
+
+메서드가 `abstract`이면 동적으로 생성된 하위 클래스가 메서드를 구현합니다. 그렇지 않으면 동적으로 생성된 하위 클래스가 원래 클래스에 정의된 구체적인 메서드를 재정의합니다. 다음 예를 고려합니다.
+
+```xml
+<!-- 프로토타입으로 배포된 상태 저장 빈(비싱글톤) -->
+<bean id="myCommand" class="fiona.apple.AsyncCommand" scope="prototype">
+    <!-- 필요에 따라 여기에 의존성을 주입합니다. -->
+</bean>
+
+<!-- commandProcessor는 statefulCommandHelper를 사용합니다. -->
+<bean id="commandManager" class="fiona.apple.CommandManager">
+    <lookup-method name="createCommand" bean="myCommand"/>
+</bean>
+```
+
+`commandManager`로 식별된 빈인 `myCommand` 빈의 새 인스턴스가 필요할 때마다 자신의 `createCommand()`메서드를 호출합니다. 실제로 필요한 경우 프로토타입으로 `myCommand` 빈을 배치하는 데 주의해야 합니다. [싱글톤](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-singleton)이면 매번 동일한 `myCommand` 빈 인스턴스가 반환됩니다.&#x20;
+
+
+
+또는 annotation-based 구성 요소 모델 내에서 다음 예제와 같이 @Lookup annotation을 통해 조회 메서드를 선언할 수 있습니다.
+
+```java
+public abstract class CommandManager {
+
+    public Object process(Object commandState) {
+        Command command = createCommand();
+        command.setState(commandState);
+        return command.execute();
+    }
+
+    @Lookup("myCommand")
+    protected abstract Command createCommand();
+}
+```
+
+또는 보다 관용적으로 조회 메서드의 선언된 반환 유형에 대해 해결되는 대상 bean에 의존할 수 있습니다.
+
+```java
+public abstract class CommandManager {
+
+    public Object process(Object commandState) {
+        Command command = createCommand();
+        command.setState(commandState);
+        return command.execute();
+    }
+
+    @Lookup
+    protected abstract Command createCommand();
+}
+```
+
+추상 클래스가 기본적으로 무시되는 Spring의 구성 요소 검색 규칙과 호환되도록 하려면 일반적으로 구체적인 스텁 구현으로 annotation이 달린 조회 메서드를 선언해야 합니다. 이 제한은 명시적으로 등록되거나 명시적으로 가져온 Bean 클래스에는 적용되지 않습니다.
+
+
+
+{% hint style="info" %}
+다른 범위의 대상 bean에 액세스하는 또 다른 방법은 `ObjectFactory`/`Provider` 주입 지점입니다. [Scoped Beans as Dependencies](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-other-injection)를 참조합니다.
+
+
+
+`ServiceLocatorFactoryBean`(`org.springframework.beans.factory.config` 패키지에 있음)을 찾아보면 도움이 될수 있습니다.
+{% endhint %}
+
+
+
+### **Arbitrary Method Replacement**
+
+조회 메서드 주입보다 덜 유용한 메서드 주입 형식은 관리 빈의 임의 메서드를 다른 메서드 구현으로 대체하는 기능입니다. 이 기능이 실제로 필요할 때까지 이 섹션의 나머지 부분을 안전하게 건너뛸 수 있습니다.
+
+
+
+XML 기반 configuration metadata를 사용하면 `replaced-method` 요소를 사용하여 배치된 Bean에 대해 기존 메소드 구현을 다른 구현으로 대체할 수 있습니다.  재정의하려는 `computeValue`라는 메서드가 있는 다음 클래스를 고려합니다.
+
+```java
+public class MyValueCalculator {
+
+    public String computeValue(String input) {
+        // some 실제 코드...
+    }
+
+    // some other methods...
+}
+```
+
+
+
+`org.springframework.beans.factory.support.MethodReplacer` 인터페이스를 구현하는 클래스는 다음 예제와 같이 새로운 메서드 정의를 제공합니다.
+
+
+
+```java
+/**
+ * MyValueCalculator에서 기존 computeValue(String) 구현을 재정의하는 데 사용됩니다.
+ */
+public class ReplacementComputeValue implements MethodReplacer {
+
+    public Object reimplement(Object o, Method m, Object[] args) throws Throwable {
+        // 입력 값을 가져와 작업하고 계산된 결과를 반환합니다.
+        String input = (String) args[0];
+        ...
+        return ...;
+    }
+}
+```
+
+원래 클래스를 배포하고 메서드 재정의를 지정하는 bean definition는 다음 예제와 유사합니다.
+
+```xml
+<bean id="myValueCalculator" class="x.y.z.MyValueCalculator">
+    <!-- arbitrary method replacement -->
+    <replaced-method name="computeValue" replacer="replacementComputeValue">
+        <arg-type>String</arg-type>
+    </replaced-method>
+</bean>
+
+<bean id="replacementComputeValue" class="a.b.c.ReplacementComputeValue"/>
+```
+
+`<replaced-method/>`요소 내에서 하나 이상의 `<arg-type/>` 요소를 사용하여 재정의되는 메서드의 메서드 시그니처를 나타낼 수 있습니다. 인수에 대한 서명은 메서드가 오버로드되고 클래스 내에 여러 변형이 있는 경우에만 필요합니다. 편의를 위해 인수의 유형 문자열은 정규화된 유형 이름의 하위 문자열일 수 있습니다. 예를 들어 다음은 모두 `java.lang.String`과 일치합니다.
+
+```java
+java.lang.String
+String
+Str
+```
+
+인수의 수는 가능한 각 선택 항목을 구별하기에 충분하기 때문에 이 단축키를 사용하면 인수 유형과 일치하는 가장 짧은 문자열만 입력할 수 있으므로 입력 시간을 많이 절약할 수 있습니다.
+
+
+
+## Trying.....
 
