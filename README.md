@@ -24,6 +24,7 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 
 ### [Java](study/java/)
 
+* [JVM Internals](study/java/jvm-internals/)
 * [Java Collection Framework](study/java/java-collection-framework.md)
 * [Annotation](study/java/annotation.md)
 * [Generic](study/java/generic.md)
