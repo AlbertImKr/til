@@ -1,5 +1,5 @@
 ---
-description: Java Virtual Machine
+description: 번역
 ---
 
 # JVM Internals
