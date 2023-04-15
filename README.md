@@ -20,7 +20,8 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 
 ### [CS](study/cs/)
 
-* [디자인 패턴](study/cs/design-pattern.md)
+* [디자인 패턴](study/cs/design-pattern/)
+* [ORM 도구](study/cs/orm.md)
 
 ### [Java](study/java/)
 
@@ -29,9 +30,10 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 * [Annotation](study/java/annotation.md)
 * [Generic](study/java/generic.md)
 
+### [CodeSquad](./#codesquad)
 
-
-
+* [Spring Boot Project 1주차 회고](study/codesquad/spring-boot-project-1.md)
+* [Spring Boot Project 2주차 회고](study/codesquad/spring-boot-project-2.md)
 
 
 

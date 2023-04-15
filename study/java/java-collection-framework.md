@@ -2,7 +2,7 @@
 
 ## Collection
 
-컨테이너라고도 하는 컬렉션은 단순히 여러 요소를 단일 단위로 그룹화하는 개체입니다. 컬렉션은 집계 데이터를 저장, 검색, 조작 및 전달하는 데 사용됩니다. 컬렉션은 집계 데이터를 저장, 검색, 조작 및 전달하는 데 사용됩니다. **** 일반적으로 포커 핸드(카드 모음), 메일 폴더(문자 모음) 또는 전화번호부(전화 번호에 대한 이름 매핑)와 같은 자연 그룹을 형성하는 데이터 항목을 나타냅니다.
+컨테이너라고도 하는 컬렉션은 단순히 여러 요소를 단일 단위로 그룹화하는 개체입니다. 컬렉션은 집계 데이터를 저장, 검색, 조작 및 전달하는 데 사용됩니다. 컬렉션은 집계 데이터를 저장, 검색, 조작 및 전달하는 데 사용됩니다. 일반적으로 포커 핸드(카드 모음), 메일 폴더(문자 모음) 또는 전화번호부(전화 번호에 대한 이름 매핑)와 같은 자연 그룹을 형성하는 데이터 항목을 나타냅니다.
 
 ## Data structure
 
@@ -56,7 +56,7 @@
 
 ## 구조
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>Java Collection Framework</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Java Collection Framework</p></figcaption></figure>
 
 ## Benefits of the Java Collections Framework
 

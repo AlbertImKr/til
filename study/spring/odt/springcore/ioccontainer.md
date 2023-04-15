@@ -50,7 +50,7 @@ Spring에서 애플리케이션의 중추를 형성하고 Spring IoC 컨테이�
 
 ## **2.1 Configuration Metadata**
 
-****
+
 
 앞의 다이어그램에서 볼 수 있듯이 Spring IoC 컨테이너는 Configuration metadata 형식을 사용합니다. 이 configuration metadata는 애플리케이션 개발자로서 애플리케이션에서 객체를 인스턴스화, 구성 및 어셈블 하도록 Spring 컨테이너에 지시하는 방법을 표시합니다.
 
@@ -115,7 +115,7 @@ id 속성의 값은 협업 객체를 참조하는 데 사용할 수 있습니다
 
 ## **2.2 컨테이너 인스턴스화**
 
-****
+
 
 `ApplicationContext` 생성자에 제공되는 위치 경로는 컨테이너가 로컬 파일 시스템, Java `CLASSPATH` 등과 같은 다양한 외부 리소스에서 configuration metadata를 로드할 수 있도록 하는 리소스 문자열입니다.
 
@@ -152,7 +152,7 @@ Spring의 IoC 컨테이너에 대해 배운 후 URI 구문에 정의된 위치�
 </beans>
 ```
 
-다음 예는 데이터 액세스 객체 `daos.xml` **** 파일을 보여줍니다.
+다음 예는 데이터 액세스 객체 `daos.xml` 파일을 보여줍니다.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -181,7 +181,7 @@ Spring의 IoC 컨테이너에 대해 배운 후 URI 구문에 정의된 위치�
 
 ### **XML-based Configuration Metadata 구성**
 
-****
+
 
 Bean definitions가 여러 XML 파일에 걸쳐 있는 것이 유용할 수 있습니다. 각 XML 구성 파일은 종종 아키텍처의 논리적 계층 또는 모듈을 표현합니다.
 
@@ -214,7 +214,7 @@ namespace 자체는 import 지시 기능을 제공합니다.  일반 bean defini
 
 ### **The Groovy Bean Definition DSL**
 
-****
+
 
 외부 Configuration metadata에 대한 추가 예로는 bean difnitions는 Gralis 프레임워크에서 알려진 것처럼 Spring의 Groovy Bean Definition DSL로 표현할 수 있습니다. 일반적으로 이러한 구성은 다음 예제에 표시된 구조와 같은  ". groovy"파일이 있습니다.
 
@@ -244,9 +244,9 @@ beans {
 
 ## **2.3 컨테이너 사용**
 
-****
 
-`ApplicationContext`는 서로 다른 beans과 그 의존성의 레지스트리를 잘 유지할 수 있는 고급 factory 인터페이스입니다. `T getBean(String name, Class <T> requiredType)` <mark style="background-color:yellow;">****</mark> 메서드를 사용하여 beans의 인스턴스룰 검색할 수 있습니다.\
+
+`ApplicationContext`는 서로 다른 beans과 그 의존성의 레지스트리를 잘 유지할 수 있는 고급 factory 인터페이스입니다. `T getBean(String name, Class <T> requiredType)` 메서드를 사용하여 beans의 인스턴스룰 검색할 수 있습니다.\
 
 
 `ApplicationContext`를 사용하면 다음 예제와 같이 bean definitions를 읽고 액세스 할 수 있습니다.
@@ -326,7 +326,7 @@ _Table 1. The bean definition_
 | Destruction method        | Destruction Callbacks                                                                                                    |
 
 \
-특정 bean을 생성하는 방법에 대한 정보를 포함하는 bean definitions 외에도 `ApplicationContext` 구현은 (사용자에 의해) 컨테이너 외부에서 생성된 기존 객체의 등록을 허용합니다. 이는 `DefaultListableBeanFactory` 구현을 반환하는 `getBeanFactory()` 메서드를 통해 ApplicationContext의 `BeanFactory`에 accessing 하여 실행합니다. `DefaultListableBeanFactory`는 `registerSingleton(..)` **** 및 `registerBeanDefinition(..)` 메서드를 통해 이 등록을 지원합니다.&#x20;
+특정 bean을 생성하는 방법에 대한 정보를 포함하는 bean definitions 외에도 `ApplicationContext` 구현은 (사용자에 의해) 컨테이너 외부에서 생성된 기존 객체의 등록을 허용합니다. 이는 `DefaultListableBeanFactory` 구현을 반환하는 `getBeanFactory()` 메서드를 통해 ApplicationContext의 `BeanFactory`에 accessing 하여 실행합니다. `DefaultListableBeanFactory`는 `registerSingleton(..)` 및 `registerBeanDefinition(..)` 메서드를 통해 이 등록을 지원합니다.&#x20;
 
 
 
@@ -681,7 +681,7 @@ public class ExampleBean {
 
 #### 생성자 인수 유형 매칭
 
-__
+
 
 이전 시나리오에서 컨테이너는 다음 예제와 같이 `type` attribute을 사용하여 생성자 인수 type을 명시적으로 지정하는 경우 단순 타입과 타입 매칭을 사용할 수 있다.
 
@@ -692,11 +692,11 @@ __
 </bean>
 ```
 
-__
+
 
 #### 생성자 인수 인덱스
 
-__
+
 
 다음 예제와 같이 `index` attribute를 사용하여 생성자 인수의 인덱스를 명시적으로 지정할 수 있습니다.
 
@@ -747,7 +747,7 @@ public class ExampleBean {
 
 ```
 
-****
+
 
 ### **Setter-based Dependency Injection**
 
@@ -1013,7 +1013,7 @@ public class ExampleBean {
 
 
 
-Spring 컨테이너는 JavaBeans `PropertyEditor` 메커니즘을 사용하여 `<value/>` **** 요소 내부의 텍스트를 `java.util.Properties` 인스턴스로 변환합니다. 이것은 좋은 지름길이며 Spring 팀이 `value` 속성 스타일보다 중첩된 \<value/> 요소의 사용을 선호하는 몇 가지 중의 하나입니다.
+Spring 컨테이너는 JavaBeans `PropertyEditor` 메커니즘을 사용하여 `<value/>` 요소 내부의 텍스트를 `java.util.Properties` 인스턴스로 변환합니다. 이것은 좋은 지름길이며 Spring 팀이 `value` 속성 스타일보다 중첩된 \<value/> 요소의 사용을 선호하는 몇 가지 중의 하나입니다.
 
 
 
@@ -1349,7 +1349,7 @@ p-namespace은 표준 XML 형식만큼 유연하지 않습니다. 예를 들어 
 
 ### **XML Shortcut with the c-namespace**
 
-[XML shortcut with the p-namespace](ioccontainer.md#xml-shortcut-with-the-p-namespace)를 비스한 Spring 3.1에 도입된 c-네임스페이스는 중첩된 `constructor-arg` **** 요소가 아닌 생성자 인수를 구성하기 위한 인라인 속성을 허용합니다.
+[XML shortcut with the p-namespace](ioccontainer.md#xml-shortcut-with-the-p-namespace)를 비스한 Spring 3.1에 도입된 c-네임스페이스는 중첩된 `constructor-arg` 요소가 아닌 생성자 인수를 구성하기 위한 인라인 속성을 허용합니다.
 
 
 
@@ -1379,7 +1379,7 @@ p-namespace은 표준 XML 형식만큼 유연하지 않습니다. 예를 들어 
 </beans>
 ```
 
-`c:` **** namespace 이름으로 생성자 인수를 설정하기 위해 `p:`(bean 참조에 대한 후행 `-ref`)과 동일한 규칙을 사용합니다. 마찬가지로 XSD 스키마에 정의되어 있지 않더라도 XML 파일에 선언해야 합니다(스프링 코어 내부에 존재).
+`c:` namespace 이름으로 생성자 인수를 설정하기 위해 `p:`(bean 참조에 대한 후행 `-ref`)과 동일한 규칙을 사용합니다. 마찬가지로 XSD 스키마에 정의되어 있지 않더라도 XML 파일에 선언해야 합니다(스프링 코어 내부에 존재).
 
 
 
@@ -1392,7 +1392,7 @@ p-namespace은 표준 XML 형식만큼 유연하지 않습니다. 예를 들어 
 ```
 
 {% hint style="info" %}
-XML 문법으로 인해 index 표기법에는 XML 속성 이름이 숫자로 시작할 수 없기 때문에(일부 IDE에서 허용하더라도) 앞에 \_가 있어야 합니다. 해당 index 표기법은 `<constructor-arg>` **** 요소에도 사용할 수 있지만 일반적으로 일반 선언 순서로 충분하기 때문에 일반적으로 사용되지 않습니다.
+XML 문법으로 인해 index 표기법에는 XML 속성 이름이 숫자로 시작할 수 없기 때문에(일부 IDE에서 허용하더라도) 앞에 \_가 있어야 합니다. 해당 index 표기법은 `<constructor-arg>` 요소에도 사용할 수 있지만 일반적으로 일반 선언 순서로 충분하기 때문에 일반적으로 사용되지 않습니다.
 {% endhint %}
 
 
