@@ -1765,7 +1765,453 @@ Str
 
 인수의 수는 가능한 각 선택 항목을 구별하기에 충분하기 때문에 이 단축키를 사용하면 인수 유형과 일치하는 가장 짧은 문자열만 입력할 수 있으므로 입력 시간을 많이 절약할 수 있습니다.
 
+## 5. Bean Scopes
 
+Bean definition를 생성할 때 해당 bean definition에 의해 정의된 클래스의 실제 인스턴스를 생성하기 위한 레시피를 생성합니다. Bean definition가 하나의 레시피라는 생각은 중요하다. 클래스와 마찬가지로 하나의 레시피에서 많은 객체 인스턴스를 생성할 수 있다는 의미이기 때문이다.
+
+
+
+특정 bean definition에서 생성된 객체에 연결되는 다양한 의존성 및 구성 값을 제어할 수 있을 뿐만 아니라 특정 bean definition에서 생성된 객체의 범위를 제어할 수 있습니다. 이 접근 방식은 강력하고 유연합니다. Java 클래스 수준에서 객체의 범위를 정하는 대신 구성을 통해 생성하는 객체의 범위를 선택할 수 있기 때문입니다. Spring Framework는 6개의 범위를 지원하며 그 중 4개는 웹 인식 `ApplicationContext`를 사용하는 경우에만 사용할 수 있습니다. [사용자 지정 범위](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-custom)를 만들 수도 있습니다.
+
+
+
+다음 표에는 지원되는 범위을 설명합니다.
+
+| Scopte      | Description                                                                                                                                                          |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| singleton   | (기본값) 각 Spring IoC 컨테이너에 대한 단일 객체 인스턴스에 단일 bean definition의 범위를 지정합니다.                                                                                               |
+| prototype   | 단일 bean definition를 여러 객체 인스턴스로 범위 지정합니다.                                                                                                                            |
+| request     | 단일 HTTP 요청의 라이프사이클에 대한 단일 bean definition의 범위를 지정합니다. 즉, 각 HTTP 요청에는 단일 bean definition 뒤에서 생성된 자체 bean 인스턴스가 있습니다. 웹 인식 Spring `ApplicationContext`의 컨텍스트에서만 유효합니다. |
+| session     | HTTP 세션의 수명 주기에 대한 단일 bean definition의 범위를 지정합니다. 웹 인식 Spring ApplicationContext의 컨텍스트에서만 유효합니다.                                                                     |
+| application | 단일 bean definition 범위를 `ServletContext`의 수명 주기로 지정합니다. 웹 인식 Spring ApplicationContext의 컨텍스트에서만 유효합니다.                                                                |
+| websocket   | `WebSocket`의 수명 주기에 대한 단일 bean definition의 범위를 지정합니다. 웹 인식 Spring ApplicationContext의 컨텍스트에서만 유효합니다.                                                                 |
+
+
+
+{% hint style="info" %}
+스레드 범위를 사용할 수 있지만 기본적으로 등록되지 않습니다. 자세한 내용은 [`SimpleThreadScope`](https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api/org/springframework/context/support/SimpleThreadScope.html) 설명서를 참조하십시오. 이 범위 또는 다른 사용자 지정 범위를 등록하는 방법에 대한 지침은 [`사용자 지정 범위 사용`](https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api/org/springframework/context/support/SimpleThreadScope.html)을 참조하십시오.
+{% endhint %}
+
+## 5.1 The Singleton Scope
+
+싱글톤 빈의 하나의 공유 인스턴스만 관리되며 해당 빈 정의와 일치하는 ID를 가진 빈에 대한 모든 요청은 Spring 컨테이너에 의해 반환되는 특정 빈 인스턴스 하나를 초래합니다.
+
+
+
+다르게 표현하자면, bean definition를 정의하고 그것이 싱글톤으로 범위가 지정되면 Spring IoC 컨테이너는 해당 bean definition에 의해 정의된 객체의 정확히 하나의 인스턴스를 생성합니다. 이 단일 인스턴스는 이러한 싱글톤 빈의 캐시에 저장되며 해당 명명된 빈에 대한 모든 후속 요청 및 참조는 캐시된 객체를 반환합니다. 다음 이미지는 싱글톤 범위의 작동 방식을 보여줍니다.
+
+<figure><img src="../../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+Spring의 싱글톤 빈 개념은 Gang of Four(GoF) 패턴 책에 정의된 싱글톤 패턴과 다릅니다. GoF 싱글톤은 특정 클래스의 인스턴스가 ClassLoader당 하나만 생성되도록 개체의 범위를 하드 코딩합니다.Spring 싱글톤의 범위는 per-container 및 per-bean으로 가장 잘 설명됩니다. 즉, 단일 Spring 컨테이너에서 특정 클래스에 대해 하나의 빈을 정의하면 Spring 컨테이너는 해당 bean definition에 의해 정의된 클래스의 인스턴스를 하나만 생성합니다. 싱글톤 범위는 Spring의 기본 범위입니다. XML에서 bean을 싱글톤으로 정의하려면 다음 예제와 같이 bean을 정의할 수 있습니다.
+
+```xml
+<bean id="accountService" class="com.something.DefaultAccountService"/>
+
+<!-- 다음은 중복되지만 동일합니다(단일 범위가 기본값임) -->
+<bean id="accountService" class="com.something.DefaultAccountService" scope="singleton"/>
+```
+
+## 5.2 **The Prototype Scope**
+
+비싱글톤 프로토타입 범위의 bean 배치는 특정 bean에 대한 요청이 있을 때마다 새로운 bean 인스턴스를 생성합니다. 즉, 빈이 다른 빈에 주입되거나 컨테이너에서 `getBean()` 메서드 호출을 통해 요청합니다. 일반적으로 모든 stateful bean에는 프로토타입 범위를 사용하고 stateless bean에는 싱글톤 범위를 사용해야 합니다.
+
+
+
+다음 다이어그램은 Spring 프로토타입 범위를 보여줍니다.
+
+<figure><img src="../../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+(DAO(Data Access Object)는 일반적으로 프로토타입으로 구성되지 않습니다. 일반적인 DAO에는 대화 상태가 없기 때문입니다. 싱글톤 다이어그램의 핵심을 재사용하는 것이 더 쉬웠습니다.)
+
+
+
+다음 예제는 Bean을 XML의 프로토타입으로 정의합니다.
+
+```xml
+<bean id="accountService" class="com.something.DefaultAccountService" scope="prototype"/>
+```
+
+다른 범위와 달리 Spring은 프로토타입 빈의 전체 수명 주기를 관리하지 않습니다. 컨테이너는 프로토타입 객체를 인스턴스화, 구성 및 어셈블하여 해당 프로토타입 인스턴스에 대한 추가 기록 없이 클라이언트에 전달합니다. 따라서 범위에 관계없이 모든 객체에 대해 초기화 생명주기 콜백 메서드가 호출되더라도 프로토타입의 경우에는 설정된 소멸 생명주기 콜백이 호출되지 않습니다. 클라이언트 코드는 프로토타입 범위 객체를 정리하고 프로토타입 빈이 보유하고 있는 값비싼 리소스를 해제해야 합니다. Spring 컨테이너가 프로토타입 범위의 bean이 보유한 리소스를 해제하려면 정리해야 하는 bean에 대한 참조를 보유하는 custom [bean post-processor](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-extension-bpp)를 사용해야 한다.
+
+
+
+어떤 면에서 프로토타입 범위 빈에 대한 Spring 컨테이너의 역할은 Java new 연산자를 대체하는 것입니다. 해당 시점 이후의 모든 수명 주기 관리는 클라이언트에서 처리해야 합니다. (Spring 컨테이너에 있는 빈의 수명 주기에 대한 자세한 내용은 수명 [Lifecycle Callbacks](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle)을 참조하세요.)
+
+## 5.3 **Singleton Beans with Prototype-bean Dependencies**
+
+프로토타입 Bean에 대한 종속성이 있는 싱글톤 범위 Bean을 사용하는 경우 인스턴스화 시간에 의존성이 해결된다는 점에 유의하여야 합니다. 따라서 프로토타입 범위의 빈을 싱글톤 범위의 빈에 의존성 주입하면 새 프로토타입 빈이 인스턴스화된 다음 싱글톤 빈에 의존성 주입됩니다. 프로토타입 인스턴스는 싱글톤 범위의 Bean에 제공되는 유일한 인스턴스입니다.&#x20;
+
+
+
+그러나 싱글톤 범위의 빈이 런타임 시 반복적으로 프로토타입 범위의 빈의 새 인스턴스를 획득하기를 원한다고 가정한다면 스프링 컨테이너가 싱글톤 빈을 인스턴스화하고 의존성을 해결하고 주입할 때 주입이 한 번만 발생하기 때문에 프로토타입 범위의 빈을 싱글톤 빈에 의존성 주입할 수 없습니다. 런타임 시 프로토타입 빈의 새 인스턴스가 두 번 이상 필요한 경우 [Method Injection](ioccontainer.md#4.6.-method-injection)을 참조하십시오.
+
+
+
+## 5.4 **Request, Session, Application, and WebSocket Scopes**
+
+`request`, `session`, `application` 및 `websocket` 범위는 웹 인식 Spring ApplicationContext 구현(예: `XmlWebApplicationContext`)을 사용하는 경우에만 사용할 수 있습니다. `ClassPathXmlApplicationContext`와 같은 일반 Spring IoC 컨테이너와 함께 이러한 범위를 사용하는 경우 알 수 없는 빈 범위에 대해 `IllegalStateException`이 발생합니다.
+
+
+
+### **Initial Web Configuration**
+
+`request`, `session`, `application` 및 `websocket` levels(웹-범위 빈)에서 빈 범위 지정을 지원하려면 빈을 정의하기 전에 약간의 초기 구성이 필요합니다. (이 초기 설정은 표준 범위(싱글톤 및 프로토타입)에는 필요하지 않습니다.)
+
+
+
+이 초기 설정을 수행하는 방법은 특정 서블릿 환경에 따라 다릅니다.
+
+
+
+실제로 Spring `DispatcherServlet`에 의해 처리되는 요청 내에서 Spring Web MVC 내에서 범위가 지정된 bean에 액세스하는 경우 특별한 설정이 필요하지 않습니다.  `DispatcherServlet`은 이미 모든 관련 상태를 exposes합니다.
+
+
+
+Spring의 `DispatcherServlet` 외부에서 요청을 처리하는 Servlet 웹 컨테이너를 사용하는 경우(예: JSF를 사용하는 경우) `org.springframework.web.context.request.RequestContextListener` `ServletRequestListener`를 등록해야 합니다. 이는 `WebApplicationInitializer` 인터페이스를 사용하여 프로그래밍 방식으로 수행할 수 있습니다. 또는 웹 애플리케이션의 `web.xml`파일에 다음 선언을 추가합니다
+
+```xml
+<web-app>
+    ...
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+    ...
+</web-app>
+```
+
+또는 리스너 설정에 문제가 있는 경우 Spring의 `RequestContextFilter` 사용을 고려하십시오. 필터 매핑은 주변 웹 애플리케이션 구성에 따라 달라지므로 적절하게 변경해야 합니다. 다음 목록은 웹 애플리케이션의 필터 부분을 보여줍니다.
+
+```xml
+<web-app>
+    ...
+    <filter>
+        <filter-name>requestContextFilter</filter-name>
+        <filter-class>org.springframework.web.filter.RequestContextFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>requestContextFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    ...
+</web-app>
+```
+
+`DispatcherServlet`, `RequestContextListener` 및 `RequestContextFilter`는 모두 정확히 동일한 작업을 수행합니다. 즉, HTTP 요청 개체를 해당 요청을 서비스하는 `Thread`에 바인딩합니다. 이렇게 하면 요청 및 세션 범위의 Bean을 호출 체인에서 더 아래로 사용할 수 있습니다
+
+
+
+### Request scope
+
+Bean 정의에 대해 다음 XML 구성을 고려합니다.
+
+```xml
+<bean id="loginAction" class="com.something.LoginAction" scope="request"/>
+```
+
+Spring 컨테이너는 각각의 모든 HTTP 요청에 대해 `loginAction` bean definition를 사용하여 LoginAction 빈의 새 인스턴스를 생성합니다. 즉, `loginAction` 빈은 HTTP 요청 level에서 범위가 지정됩니다. 동일한 loginAction 빈 정의에서 생성된 다른 인스턴스는 이러한 상태 변화를 볼 수 없기 때문에 생성된 인스턴스의 내부 상태를 원하는 만큼 변경할 수 있습니다. 개별 요청에 따라 달라집니다. 요청 처리가 완료되면 요청 범위의 Bean이 삭제됩니다.
+
+
+
+Annotation 기반 구성 요소 또는 Java 구성을 사용하는 경우 `@RequestScope` annotation을 사용하여 `request` 범위에 구성 요소를 할당 할 수 있습니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.
+
+```java
+@RequestScope
+@Component
+public class LoginAction {
+    // ...
+}
+```
+
+
+
+### Session Scope
+
+bean definition에 대해 다음 XML 구성을 고려합니다.
+
+```xml
+<bean id="userPreferences" class="com.something.UserPreferences" scope="session"/>
+```
+
+Spring 컨테이너는 단일 HTTP `Session`의 수명 동안 `userPreferences` bean definition를 사용하여 `UserPreferences` 빈의 새 인스턴스를 생성합니다. 즉, `userPreferences` 빈은 HTTP `Session` level에서 실제러으로 범위가 지정됩니다. request-scoped beans과 마찬가지로 생성된 인스턴스의 내부 상태를 원하는 만큼 변경할 수 있습니다.  개별 HTTP 세션에 고유하기 때문에 동일한 `userPreferences` bean definition에서 생성된 인스턴스를 사용하는 다른 HTTP `Session` 인스턴스는 이러한 상태 변경을 볼 수 없습니다. HTTP `Session`이 결국 폐기되면 해당 특정 HTTP `Session`으로 범위가 지정된 Bean도 폐기됩니다.
+
+
+
+Annotation 기반 구성 요소 또는 Java 구성을 사용하는 경우 `@SessionScope` annotation을 사용하여 구성 요소를 session 범위에 할당할 수 있습니다.
+
+```java
+@SessionScope
+@Component
+public class UserPreferences {
+    // ...
+}
+```
+
+### **Application Scope**
+
+bean definition에 대해 다음 XML 구성을 고려합니다.
+
+```xml
+<bean id="appPreferences" class="com.something.AppPreferences" scope="application"/>
+```
+
+Spring 컨테이너는 전체 웹 애플리케이션에 대해 한 번 `appPreferences` 빈 정의를 사용하여 `AppPreferences` 빈의 새 인스턴스를 생성합니다. 즉, `appPreferences` 빈은 `ServletContext` level에서 범위가 지정되고 일반 `ServletContext` 속성으로 저장됩니다. 이것은 Spring 싱글톤 빈과 어느 정도 비슷하지만 두 가지 중요한 점에서 다릅니다.&#x20;
+
+* Spring `ApplicationContext`가 아닌 `ServletContext`당 싱글톤입니다(특정 웹 애플리케이션에 여러 개가 있을 수 있음)
+* 실제로 exposed되어 `ServletContext` 속성으로 표시됩니다.
+
+Annotation 기반 구성 요소 또는 Java 구성을 사용하는 경우 `@ApplicationScope` annotation을 사용하여 응용 프로그램 범위에 구성 요소를 할당할 수 있습니다. 다음 예에서는 이를 수행하는 방법을 보여줍니다.
+
+```java
+@ApplicationScope
+@Component
+public class AppPreferences {
+    // ...
+}
+```
+
+### **WebSocket Scope**
+
+WebSocket 범위는 WebSocket 세션의 수명 주기와 연관되며 WebSocket 애플리케이션을 통한 STOMP에 적용됩니다. 자세한 내용은[ WebSocket 범위](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#websocket-stomp-websocket-scope)를 참조하세요. (예를 들어) HTTP 요청 범위 빈을 더 오래 지속되는 범위의 다른 빈에 주입하려는 경우 범위가 지정된 빈 대신 AOP 프록시를 의존하도록 선택할 수 있습니다. 즉, 범위가 지정된 객체와 동일한 공용 인터페이스를 exposes하지만 관련 범위(예: HTTP 요청)에서 실제 대상 객체를 검색할 수 있는 프록시 객체를 주입하고 실제 객체에 메서드 호출을 위임해야 합니다.
+
+
+
+### **Scoped Beans as Dependencies**
+
+Spring IoC 컨테이너는 객체(빈)의 인스턴스화뿐만 아니라 협력자(또는 의존성)의 연결도 관리합니다. (예를 들어) HTTP 요청 범위 빈을 더 오래 지속되는 범위의 다른 빈에 주입하려는 경우 범위가 지정된 빈 대신 AOP 프록시를 주입하도록 선택할 수 있습니다. 즉, 범위가 지정된 객체와 동일한 공용 인터페이스를 exposes하지만 관련 범위에서 실제 대상 객체를 검색할 수도 있는 프록시 객체(HTTP 요청과 같은)를 주입하거나 대리자 메서드를 사용하여 실제 책체를 호출하여야 한다.
+
+
+
+{% hint style="info" %}
+싱글톤으로 범위가 지정된 빈 사이에서 \<aop:scoped-proxy>를 사용할 수도 있습니다. 그리고 참조는 직렬화 가능한 중간 프록시를 통과하므로 역직렬화 시 대상 싱글톤 빈을 다시 얻을 수 있습니다.
+
+
+
+범위 프로토타입의 bean에 대해 \<aop:scoped-proxy>를 선언할 때 공유 프록시에 대한 모든 메서드 호출은 호출이 전달되는 새 대상 인스턴스의 생성으로 이어집니다.
+
+
+
+또한 범위가 지정된 프록시가 lifecycle-safe fashion에서 더 짧은 범위에서 Bean에 액세스하는 유일한 방법은 아닙니다. 인스턴스를 유지하거나 별도로 저장하지 않고 의존 point(즉, 생성자 또는 setter 인수 또는 autowired 필드)을 `ObjectFactory<MyTargetBean>`으로 선언하여 필요할 때마다 요청 시 현재 인스턴스를 검색하는 `getObject()` 호출을 허용할 수도 있습니다.
+
+
+
+확장 변형으로 `getIfAvailable` 및 `getIfUnique`를 포함하여 몇 가지 추가 액세스 변형을 제공하는 `ObjectProvider<MyTargetBean>`을 선언할 수 있습니다.
+
+
+
+이에 대한 JSR-330 변형 `Provider`라고 하며 모든 검색 시도에 대해 `Provider<MyTargetBean>` 선언 및 해당 `get()` 호출과 함께 사용됩니다. JSR-330 전체에 대한 자세한 내용은 [여기](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-standard-annotations)를 참조하십시오.
+{% endhint %}
+
+
+
+다음 예의 구성은 한 줄에 불과하지만 "why"와 "how"을 이해하는 것이 중요합니다.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 프록시로 노출된 HTTP 세션 범위 빈 -->
+    <bean id="userPreferences" class="com.something.UserPreferences" scope="session">
+        <!-- 컨테이너가 주변 빈을 프록시하도록 지시합니다. -->
+        <aop:scoped-proxy/> ❶
+    </bean>
+
+    <!-- 위의 bean에 대한 프록시와 함께 주입된 싱글톤 범위의 bean -->
+    <bean id="userService" class="com.something.SimpleUserService">
+        <!-- 프록시된 userPreferences 빈에 대한 참조 -->
+        <property name="userPreferences" ref="userPreferences"/>
+    </bean>
+</beans>
+```
+
+❶ 프록시를 정의하는 줄입니다
+
+이러한 프록시를 생성하려면 하위 `<aop:scoped-proxy/>` 요소를 범위 지정 bean definition에 삽입합니다([생성할 프록시 유형 선택](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-other-injection-proxies) 및 [XML 스키마 기반 구성](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#core.appendix.xsd-schemas) 참조). `request`, `session` 및 사용자 정의 범위 levels에서 범위가 지정된 Bean 정의에 `<aop:scoped-proxy/>` 요소가 필요한 이유는 무엇입니까? 다음 싱글톤 bean 정의를 고려하고 앞서 언급한 범위에 대해 정의해야 하는 것과 대조합니다. (다음 userPreferences 빈 정의는 불완전하다는 점에 유의합니다.)
+
+```xml
+<bean id="userPreferences" class="com.something.UserPreferences" scope="session"/>
+
+<bean id="userManager" class="com.something.UserManager">
+    <property name="userPreferences" ref="userPreferences"/>
+</bean>
+```
+
+이전 예제에서 싱글톤 빈(`userManager`)은 HTTP `Session` 범위 빈(`userPreferences`)에 대한 참조와 함께 주입됩니다. 여기서 보여주는  점은 `userManager` bean이 싱글톤이라는 것입니다. 컨테이너당 정확히 한 번 인스턴스화되며 해당 의존성(이 경우 하나만, userPreferences 빈)도 한 번만 주입됩니다. 이는 `userManager` bean이 정확히 동일한 `userPreferences` 객체(즉, 원래 삽입된 객체)에서만 작동함을 의미합니다.
+
+
+
+수명이 짧은 범위의 Bean을 수명이 긴 범위의 Bean에 주입할 때(예: HTTP `Session` 범위의 협력 Bean을 의존성으로 싱글톤 Bean에 주입) 원하는 동작이 아닙니다. 오히려 단일 `userManager` 객체가 필요하고 HTTP `Session`의 수명 동안 HTTP `Session`에 특정한 `userPreferences` 객체가 필요합니다. 따라서 컨테이너는 범위 지정 메커니즘(HTTP 요청, `Session` 등)에서 실제 `UserPreferences` 객체를 가져올 수 있는 `UserPreferences` 클래스(이상적으로는 UserPreferences 인스턴스인 개체)와 정확히 동일한 공용 인터페이스를 expose하는 객체를 생성합니다. 컨테이너는 이 프록시 객체를 이 `UserPreferences` 참조가 프록시라는 것을 인식하지 못하는 `userManager` 빈에 주입합니다. 이 예에서 `UserManager` 인스턴스가 의존성 주입된 `UserPreferences` 객체에서 메서드를 호출하면 실제로는 프록시에서 메서드를 호출합니다. 그런 다음 프록시는 HTTP `Session`(이 경우)에서 실제 `UserPreferences` 객체를 가져오고 메서드 호출을 검색된 실제 `UserPreferences` 객체에 위임합니다.
+
+
+
+따라서 다음 예제와 같이 `request-` 및 `session-scoped` 범위 빈을 협업 객체에 주입할 때 다음과 같은 (정확하고 완전한) 구성이 필요합니다.
+
+```xml
+<bean id="userPreferences" class="com.something.UserPreferences" scope="session">
+    <aop:scoped-proxy/>
+</bean>
+
+<bean id="userManager" class="com.something.UserManager">
+    <property name="userPreferences" ref="userPreferences"/>
+</bean>
+```
+
+
+
+### Choosing the Type of Proxy to Create
+
+기본적으로 Spring 컨테이너가 `<aop:scoped-proxy/>` 요소로 표시된 빈에 대한 프록시를 생성하면 CGLIB 기반 클래스 프록시가 생성됩니다.
+
+{% hint style="info" %}
+CGLIB 프록시는 공용 메서드 호출만 가로챕니다! 그러한 프록시에서 비공개 메서드를 호출하지 마십시오. 실제 범위가 지정된 대상 개체에 위임되지 않습니다.
+{% endhint %}
+
+
+
+또는 `<aop:scoped-proxy/>` 요소의 `proxy-target-class` 속성 값에 대해 `false`를 지정하여 이러한 범위가 지정된 Bean에 대한 표준 JDK 인터페이스 기반 프록시를 생성하도록 Spring 컨테이너를 구성할 수 있습니다. JDK 인터페이스 기반 프록시를 사용하기 때문에 이러한 프록시에 affect하기 위해 애플리케이션 클래스 경로에 추가 라이브러리가 필요하지 않습니다. 그러나 이는 범위가 지정된 Bean의 클래스가 적어도 하나의 인터페이스를 구현해야 하고 범위가 지정된 Bean이 주입되는 모든 협력자가 해당 인터페이스 중 하나를 통해 Bean을 참조해야 함을 의미합니다. 다음 예는 인터페이스 기반 프록시를 보여줍니다.
+
+```xml
+<!-- DefaultUserPreferences는 UserPreferences 인터페이스를 구현합니다. -->
+<bean id="userPreferences" class="com.stuff.DefaultUserPreferences" scope="session">
+    <aop:scoped-proxy proxy-target-class="false"/>
+</bean>
+
+<bean id="userManager" class="com.stuff.UserManager">
+    <property name="userPreferences" ref="userPreferences"/>
+</bean>
+```
+
+클래스 기반 또는 인터페이스 기반 프록시 선택에 대한 자세한 내용은 [프록시 메커니즘](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-proxying)을 참조하십시오.
+
+## 5.5 Custom Scopes
+
+Bean 범위 지정 메커니즘은 확장 가능합니다. 자신의 범위를 정의하거나 기존 범위를 재정의할 수도 있지만 후자는 나쁜 습관으로 간주되어 기본 제공 `singleton` 및 `prototype` 범위를 재정의할 수 없습니다.
+
+### **Creating a Custom Scope**
+
+사용자 지정 범위를 Spring 컨테이너에 통합하려면 이 섹션에서 설명하는 `org.springframework.beans.factory.config.Scope` 인터페이스를 구현해야 합니다. 자신의 범위를 구현하는 방법에 대한 아이디어는 Spring Framework 자체와 함께 제공되는 Scope 구현 및 구현해야 하는 메소드를 자세히 설명하는 [Scope](https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api/org/springframework/beans/factory/config/Scope.html) javadoc를 참조하세요.
+
+
+
+`Scope` 인터페이스에는 범위에서 객체를 가져오고, 범위에서 제거하고, 소멸되도록 하는 네 가지 메서드가 있습니다.
+
+
+
+예를 들어 session 범위 구현은 session 범위 빈을 반환합니다(존재하지 않는 경우 메서드는 나중에 참조할 수 있도록 세션에 바인딩한 후 빈의 새 인스턴스를 반환합니다). 다음 메서드는 기본 범위에서 객체를 반환합니다.
+
+```java
+Object get(String name, ObjectFactory<?> objectFactory)
+```
+
+
+
+예를 들어 세션 범위 구현은 기본 세션에서 세션 범위 빈을 제거합니다. 객체를 반환해야 하지만 지정된 이름의 객체를 찾을 수 없는 경우 `null`을 반환할 수 있습니다. 다음 메서드는 기본 범위에서 객체를 제거합니다.
+
+```java
+Object remove(String name)
+```
+
+
+
+다음 메서드는 범위가 소멸되거나 범위의 지정된 객체가 소멸될 때 범위가 호출해야 하는 콜백을 등록합니다.
+
+```java
+void registerDestructionCallback(String name, Runnable destructionCallback)
+```
+
+소멸 콜백에 대한 자세한 내용은 [javadoc](https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api/org/springframework/beans/factory/config/Scope.html#registerDestructionCallback) 또는 Spring 범위 구현을 참조하세요.
+
+
+
+다음 메서드는 기본 범위에 대한 대화 식별자를 가져옵니다.
+
+```java
+String getConversationId()
+```
+
+이 식별자는 범위마다 다릅니다. 세션 범위 구현의 경우 이 식별자는 세션 식별자일 수 있습니다.
+
+### **Using a Custom Scope**
+
+하나 이상의 사용자 지정 `Scope` 구현을 작성하고 테스트한 후에는 Spring 컨테이너가 새 범위를 인식하도록 해야 합니다. 다음 방법은 Spring 컨테이너에 새 `Scope`를 등록하는 핵심 방법입니다.
+
+```java
+void registerScope(String scopeName, Scope scope);
+```
+
+이 메서드는 `ConfigurableBeanFactory`인터페이스에서 선언되며 Spring과 함께 제공되는 대부분의 구체적인 `ApplicationContext` 구현에서 `BeanFactory` 속성을 통해 사용할 수 있습니다.
+
+
+
+`registerScope(..)` 메서드의 첫 번째 인수는 범위와 연결된 고유한 이름입니다. Spring 컨테이너 자체에서 그러한 이름의 예는 `singleton`과 `prototype`입니다. `registerScope(..)` 메서드에 대한 두 번째 인수는 등록하고 사용하려는 사용자 지정 범위 구현의 실제 인스턴스입니다.
+
+
+
+사용자 지정 `Scope` 구현을 작성한 후 다음 예제와 같이 등록한다고 가정합니다.
+
+{% hint style="info" %}
+다음 예제에서는 Spring에 포함되어 있지만 기본적으로 등록되지 않은 `SimpleThreadScope`를 사용합니다. 사용자 지정 `Scope` 구현에 대한 지침은 동일합니다.
+{% endhint %}
+
+
+
+```java
+Scope threadScope = new SimpleThreadScope();
+beanFactory.registerScope("thread", threadScope);
+```
+
+그런 다음 다음과 같이 사용자 지정 `Scope`의 범위 지정 규칙을 준수하는 bean definitions를 만들 수 있습니다.
+
+```java
+<bean id="..." class="..." scope="thread">
+```
+
+사용자 지정 `Scope` 구현을 사용하면 범위의 프로그래밍 방식 등록으로 제한되지 않습니다. 다음 예제와 같이 `CustomScopeConfigurer` 클래스를 사용하여 `Scope` 등록을 선언적으로 수행할 수도 있습니다.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="thread">
+                    <bean class="org.springframework.context.support.SimpleThreadScope"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="thing2" class="x.y.Thing2" scope="thread">
+        <property name="name" value="Rick"/>
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="thing1" class="x.y.Thing1">
+        <property name="thing2" ref="thing2"/>
+    </bean>
+
+</beans>
+```
+
+{% hint style="info" %}
+`FactoryBean` 구현에 대한 `<bean>`선언 내에 `<aop:scoped-proxy>`를 배치하면 `getObject()`에서 반환된 객체가 아니라 범위가 지정되는 팩토리 빈 자체입니다.
+{% endhint %}
+
+##
 
 ## Trying.....
 
