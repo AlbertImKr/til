@@ -34,8 +34,6 @@
 
 ## 3. Bean Validation
 
-* Bean Validation은 내용은 많아서 아직 이해를 하지 못한 상태여서 일단 찾은 자료를 정리합니다.
-
 {% embed url="https://reflectoring.io/bean-validation-with-spring-boot/" %}
 
 {% embed url="https://meetup.nhncloud.com/posts/223" %}
@@ -47,8 +45,6 @@
 {% embed url="https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#section-fail-fast" %}
 
 ## 4. AOP
-
-* AOP도 내용은 많아서 아직 이해를 하지 못한 상태여서 일단 찾은 자료를 정리합니다.
 
 {% embed url="https://jojoldu.tistory.com/71" %}
 
@@ -70,9 +66,7 @@
 
 ## 7. JPA 테이블명 네이밍 전략
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
-{% endcontent-ref %}
+{% embed url="https://www.baeldung.com/spring-data-jpa-custom-naming" %}
 
 ## 8.Entity 에서 `@NotNull` 필드를 삭제
 
