@@ -8,6 +8,10 @@
 
 ## 엔진엑스를 이용한 무중단 배포 예시
 
+{% content-ref url="undefined/" %}
+[undefined](undefined/)
+{% endcontent-ref %}
+
 ### 구조
 
 * 엔진엑스는 80(http),443(https)포트를 할당합니다.

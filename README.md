@@ -41,11 +41,24 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 * [ACID properties of transactions](study/db/acid-properties-of-transactions.md)
 * [Between JPA and JDBC](study/db/between-jpa-and-jdbc.md)
 
+[Infra](study/infra/)
+
+* [AWS S3](study/infra/aws-s3.md)
+* [무중단 배포](study/infra/undefined/)
+  * [엔진엑스(Nginx)](study/infra/undefined/nginx.md)
+  * [코드 자동 배포](study/infra/undefined/undefined/)
+    * [CodeDeploy](study/infra/undefined/undefined/codedeploy.md)
+    * [Travis CI](study/infra/undefined/undefined/travis-ci.md)
+* [Cloud 유형](study/infra/cloud/)
+* [AWS EC2](study/infra/aws-ec2/)
+* [AWS RDS](study/infra/aws-rds.md)
+
 ### [CodeSquad](./#codesquad)
 
 * [Spring Boot Project 1주차 회고](study/codesquad/spring-boot-project-1.md)
 * [Spring Boot Project 2주차 회고](study/codesquad/spring-boot-project-2.md)
 * [Spring Boot Project 3주차 회고](study/codesquad/spirng-boot-project-3.md)
+* [Spring Boot Project 4주차 회고](study/codesquad/spring-boot-project-4.md)
 
 
 

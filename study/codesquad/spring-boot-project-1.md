@@ -226,11 +226,19 @@ public String saveUser(User user){
 
 #### before
 
+<div align="left">
+
 <figure><img src="../../.gitbook/assets/스크린샷 2023-04-09 오후 4.20.07.png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 #### after
 
+<div align="left">
+
 <figure><img src="../../.gitbook/assets/스크린샷 2023-04-09 오후 4.20.47.png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 > [https://developer.mozilla.org/ko/docs/Glossary/Idempotent](https://developer.mozilla.org/ko/docs/Glossary/Idempotent)
 >
