@@ -377,3 +377,7 @@ function switch_proxy() {
 {% hint style="info" %}
 `tee` 명령어는 파이프로 전달된 입력 데이터를 받아서 동시에 지정된 파일 및 표준 출력으로 출력합니다. 즉, 입력 데이터를 파일에 저장하면서 동시에 화면에 출력할 수 있습니다. 이는 로그 파일 작성이나 출력 내용의 확인 등에 유용하게 사용됩니다.
 {% endhint %}
+
+## Refrence
+
+> :books:[스프링 부트와 AWS로 혼자 구현하는 웹 서비스](https://product.kyobobook.co.kr/detail/S000001019679)

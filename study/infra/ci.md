@@ -81,3 +81,7 @@ service <서비스 이름> <동작>
    * CodeDeploy에서 EC2에 접근하려면 권한이 필요합니다.
 4. CodeDeploy 생성
 5. Travis CI,S3,CodeDeploy 연동
+
+## Refrence
+
+> :books:[스프링 부트와 AWS로 혼자 구현하는 웹 서비스](https://product.kyobobook.co.kr/detail/S000001019679)
