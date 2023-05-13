@@ -109,7 +109,7 @@ implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 ```
 //이 IvGenerator 구현은 항상 길이가 0인 초기화 벡터(IV)를 반환합니다.
 jasypt.encryptor.iv-generator-classname=org.jasypt.iv.NoIvGenerator 
-//암호화 일고리즘
+//암호화 알고리즘
 jasypt.encryptor.algorithm=PBEWithMD5AndTripleDES 
 //임의의 암호화 password(업로드 시 삭제,
 //--jasypt.encryptor.password=dip3tH7IJrL 추가하여 Java 실행) 

@@ -21,6 +21,7 @@
 * [Java](study/java/README.md)
   * [Gradle에서 종속성(Dependency)을 관리](study/java/gradle-dependency.md)
   * [Logging Level](study/java/logging-level.md)
+  * [Bean Validation](study/java/bean-validation.md)
   * [JVM Internals](study/java/jvm-internals/README.md)
     * [Threads](study/java/jvm-internals/threads/README.md)
       * [Frame](study/java/jvm-internals/threads/frame.md)
