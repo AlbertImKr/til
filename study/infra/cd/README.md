@@ -1,5 +1,10 @@
 # 무중단 배포
 
+## CD(Continuous Deployment - 지속적인 배포)
+
+* Continuous Deployment(지속적인 배포)은 소프트웨어 개발 및 배포 과정에서 자동화와 지속적인 통합을 통해 소프트웨어의 변경 사항을 빠르게, 자주, 안정적으로 실제 운영 환경에 배포하는 방법입니다. 이것은 Agile 및 DevOps 개발 방법론의 일환으로 사용되며, 릴리즈 주기를 단축하고 사용자 요구 사항을 신속하게 반영하기 위해 도입됩니다.
+* Continuous Deployment에서는 소스 코드 변경이 이루어지면, 자동화된 빌드, 테스트, 배포 프로세스를 통해 변경 사항을 실시간으로 릴리즈에 반영합니다. 개발자들은 작은 단위의 변경 사항을 빠르게 배포하여 실제 사용자들의 피드백을 받고, 지속적인 개선과 배우기를 추구할 수 있습니다.
+
 ## 배포 방식
 
 * AWS에서 블루 그린(Blue-Green) 무중단 배포
@@ -8,8 +13,8 @@
 
 ## 엔진엑스를 이용한 무중단 배포 예시
 
-{% content-ref url="undefined/" %}
-[undefined](undefined/)
+{% content-ref url="../ci.md" %}
+[ci.md](../ci.md)
 {% endcontent-ref %}
 
 ### 구조

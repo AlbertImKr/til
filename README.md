@@ -23,9 +23,9 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 ### [CS](study/cs/)
 
 * [디자인 패턴](study/cs/design-pattern/)
-* [ORM 도구](study/cs/orm.md)
-* [디미터 법칙](study/cs/undefined-1.md)
-* [오류 코드](study/cs/undefined.md)
+* [ORM 도구](study/cs/orm\_tool.md)
+* [디미터 법칙](study/cs/demeter\_law.md)
+* [오류 코드](study/cs/erro\_code.md)
 
 ### [Java](study/java/)
 
@@ -43,15 +43,13 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 
 [Infra](study/infra/)
 
-* [AWS S3](study/infra/aws-s3.md)
-* [무중단 배포](study/infra/undefined/)
-  * [엔진엑스(Nginx)](study/infra/undefined/nginx.md)
-  * [코드 자동 배포](study/infra/undefined/undefined/)
-    * [CodeDeploy](study/infra/undefined/undefined/codedeploy.md)
-    * [Travis CI](study/infra/undefined/undefined/travis-ci.md)
-* [Cloud 유형](study/infra/cloud/)
+* [Cloud 유형](study/infra/clouds/)
+* [무중단 배포](study/infra/cd/)
+  * [엔진엑스(Nginx)](study/infra/cd/nginx.md)
+* [코드 자동 배포](study/infra/ci.md)
 * [AWS EC2](study/infra/aws-ec2/)
 * [AWS RDS](study/infra/aws-rds.md)
+* [AWS S3](study/infra/aws-s3.md)
 
 ### [CodeSquad](./#codesquad)
 

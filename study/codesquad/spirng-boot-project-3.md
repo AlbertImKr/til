@@ -16,8 +16,8 @@
 
 * 디미터 법칙이란?
 
-{% content-ref url="../cs/undefined-1.md" %}
-[undefined-1.md](../cs/undefined-1.md)
+{% content-ref url="../cs/demeter_law.md" %}
+[demeter\_law.md](../cs/demeter\_law.md)
 {% endcontent-ref %}
 
 * 문제 코드
@@ -60,8 +60,8 @@
 
 ## 6. 오류 코드
 
-{% content-ref url="../cs/undefined.md" %}
-[undefined.md](../cs/undefined.md)
+{% content-ref url="../cs/erro_code.md" %}
+[erro\_code.md](../cs/erro\_code.md)
 {% endcontent-ref %}
 
 ## 7. JPA 테이블명 네이밍 전략

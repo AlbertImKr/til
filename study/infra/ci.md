@@ -13,15 +13,11 @@
 
 ### 도구
 
-* [Travis CI](travis-ci.md)
+* Travis CI
 * 젠키스
   * 설치형이여서 EC2 인스턴스 하나 더 필요함
 * CodeBuild
   * 유료
-
-## CD(Continuous Deployment - 지속적인 배포)
-
-* CI에서의 빌드 결과를 자동으로 운영 서버에 무중단 배포까지 진행되는 과정
 
 ## 연결 단계
 
