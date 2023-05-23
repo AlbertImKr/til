@@ -19,6 +19,7 @@
     * [Builder Pattern](study/cs/design-pattern/builder-pattern.md)
   * [ORM 도구](study/cs/orm\_tool.md)
 * [Java](study/java/README.md)
+  * [Collections.singletonList()와 List.of()](study/java/collections.singletonlist-list.of.md)
   * [Gradle에서 종속성(Dependency)을 관리](study/java/gradle-dependency.md)
   * [Logging Level](study/java/logging-level.md)
   * [Bean Validation](study/java/bean-validation.md)
