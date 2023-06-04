@@ -10,11 +10,11 @@ description: Authentication
 
 ## Authentication 인터페이스
 
-<figure><img src="../../../.gitbook/assets/image (16).png" alt=""><figcaption><p>Authentication 계약은 Principal 계약을 상속한다. Authentication에는 암호 같은 요구 사항이나 인증 요청에 대한 세부 정보를 더 추가할 수 있다. 이러한 세부 벙보 중 일부(예: 권한의 목록)는 스프링 시큐리티에 특화된 것이다.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (16) (1).png" alt=""><figcaption><p>Authentication 계약은 Principal 계약을 상속한다. Authentication에는 암호 같은 요구 사항이나 인증 요청에 대한 세부 정보를 더 추가할 수 있다. 이러한 세부 벙보 중 일부(예: 권한의 목록)는 스프링 시큐리티에 특화된 것이다.</p></figcaption></figure>
 
 ## AuthenticationProvide 메서드
 
-<figure><img src="../../../.gitbook/assets/image (6) (1).png" alt=""><figcaption><p>AuthenticationManager는 사용 가능한 인증 공급자 중 하나에 인증을 위임한다. AuthenticationProvider는 주어진 인증 유형을 지원하지 않거나 객체 유형은 지원하지만 해당 특정 객체를 인증하는 방법을 모를 수 있다. 인증을 평가한 후 요청이 올바른지 판단할 수 있는 AuthenticationProvider가 AuthenticationManager에 응답한다.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption><p>AuthenticationManager는 사용 가능한 인증 공급자 중 하나에 인증을 위임한다. AuthenticationProvider는 주어진 인증 유형을 지원하지 않거나 객체 유형은 지원하지만 해당 특정 객체를 인증하는 방법을 모를 수 있다. 인증을 평가한 후 요청이 올바른지 판단할 수 있는 AuthenticationProvider가 AuthenticationManager에 응답한다.</p></figcaption></figure>
 
 ### authenticate() 구현 방법
 
@@ -43,7 +43,7 @@ description: Authentication
 * MODE\_GLOBAL
   * 애플리케이션의 모든 스레드가 같은 보안 컨텍스트 인스턴스를 보게 한다
 
-<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption><p>각 요청이 자체 스레드를 가진다</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (2).png" alt=""><figcaption><p>각 요청이 자체 스레드를 가진다</p></figcaption></figure>
 
 ### DelegatingSecurityContextCallable
 
@@ -57,7 +57,7 @@ description: Authentication
 
 * DelegatingSecurityContextExecutorService는 보안 컨텍스트 전파도 처리한다
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption><p>DelegatingSecurityContextExecutorService는 ExecutorService를 작성해 작업하기 전에 보안 컨텍스트 세부 정보를 다음 스레드로 전파한다</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption><p>DelegatingSecurityContextExecutorService는 ExecutorService를 작성해 작업하기 전에 보안 컨텍스트 세부 정보를 다음 스레드로 전파한다</p></figcaption></figure>
 
 ## HTTP Basic 인증
 
@@ -71,4 +71,4 @@ Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 
 ## Form Login 인증
 
-<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Form 기반 로그인을 이용하는 과정</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption><p>Form 기반 로그인을 이용하는 과정</p></figcaption></figure>

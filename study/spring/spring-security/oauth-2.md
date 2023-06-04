@@ -2,7 +2,7 @@
 
 ## 아키텍처의 구성 요소
 
-<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption><p>OAuth 2 아키텍처의 주 구성 요소</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6) (1).png" alt=""><figcaption><p>OAuth 2 아키텍처의 주 구성 요소</p></figcaption></figure>
 
 ## 그랜트(grant) 유형
 
@@ -25,7 +25,7 @@
 * 클라이언트가 사용자의 자격 증명을 직접 사용하여 인증하는 방식입니다.
 * 보안 상의 이유로 권장되지 않습니다. 주로 신뢰할 수 있는 애플리케이션과의 통합 시에만 사용해야 합니다.
 
-<figure><img src="../../../.gitbook/assets/image (8).png" alt=""><figcaption><p>암호 그랜트 유형</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (8) (2).png" alt=""><figcaption><p>암호 그랜트 유형</p></figcaption></figure>
 
 ### Refresh Token(갱신 토큰)
 
@@ -39,5 +39,5 @@
 * 클라이언트 애플리케이션이 자신의 자격 증명으로 인증하는 방식입니다.
 * 사용자에 대한 액세스 권한 없이 클라이언트 자체의 자원에 접근할 때 사용됩니다.
 
-<figure><img src="../../../.gitbook/assets/image (11).png" alt=""><figcaption><p>클라이언트 자격 증명 그랜트 유형</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (11) (2).png" alt=""><figcaption><p>클라이언트 자격 증명 그랜트 유형</p></figcaption></figure>
 

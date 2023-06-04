@@ -2,7 +2,7 @@
 
 제품을 여러 단계로 나눠서 만들도록 제품 생상 단계를 캡
 
-<figure><img src="../../../.gitbook/assets/image (1) (2).png" alt=""><figcaption><p>Wiki</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (2) (1).png" alt=""><figcaption><p>Wiki</p></figcaption></figure>
 
 ## Why?
 
