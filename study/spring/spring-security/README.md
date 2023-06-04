@@ -1,6 +1,6 @@
 # Spring Security
 
-## 흐름
+
 
 <figure><img src="../../../.gitbook/assets/image (14).png" alt=""><figcaption><p>스프링 시큐리티의 인증 프로세스에 포함한 주 구성요소와 이들 간의 관계</p></figcaption></figure>
 
