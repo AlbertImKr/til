@@ -32,7 +32,7 @@ mockMvc.perform(put("/users/"+NON_EXISTING_USER_ID+"/update")
 
 ## 4.Logging Level 에 대한 재고민
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 아직 코드가 간단해서 다양한 레벨의 필요성을 느끼지 못하고 있다. 이해를 더 깊게 하려면 조금 더 복잡한 구조의 프로젝트로 만들고 이해를 하여야 할 것 같습니다.
 
@@ -131,7 +131,7 @@ jasypt.encryptor.password=dip3tH7IJrL
 
 * 출력한 암호를 복사
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * properties에서 ENC추가하여 암호화 완성
 

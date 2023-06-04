@@ -26,7 +26,7 @@ CQRS는 데이터를 **업데이트**하는 명령과 데이터를 **읽는** �
 
 그런 다음 절대적인 요구 사항은 아니지만 다음 다이어그램에 표시된 것처럼 모델을 격리할 수 있습니다.
 
-<figure><img src="../../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 별도의 쿼리 및 업데이트 모델을 사용하면 설계 및 구현이 간소화됩니다. 그러나 한 가지 단점은 [O/RM 도구](../orm\_tool.md)와 같은 scaffolding 메커니즘을 사용하여 데이터베이스 스키마에서 CQRS 코드를 자동으로 생성할 수 없다는 것입니다. (그러나 생성된 코드 위에 사용자 customization할 수 있습니다.)
 

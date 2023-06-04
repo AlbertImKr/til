@@ -16,4 +16,4 @@ description: Authorization
 
 ## 역할
 
-<figure><img src="../../../.gitbook/assets/image (11).png" alt=""><figcaption><p>특정 역할이 있는 사용자는 해당 역할에 허가된 작업만 할 수 있다.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (11) (1).png" alt=""><figcaption><p>특정 역할이 있는 사용자는 해당 역할에 허가된 작업만 할 수 있다.</p></figcaption></figure>

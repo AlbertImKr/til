@@ -14,7 +14,7 @@ description: Authentication
 
 ## AuthenticationProvide 메서드
 
-<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption><p>AuthenticationManager는 사용 가능한 인증 공급자 중 하나에 인증을 위임한다. AuthenticationProvider는 주어진 인증 유형을 지원하지 않거나 객체 유형은 지원하지만 해당 특정 객체를 인증하는 방법을 모를 수 있다. 인증을 평가한 후 요청이 올바른지 판단할 수 있는 AuthenticationProvider가 AuthenticationManager에 응답한다.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6) (1).png" alt=""><figcaption><p>AuthenticationManager는 사용 가능한 인증 공급자 중 하나에 인증을 위임한다. AuthenticationProvider는 주어진 인증 유형을 지원하지 않거나 객체 유형은 지원하지만 해당 특정 객체를 인증하는 방법을 모를 수 있다. 인증을 평가한 후 요청이 올바른지 판단할 수 있는 AuthenticationProvider가 AuthenticationManager에 응답한다.</p></figcaption></figure>
 
 ### authenticate() 구현 방법
 
@@ -32,7 +32,7 @@ description: Authentication
 
 ## SecurityContext
 
-<figure><img src="../../../.gitbook/assets/image (10).png" alt=""><figcaption><p>인증이 성공한 후 인증 필터는 인증된 엔티티의 세부 정보를 보안 컨텍스트에 저장한다.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (10) (1).png" alt=""><figcaption><p>인증이 성공한 후 인증 필터는 인증된 엔티티의 세부 정보를 보안 컨텍스트에 저장한다.</p></figcaption></figure>
 
 ### 관리하는 세가지 전략
 
