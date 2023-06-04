@@ -26,7 +26,7 @@ CQRS는 데이터를 **업데이트**하는 명령과 데이터를 **읽는** �
 
 그런 다음 절대적인 요구 사항은 아니지만 다음 다이어그램에 표시된 것처럼 모델을 격리할 수 있습니다.
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 별도의 쿼리 및 업데이트 모델을 사용하면 설계 및 구현이 간소화됩니다. 그러나 한 가지 단점은 [O/RM 도구](../orm\_tool.md)와 같은 scaffolding 메커니즘을 사용하여 데이터베이스 스키마에서 CQRS 코드를 자동으로 생성할 수 없다는 것입니다. (그러나 생성된 코드 위에 사용자 customization할 수 있습니다.)
 
@@ -38,7 +38,7 @@ CQRS는 데이터를 **업데이트**하는 명령과 데이터를 **읽는** �
 
 별도의 읽기 및 쓰기 데이터베이스를 사용하는 경우 동기화 상태를 유지해야 합니다. 일반적으로 이것은 쓰기 모델이 데이터베이스를 업데이트할 때마다 이벤트를 publish하도록 함으로써 수행됩니다. 이벤트 사용에 대한 자세한 내용은 [Event-driven architecture style](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/event-driven)을 참조하세요. 메시지 브로커와 데이터베이스는 일반적으로 단일 분산 트랜잭션에 참여할 수 없기 때문에 데이터베이스를 업데이트하고 이벤트를 publish할 때 일관성을 보장하는 데 문제가 있을 수 있습니다. 자세한 내용은 [Idempotent message processing](https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/containers/aks-mission-critical/mission-critical-data-platform#idempotent-message-processing)에 대한 지침을 참조하십시오.
 
-<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 읽기 저장소는 쓰기 저장소의 읽기 전용 복제본이거나 읽기 및 쓰기 저장소가 모두 다른 구조를 가질 수 있습니다. 여러 읽기 전용 복제본을 사용하면 특히 읽기 전용 복제본이 애플리케이션 인스턴스에 가까운 분산 시나리오에서 쿼리 성능을 향상시킬 수 있습니다.
 

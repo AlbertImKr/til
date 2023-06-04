@@ -87,12 +87,7 @@ Java 컬렉션 프레임워크는 다음과 같은 이점을 제공합니다.
 
 ## Arrays VS Collection
 
-| No. |                              Arrays                             |                    Collection Framework                   |
-| --- | :-------------------------------------------------------------: | :-------------------------------------------------------: |
-| 1   |      배열은 크기가 고정되어 있으므로 일단 배열을 만들면 요구 사항에 따라 늘리거나 줄일 수 없습니다.     | 컬렉션은 우리의 요구 사항에 따라 본질적으로 확장 할 수 있습니다. 크기를 늘리거나 줄일 수 있습니다. |
-| 2   | 기본 유형(boolean, byte, short, int, long 등)과 객체 유형을 모두 보유할 수 있습니다. |                      객체 유형만 보유할 수 있음                      |
-| 3   |        배열에는 기본 데이터 구조가 없습니다. 자바에서 데이터 구조로 사용되는 배열 자체입니다.        |            모든 Collection 클래스에는 기본 데이터 구조가 있습니다.           |
-| 4   |                       배열에는 유틸리티 메서드가 없습니다                       |              모든 Collection은 유틸리티 메서드를 제공합니다.              |
+<table><thead><tr><th width="80.33333333333331">No.</th><th width="300" align="center">Arrays</th><th align="center">Collection Framework</th></tr></thead><tbody><tr><td>1</td><td align="center">배열은 크기가 고정되어 있으므로 일단 배열을 만들면 요구 사항에 따라 늘리거나 줄일 수 없습니다.</td><td align="center">컬렉션은 우리의 요구 사항에 따라 본질적으로 확장 할 수 있습니다. 크기를 늘리거나 줄일 수 있습니다.</td></tr><tr><td>2</td><td align="center">기본 유형(boolean, byte, short, int, long 등)과 객체 유형을 모두 보유할 수 있습니다.</td><td align="center">객체 유형만 보유할 수 있음</td></tr><tr><td>3</td><td align="center">배열에는 기본 데이터 구조가 없습니다. 자바에서 데이터 구조로 사용되는 배열 자체입니다.</td><td align="center">모든 Collection 클래스에는 기본 데이터 구조가 있습니다.</td></tr><tr><td>4</td><td align="center">배열에는 유틸리티 메서드가 없습니다</td><td align="center">모든 Collection은 유틸리티 메서드를 제공합니다.</td></tr></tbody></table>
 
 
 
@@ -128,12 +123,7 @@ Java 컬렉션 프레임워크는 다음과 같은 이점을 제공합니다.
 
 ### Map의 구현체
 
-| 비교 목록           | HashMap            | LinkedHashMap  | TreeMap          | EnumMap           |
-| --------------- | ------------------ | -------------- | ---------------- | ----------------- |
-| Add element     | amoritize O(1)     | amoritize O(1) | O(log(n))        | O(1)              |
-| Remove element  | amoritize O(1)     | amoritize O(1) | O(log(n))        | O(1)              |
-| Find element    | O(1)               | O(1)           | O(log(n))        | O(1)              |
-| Traversal order | 무작위, 해시 함수에 의해 흩어짐 | 삽입된 대로         | 요소 비교 기준에 따라 정렬됨 | enum 값의 정의 순서에 따라 |
+<table><thead><tr><th>비교 목록</th><th>HashMap</th><th width="160">LinkedHashMap</th><th>TreeMap</th><th>EnumMap</th></tr></thead><tbody><tr><td>Add element</td><td>amoritize O(1)</td><td>amoritize O(1)</td><td>O(log(n))</td><td>O(1)</td></tr><tr><td>Remove element</td><td>amoritize O(1)</td><td>amoritize O(1)</td><td>O(log(n))</td><td>O(1)</td></tr><tr><td>Find element</td><td>O(1)</td><td>O(1)</td><td>O(log(n))</td><td>O(1)</td></tr><tr><td>Traversal order</td><td>무작위, 해시 함수에 의해 흩어짐</td><td>삽입된 대로</td><td>요소 비교 기준에 따라 정렬됨</td><td>enum 값의 정의 순서에 따라</td></tr></tbody></table>
 
 ##
 

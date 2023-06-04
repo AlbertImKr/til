@@ -110,17 +110,7 @@ ClassFile {
 }
 ```
 
-| component                             | description                                                                                          |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| magic, minor\_version, major\_version | magic, minor\_version, major\_version은 클래스 버전 및 이 클래스가 컴파일된 JDK 버전에 대한 정보를 지정합니다.                    |
-| constant\_pool                        | Symbol  테이블과 유사하지만 더 많은 데이터를 포함하고 있다 . 이에 대해서는 아래에서 자세히 설명합니다.                                      |
-| access\_flags                         | 이 클래스에 대한 수정자 list를 제공합니다.                                                                           |
-| this\_class                           | 이 클래스의 정규화된 이름(예: org/jamesdbloom/foo/Bar)을 제공하는 constant\_pool에 대한 인덱스                              |
-| super\_class                          | 상위 클래스 (즉, java/lang/Object)에 대한 symbolic 참조를 제공하는 constant\_pool에 대한 인덱스                            |
-| interfaces                            | 구현된 모든 인터페이스에 대한 symbolic 참조를 제공하는 constant\_pool에 대한 인덱스 배열.                                        |
-| fields                                | 각 필드에 대한 완전한 설명을 제공하는 constant\_pool에 대한 인덱스 배열.                                                     |
-| methods                               | 각 메서드 시그니처에 대한 완전한 설명을 제공하는 constant\_pool에 대한 인덱스 배열, 메서드가 abstract 또는 native가 아닌 경우 바이트코드도 존재합니다. |
-| attributes                            | RetentionPolicy.CLASS 또는 RetentionPolicy.RUNTIME이 있는 annotaions을 포함하여 클래스에 대한 추가 정보를 제공하는 다양한 값의 배열 |
+<table><thead><tr><th width="187">component</th><th>description</th></tr></thead><tbody><tr><td>magic, minor_version, major_version</td><td>magic, minor_version, major_version은 클래스 버전 및 이 클래스가 컴파일된 JDK 버전에 대한 정보를 지정합니다.</td></tr><tr><td>constant_pool</td><td>Symbol  테이블과 유사하지만 더 많은 데이터를 포함하고 있다 . 이에 대해서는 아래에서 자세히 설명합니다.</td></tr><tr><td>access_flags</td><td>이 클래스에 대한 수정자 list를 제공합니다.</td></tr><tr><td>this_class</td><td>이 클래스의 정규화된 이름(예: org/jamesdbloom/foo/Bar)을 제공하는 constant_pool에 대한 인덱스</td></tr><tr><td>super_class</td><td>상위 클래스 (즉, java/lang/Object)에 대한 symbolic 참조를 제공하는 constant_pool에 대한 인덱스</td></tr><tr><td>interfaces</td><td>구현된 모든 인터페이스에 대한 symbolic 참조를 제공하는 constant_pool에 대한 인덱스 배열.</td></tr><tr><td>fields</td><td>각 필드에 대한 완전한 설명을 제공하는 constant_pool에 대한 인덱스 배열.</td></tr><tr><td>methods</td><td>각 메서드 시그니처에 대한 완전한 설명을 제공하는 constant_pool에 대한 인덱스 배열, 메서드가 abstract 또는 native가 아닌 경우 바이트코드도 존재합니다.</td></tr><tr><td>attributes</td><td>RetentionPolicy.CLASS 또는 RetentionPolicy.RUNTIME이 있는 annotaions을 포함하여 클래스에 대한 추가 정보를 제공하는 다양한 값의 배열</td></tr></tbody></table>
 
 javap 명령을 사용하여 컴파일된 Java 클래스의 바이트 코드를 볼 수 있습니다.
 
@@ -369,17 +359,7 @@ Constant pool:
 
 상수 풀에는 다음 유형이 포함됩니다
 
-| Types                                    | Description                                                                                                                                                                        |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Integer                                  | 4바이트 int 상수                                                                                                                                                                        |
-| Long                                     | 8바이트 long 상수                                                                                                                                                                       |
-| Float                                    | 4바이트 float 상수                                                                                                                                                                      |
-| Double                                   | 8바이트 double 상수                                                                                                                                                                     |
-| String                                   | 실제 바이트를 포함하는 상수 풀의 다른 Utf8 항목을 가리키는 문자열 상수                                                                                                                                         |
-| Utf8                                     | Utf8로 인코딩된 문자 시퀀스를 나타내는 바이트 스트림                                                                                                                                                    |
-| Class                                    | 내부 JVM 형식의 정규화된 클래스 이름을 포함하는 상수 풀의 다른 Utf8 항목을 가리키는 클래스 상수(동적 연결 프로세스에서 사용됨)                                                                                                       |
-| NameAndType                              | 상수 풀의 다른 항목을 각각 가리키는 콜론으로 구분된 값 쌍입니다. 첫 번째 값(콜론 앞)은 메서드 또는 필드 이름인 Utf8 문자열 항목을 가리킵니다. 두 번째 값은 유형을 나타내는 Utf8 항목을 가리킵니다. 필드의 경우 정규화된 클래스 이름이고 메서드의 경우 매개변수당 하나의 정규화된 클래스 이름 list입니다. |
-| Fielddref, Methodref, InterfaceMethodref | 상수 풀의 다른 항목을 각각 가리키는 점으로 구분된 값 쌍입니다. 첫 번째 값(점 앞)은 클래스 항목을 가리킵니다. 두 번째 값은 NameAndType 항목을 가리킵니다.                                                                                    |
+<table><thead><tr><th width="204">Types</th><th>Description</th></tr></thead><tbody><tr><td>Integer</td><td>4바이트 int 상수</td></tr><tr><td>Long</td><td>8바이트 long 상수</td></tr><tr><td>Float</td><td>4바이트 float 상수</td></tr><tr><td>Double</td><td>8바이트 double 상수</td></tr><tr><td>String</td><td>실제 바이트를 포함하는 상수 풀의 다른 Utf8 항목을 가리키는 문자열 상수</td></tr><tr><td>Utf8</td><td>Utf8로 인코딩된 문자 시퀀스를 나타내는 바이트 스트림</td></tr><tr><td>Class</td><td>내부 JVM 형식의 정규화된 클래스 이름을 포함하는 상수 풀의 다른 Utf8 항목을 가리키는 클래스 상수(동적 연결 프로세스에서 사용됨)</td></tr><tr><td>NameAndType</td><td>상수 풀의 다른 항목을 각각 가리키는 콜론으로 구분된 값 쌍입니다. 첫 번째 값(콜론 앞)은 메서드 또는 필드 이름인 Utf8 문자열 항목을 가리킵니다. 두 번째 값은 유형을 나타내는 Utf8 항목을 가리킵니다. 필드의 경우 정규화된 클래스 이름이고 메서드의 경우 매개변수당 하나의 정규화된 클래스 이름 list입니다.</td></tr><tr><td>Fielddref, Methodref, InterfaceMethodref</td><td>상수 풀의 다른 항목을 각각 가리키는 점으로 구분된 값 쌍입니다. 첫 번째 값(점 앞)은 클래스 항목을 가리킵니다. 두 번째 값은 NameAndType 항목을 가리킵니다.</td></tr></tbody></table>
 
 
 

@@ -131,7 +131,7 @@ jasypt.encryptor.password=dip3tH7IJrL
 
 * 출력한 암호를 복사
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 * properties에서 ENC추가하여 암호화 완성
 

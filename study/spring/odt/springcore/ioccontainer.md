@@ -1493,12 +1493,7 @@ XML 기반 configuration metadat([Dependency Injection](ioccontainer.md#4.1-dep
 
 _Table 2. Autowiring modes_
 
-| Mode          | 설명                                                                                                                                                                                                                       |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `no`          | (기본값) 자동 연결 없음. Bean 참조는 `ref` 요소에 의해 정의되어야 합니다. 공동 작업자를 명시적으로 지정하면 더 많은 제어와 명확성을 제공하므로 대규모 배포에는 기본 설정을 변경하지 않는 것이 좋습니다. 어느 정도까지는 시스템의 구조를 문서화합니다.                                                                       |
-| `byName`      | 속성 이름으로 Autowiring. Spring은 autowired가 필요한 프로퍼티와 같은 이름을 가진 빈을 찾습니다. 예를 들어 bean definition가 이름으로 autowire로 설정되고 `master` 속성(즉, `setMaster(..)` 메서드가 있음)을 포함하는 경우 Spring은 `master`라는 bean definition를 찾고 속성을 설정하는 데 사용합니다. |
-| `byType`      | 컨테이너에 속성 타입이 정확히 하나의 빈이  존재하는 경우 속성이 자동 연결되도록 합니다. 둘 이상이 존재하면 치명적인 예외가 발생하여 해당 빈에 대해 `byType` autowiring을 사용할 수 없게 된다. 일치하는 빈이 없으면 아무 일도 일어나지 않습니다(속성이 설정되지 않음).                                                         |
-| `constructor` | `byType`과 유사하지만 생성자 인수에 적용됩니다. 컨테이너에 생성자 인수 타입의 빈이 정확히 하나도 없으면 치명적인 오류가 발생합니다.                                                                                                                                           |
+<table><thead><tr><th width="162.33333333333331">Mode</th><th>설명</th></tr></thead><tbody><tr><td><code>no</code></td><td>(기본값) 자동 연결 없음. Bean 참조는 <code>ref</code> 요소에 의해 정의되어야 합니다. 공동 작업자를 명시적으로 지정하면 더 많은 제어와 명확성을 제공하므로 대규모 배포에는 기본 설정을 변경하지 않는 것이 좋습니다. 어느 정도까지는 시스템의 구조를 문서화합니다.</td></tr><tr><td><code>byName</code></td><td>속성 이름으로 Autowiring. Spring은 autowired가 필요한 프로퍼티와 같은 이름을 가진 빈을 찾습니다. 예를 들어 bean definition가 이름으로 autowire로 설정되고 <code>master</code> 속성(즉, <code>setMaster(..)</code> 메서드가 있음)을 포함하는 경우 Spring은 <code>master</code>라는 bean definition를 찾고 속성을 설정하는 데 사용합니다.</td></tr><tr><td><code>byType</code></td><td>컨테이너에 속성 타입이 정확히 하나의 빈이  존재하는 경우 속성이 자동 연결되도록 합니다. 둘 이상이 존재하면 치명적인 예외가 발생하여 해당 빈에 대해 <code>byType</code> autowiring을 사용할 수 없게 된다. 일치하는 빈이 없으면 아무 일도 일어나지 않습니다(속성이 설정되지 않음).</td></tr><tr><td><code>constructor</code></td><td><code>byType</code>과 유사하지만 생성자 인수에 적용됩니다. 컨테이너에 생성자 인수 타입의 빈이 정확히 하나도 없으면 치명적인 오류가 발생합니다.</td></tr></tbody></table>
 
 `byType` 또는 `constructor` 자동 연결 모드를 사용하면 배열 및 타입이 지정된 컬렉션을 연결할 수 있습니다.  이러한 경우 예상 타입과 일치하는 컨테이너 내의 모든 autowire 후보가 의존성을 충족하도록 제공됩니다. 예상되는 키 타입이 `String`인 경우 강력한 타입의 `map` 인스턴스를 자동으로 연결할 수 있습니다. autowired `map` 인스턴스의 값은 예상되는 타입과 일치하는 모든 빈 인스턴스로 구성되며 `map` 인스턴스의 키에는 해당 빈 이름이 포함됩니다
 
@@ -1777,14 +1772,7 @@ Bean definition를 생성할 때 해당 bean definition에 의해 정의된 클�
 
 다음 표에는 지원되는 범위을 설명합니다.
 
-| Scopte      | Description                                                                                                                                                          |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| singleton   | (기본값) 각 Spring IoC 컨테이너에 대한 단일 객체 인스턴스에 단일 bean definition의 범위를 지정합니다.                                                                                               |
-| prototype   | 단일 bean definition를 여러 객체 인스턴스로 범위 지정합니다.                                                                                                                            |
-| request     | 단일 HTTP 요청의 라이프사이클에 대한 단일 bean definition의 범위를 지정합니다. 즉, 각 HTTP 요청에는 단일 bean definition 뒤에서 생성된 자체 bean 인스턴스가 있습니다. 웹 인식 Spring `ApplicationContext`의 컨텍스트에서만 유효합니다. |
-| session     | HTTP 세션의 수명 주기에 대한 단일 bean definition의 범위를 지정합니다. 웹 인식 Spring ApplicationContext의 컨텍스트에서만 유효합니다.                                                                     |
-| application | 단일 bean definition 범위를 `ServletContext`의 수명 주기로 지정합니다. 웹 인식 Spring ApplicationContext의 컨텍스트에서만 유효합니다.                                                                |
-| websocket   | `WebSocket`의 수명 주기에 대한 단일 bean definition의 범위를 지정합니다. 웹 인식 Spring ApplicationContext의 컨텍스트에서만 유효합니다.                                                                 |
+<table><thead><tr><th width="176">Scopte</th><th>Description</th></tr></thead><tbody><tr><td>singleton</td><td>(기본값) 각 Spring IoC 컨테이너에 대한 단일 객체 인스턴스에 단일 bean definition의 범위를 지정합니다.</td></tr><tr><td>prototype</td><td>단일 bean definition를 여러 객체 인스턴스로 범위 지정합니다.</td></tr><tr><td>request</td><td>단일 HTTP 요청의 라이프사이클에 대한 단일 bean definition의 범위를 지정합니다. 즉, 각 HTTP 요청에는 단일 bean definition 뒤에서 생성된 자체 bean 인스턴스가 있습니다. 웹 인식 Spring <code>ApplicationContext</code>의 컨텍스트에서만 유효합니다.</td></tr><tr><td>session</td><td>HTTP 세션의 수명 주기에 대한 단일 bean definition의 범위를 지정합니다. 웹 인식 Spring ApplicationContext의 컨텍스트에서만 유효합니다.</td></tr><tr><td>application</td><td>단일 bean definition 범위를 <code>ServletContext</code>의 수명 주기로 지정합니다. 웹 인식 Spring ApplicationContext의 컨텍스트에서만 유효합니다.</td></tr><tr><td>websocket</td><td><code>WebSocket</code>의 수명 주기에 대한 단일 bean definition의 범위를 지정합니다. 웹 인식 Spring ApplicationContext의 컨텍스트에서만 유효합니다.</td></tr></tbody></table>
 
 
 
@@ -1800,7 +1788,7 @@ Bean definition를 생성할 때 해당 bean definition에 의해 정의된 클�
 
 다르게 표현하자면, bean definition를 정의하고 그것이 싱글톤으로 범위가 지정되면 Spring IoC 컨테이너는 해당 bean definition에 의해 정의된 객체의 정확히 하나의 인스턴스를 생성합니다. 이 단일 인스턴스는 이러한 싱글톤 빈의 캐시에 저장되며 해당 명명된 빈에 대한 모든 후속 요청 및 참조는 캐시된 객체를 반환합니다. 다음 이미지는 싱글톤 범위의 작동 방식을 보여줍니다.
 
-<figure><img src="../../../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Spring의 싱글톤 빈 개념은 Gang of Four(GoF) 패턴 책에 정의된 싱글톤 패턴과 다릅니다. GoF 싱글톤은 특정 클래스의 인스턴스가 ClassLoader당 하나만 생성되도록 개체의 범위를 하드 코딩합니다.Spring 싱글톤의 범위는 per-container 및 per-bean으로 가장 잘 설명됩니다. 즉, 단일 Spring 컨테이너에서 특정 클래스에 대해 하나의 빈을 정의하면 Spring 컨테이너는 해당 bean definition에 의해 정의된 클래스의 인스턴스를 하나만 생성합니다. 싱글톤 범위는 Spring의 기본 범위입니다. XML에서 bean을 싱글톤으로 정의하려면 다음 예제와 같이 bean을 정의할 수 있습니다.
 
@@ -1819,7 +1807,7 @@ Spring의 싱글톤 빈 개념은 Gang of Four(GoF) 패턴 책에 정의된 싱�
 
 다음 다이어그램은 Spring 프로토타입 범위를 보여줍니다.
 
-<figure><img src="../../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 (DAO(Data Access Object)는 일반적으로 프로토타입으로 구성되지 않습니다. 일반적인 DAO에는 대화 상태가 없기 때문입니다. 싱글톤 다이어그램의 핵심을 재사용하는 것이 더 쉬웠습니다.)
 
