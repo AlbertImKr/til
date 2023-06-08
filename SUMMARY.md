@@ -62,3 +62,5 @@
   * [Spring Boot Project 2주차 회고](study/codesquad/spring-boot-project-2.md)
   * [Spirng Boot Project 3주차 회고](study/codesquad/spirng-boot-project-3.md)
   * [Spring Boot Project 4주차 회고](study/codesquad/spring-boot-project-4.md)
+* [DDD](study/ddd/README.md)
+  * [AggregateId](study/ddd/aggregateid.md)
