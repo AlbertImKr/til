@@ -156,7 +156,7 @@
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## HTTP/2 푸시란
 
@@ -198,7 +198,7 @@
 * H2PushResource와 같은 웹서버의 이른 푸시 명령을 사용하는 데 따른 단점은 애플리케이션이 이러한 푸시를 개시하게 할 수 없으며, 애플리케이션이 푸시여부를 결정하기에 최적의 위치일 것이라는 점이다. 이 상황을 해결하고자 새로운 HTTP 상태 코드(103 Early Hint)를 사용해서 프리코드 HTTP 링크 헤더를 통한 리소스 요구 사항을 더 이르게 암시할 수 있다.
   * 이 코드를 사용하면 헤더만 있는 이른 응답을 보낼 수 있으며 , 드다음에는 표준 200 등답 코드가 따라온다.
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 브라우저에서 푸시 캐시 동작 방식
 
