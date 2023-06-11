@@ -1,4 +1,4 @@
-# Collections.singletonList()와 List.of()
+# Collections.singletonList() vs List.of()
 
 \
 `Collections.singletonList()`와 `List.of()`는 둘 다 Java에서 단일 요소를 포함하는 불변(immutable) 리스트를 생성하는 메서드입니다. 하지만 몇 가지 차이점이 있습니다.

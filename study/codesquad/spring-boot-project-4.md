@@ -22,8 +22,8 @@
 
 ## 4. Gradle에서 종속성(Dependency)을 관리
 
-{% content-ref url="../java/manage-dependencies-in-gradle.md" %}
-[manage-dependencies-in-gradle.md](../java/manage-dependencies-in-gradle.md)
+{% content-ref url="../java/gradle-dependency.md" %}
+[gradle-dependency.md](../java/gradle-dependency.md)
 {% endcontent-ref %}
 
 ## 5. Mock 과 Stub

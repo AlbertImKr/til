@@ -44,12 +44,12 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 * [Java Collection Framework](study/java/java-collection-framework.md)
 * [Annotation](study/java/annotation.md)
 * [Generic](study/java/generic.md)
-* [Collections.singletonList() vs List.of()](study/java/collections.singletonlist-vs-list.of.md)
-* [Manage dependencies in Gradle](study/java/manage-dependencies-in-gradle.md)
+* [Collections.singletonList() vs List.of()](study/java/collections.singletonlist-list.of.md)
+* [Manage dependencies in Gradle](study/java/gradle-dependency.md)
 * [Logging Level](study/java/logging-level.md)
 * [Bean Validation](study/java/bean-validation.md)
 
-[DB](study/db/)
+### [DB](study/db/)
 
 * [About JPA](study/db/about-jpa.md)
 * [Why JPA?](study/db/why-jpa.md)
@@ -57,7 +57,7 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 * [Between JPA and JDBC](study/db/between-jpa-and-jdbc.md)
 * [Identifiers in Hibernate/JPA](study/db/identifiers-in-hibernate-jpa.md)
 
-[Infra](study/infra/)
+### [Infra](study/infra/)
 
 * [Docker](study/infra/docker/)
   * [Command](study/infra/docker/command.md)
@@ -79,7 +79,7 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 * [Spring Boot Project 3주차 회고](study/codesquad/spirng-boot-project-3.md)
 * [Spring Boot Project 4주차 회고](study/codesquad/spring-boot-project-4.md)
 
-[DDD](study/ddd/)
+### [DDD](study/ddd/)
 
 * [AggregateId](study/ddd/aggregateid.md)
 

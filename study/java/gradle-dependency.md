@@ -1,4 +1,4 @@
-# Gradle에서 종속성(Dependency)을 관리
+# Manage dependencies in Gradle
 
 ## 1.**`implementation`** 구성:
 
