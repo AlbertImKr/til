@@ -57,7 +57,7 @@ description: Authentication
 
 * DelegatingSecurityContextExecutorService는 보안 컨텍스트 전파도 처리한다
 
-<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption><p>DelegatingSecurityContextExecutorService는 ExecutorService를 작성해 작업하기 전에 보안 컨텍스트 세부 정보를 다음 스레드로 전파한다</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>DelegatingSecurityContextExecutorService는 ExecutorService를 작성해 작업하기 전에 보안 컨텍스트 세부 정보를 다음 스레드로 전파한다</p></figcaption></figure>
 
 ## HTTP Basic 인증
 
