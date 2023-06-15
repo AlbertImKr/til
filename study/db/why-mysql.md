@@ -1,6 +1,6 @@
 # Why MySQL?
 
-직접 Infra를 구현하지 않고 AWS Cloud를 사용하고 있습니다.
+회사에서 직접 Infra를 구현하지 않고 AWS Cloud를 많이 사용하고 있습니다.
 
 AWS Cloud에서 제공하는 RDS는 아래 유형 있습니다.
 
