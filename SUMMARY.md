@@ -4,6 +4,7 @@
 
 * [README](README.md)
 * [Spring](study/spring/README.md)
+  * [HATEOAS](study/spring/hateoas.md)
   * [IoC Container](study/spring/ioc-container.md)
   * [Filter,Interceptor,AOP,Argument Resolver](study/spring/filter-interceptor-aop-argument-resolver.md)
   * [@Autowired vs Constructor Dependency Injection](study/spring/autowired-vs-constructor-dependency-injection.md)
