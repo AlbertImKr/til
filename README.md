@@ -8,8 +8,6 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 
 ### Efforts do not betray
 
-
-
 ## 목록:
 
 ### [Spring](study/spring/)
@@ -56,6 +54,8 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 * [ACID properties of transactions](study/db/acid-properties-of-transactions.md)
 * [Between JPA and JDBC](study/db/between-jpa-and-jdbc.md)
 * [Identifiers in Hibernate/JPA](study/db/identifiers-in-hibernate-jpa.md)
+* [MongoDB](study/db/mongodb/)
+  * [ObjectId](study/db/mongodb/objectid.md)
 
 ### [Infra](study/infra/)
 
@@ -82,24 +82,3 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 ### [DDD](study/ddd/)
 
 * [AggregateId](study/ddd/aggregateid.md)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
