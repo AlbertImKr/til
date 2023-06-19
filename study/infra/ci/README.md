@@ -62,11 +62,7 @@ sudo service codedeploy-agent status
 {% hint style="info" %}
 "service"는 Linux 시스템에서 서비스(데몬)를 관리하는 명령어입니다.
 
-
-
 service <서비스 이름> <동작>
-
-
 
 일반적으로 사용되는 동작은 다음과 같습니다:
 
