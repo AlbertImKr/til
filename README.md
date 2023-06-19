@@ -67,7 +67,7 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
   * [Software as a Service](study/infra/clouds/software-as-a-service.md)
 * [무중단 배포](study/infra/cd/)
   * [엔진엑스(Nginx)](study/infra/cd/nginx.md)
-* [코드 자동 배포](study/infra/ci.md)
+* [코드 자동 배포](study/infra/ci/)
 * [AWS EC2](study/infra/aws-ec2/)
 * [AWS RDS](study/infra/aws-rds.md)
 * [AWS S3](study/infra/aws-s3.md)

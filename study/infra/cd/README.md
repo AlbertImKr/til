@@ -13,8 +13,8 @@
 
 ## 엔진엑스를 이용한 무중단 배포 예시
 
-{% content-ref url="../ci.md" %}
-[ci.md](../ci.md)
+{% content-ref url="../ci/" %}
+[ci](../ci/)
 {% endcontent-ref %}
 
 ### 구조
@@ -63,8 +63,8 @@ sudo vim /etc/nginx/nginx.conf
 수정 내용
 
 <pre class="language-bash"><code class="lang-bash"><strong># load configuraion files for the default server block.
-</strong><strong>
-</strong><strong># 이는 서버 블록 설정에 대한 추가 구성 파일을 포함할 수 있는 방법입니다.
+</strong>
+<strong># 이는 서버 블록 설정에 대한 추가 구성 파일을 포함할 수 있는 방법입니다.
 </strong>include /etc/nginx/conf.d/service_url.cnf;
 
 # location / { ... }: 웹 서버의 기본 서버 블록에 대한 설정을 나타냅니다. 
@@ -265,8 +265,6 @@ nohup java -jar \
 {% hint style="info" %}
 `-Dspring.config.location`은 스프링 부트 애플리케이션에서 사용되는 시스템 프로퍼티(System Property)입니다. 이 프로퍼티를 사용하여 스프링 부트 애플리케이션의 구성 파일 위치를 지정할 수 있습니다.
 
-
-
 `-Dspring.config.location`을 사용하면 기본적으로 클래스패스(classpath) 상에서 `application.properties` 파일을 찾지만, 추가적인 설정 파일의 위치를 지정할 수 있습니다. 즉, `-Dspring.config.location` 옵션을 사용하여 스프링 부트 애플리케이션에 대한 구성 파일의 경로를 직접 지정할 수 있습니다.
 
 \
@@ -275,8 +273,6 @@ nohup java -jar \
 
 {% hint style="info" %}
 `-Dspring.profiles.active`는 스프링 부트 애플리케이션에서 사용되는 시스템 프로퍼티(System Property)입니다. 이 프로퍼티를 사용하여 활성화할 프로파일(profile)을 지정할 수 있습니다.
-
-
 
 `-Dspring.profiles.active` 옵션을 사용하여 애플리케이션 실행 시 활성화할 프로파일을 지정할 수 있습니다. 예를 들어, `-Dspring.profiles.active=dev`라는 옵션을 사용하면 `dev` 프로파일이 활성화되고, 해당 프로파일에 연결된 프로퍼티 파일의 구성이 적용됩니다.
 {% endhint %}
