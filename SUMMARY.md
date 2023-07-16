@@ -43,6 +43,8 @@
   * [Generic](study/java/generic.md)
 * [DB](study/db/README.md)
   * [JPA](study/db/jpa/README.md)
+    * [Index](study/db/jpa/index.md)
+    * [ElementCollection\&CollectionTable](study/db/jpa/elementcollection-and-collectiontable.md)
     * [orphanRemoval](study/db/jpa/orphanremoval.md)
     * [CascadeType](study/db/jpa/cascadetype.md)
     * [Use Subselect](study/db/jpa/use-subselect.md)
