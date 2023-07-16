@@ -27,6 +27,7 @@
     * [CQRS Pattern](study/cs/design-pattern/cqrs-pattern.md)
     * [Builder Pattern](study/cs/design-pattern/builder-pattern.md)
 * [Java](study/java/README.md)
+  * [Jackson de/serialize](study/java/jackson-de-serialize.md)
   * [Collections.singletonList() vs List.of()](study/java/collections.singletonlist-list.of.md)
   * [Manage dependencies in Gradle](study/java/gradle-dependency.md)
   * [Logging Level](study/java/logging-level.md)
