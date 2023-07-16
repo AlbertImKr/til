@@ -198,7 +198,7 @@
 * H2PushResource와 같은 웹서버의 이른 푸시 명령을 사용하는 데 따른 단점은 애플리케이션이 이러한 푸시를 개시하게 할 수 없으며, 애플리케이션이 푸시여부를 결정하기에 최적의 위치일 것이라는 점이다. 이 상황을 해결하고자 새로운 HTTP 상태 코드(103 Early Hint)를 사용해서 프리코드 HTTP 링크 헤더를 통한 리소스 요구 사항을 더 이르게 암시할 수 있다.
   * 이 코드를 사용하면 헤더만 있는 이른 응답을 보낼 수 있으며 , 드다음에는 표준 200 등답 코드가 따라온다.
 
-<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 브라우저에서 푸시 캐시 동작 방식
 
@@ -207,7 +207,7 @@
   * 눈에 띄는 예외 사항은 크로미움 기반 브라우저(Chromium-based browers)는 신뢰하지 않는 인증서에 대한 리소스를 캐시하지 않는다는 점이다.
   * 인증서 오류를 찾아낸 경우에도 여전히 캐시가 사용되지 않는다.
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 이미지 캐시는 수명이 짧은 메모리상의 캐시로, 페이지에 대한 캐시다.
   * 예를 들면 브라우저가 페이지에서 두번 참조하는 이미지를 두번 가져오지 않고 하고자 사용된다. 사용자가 페이지에서 다른 곳으로 브라우징하면 캐시는 없어진다.

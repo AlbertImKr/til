@@ -1,4 +1,4 @@
-# CQRS pattern
+# CQRS Pattern
 
 CQRS는 데이터 저장소에 대한 읽기 및 업데이트 작업을 구분하는 패턴인 Command and Query Responsibility Segregation의 약자입니다. 애플리케이션에 CQRS를 구현하면 성능, 확장성 및 보안을 극대화할 수 있습니다. CQRS로 마이그레이션하여 생성된 유연성을 통해 시간이 지남에 따라 시스템이 더 잘 발전하고 업데이트 명령이 도메인 수준에서 병합 충돌을 일으키는 것을 방지할 수 있습니다.
 
@@ -6,8 +6,7 @@ CQRS는 데이터 저장소에 대한 읽기 및 업데이트 작업을 구분�
 
 기존 아키텍처에서는 데이터베이스를 쿼리하고 업데이트하는 데 동일한 데이터 모델이 사용됩니다. 간단하고 기본 CRUD 작업에 적합합니다. 그러나 더 복잡한 응용 프로그램에서는 이 접근 방식이 다루기 어려워질 수 있습니다. 예를 들어 읽기 측면에서 응용 프로그램은 다양한 쿼리를 수행하여 모양이 다른 DTO(데이터 전송 개체)를 반환할 수 있습니다. 개체 매핑이 복잡해질 수 있습니다. 쓰기 측면에서 모델은 복잡한 유효성 검사 및 비즈니스 논리를 구현할 수 있습니다. 결과적으로 너무 많은 일을 하는 지나치게 복잡한 모델로 끝날 수 있습니다.
 
-읽기 및 쓰기 워크로드는 성능 및 확장 요구 사항이 매우 다른 비대칭인 경우가 많습니다.\
-
+읽기 및 쓰기 워크로드는 성능 및 확장 요구 사항이 매우 다른 비대칭인 경우가 많습니다.\\
 
 <figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
@@ -26,15 +25,11 @@ CQRS는 데이터를 **업데이트**하는 명령과 데이터를 **읽는** �
 
 그런 다음 절대적인 요구 사항은 아니지만 다음 다이어그램에 표시된 것처럼 모델을 격리할 수 있습니다.
 
-<figure><img src="../../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 별도의 쿼리 및 업데이트 모델을 사용하면 설계 및 구현이 간소화됩니다. 그러나 한 가지 단점은 [O/RM 도구](../orm\_tool.md)와 같은 scaffolding 메커니즘을 사용하여 데이터베이스 스키마에서 CQRS 코드를 자동으로 생성할 수 없다는 것입니다. (그러나 생성된 코드 위에 사용자 customization할 수 있습니다.)
 
-
-
 격리 수준을 높이려면 쓰기 데이터에서 읽기 데이터를 물리적으로 분리할 수 있습니다. 이 경우 읽기 데이터베이스는 쿼리에 최적화된 자체 데이터 스키마를 사용할 수 있습니다. 예를 들어 복잡한 조인이나 복잡한 O/RM 매핑을 피하기 위해 데이터의 [Materialized View](https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view)를 저장할 수 있습니다. 다른 유형의 데이터 저장소를 사용할 수도 있습니다. 예를 들어 쓰기 데이터베이스는 관계형이고 읽기 데이터베이스는 문서 데이터베이스일 수 있습니다.
-
-
 
 별도의 읽기 및 쓰기 데이터베이스를 사용하는 경우 동기화 상태를 유지해야 합니다. 일반적으로 이것은 쓰기 모델이 데이터베이스를 업데이트할 때마다 이벤트를 publish하도록 함으로써 수행됩니다. 이벤트 사용에 대한 자세한 내용은 [Event-driven architecture style](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/event-driven)을 참조하세요. 메시지 브로커와 데이터베이스는 일반적으로 단일 분산 트랜잭션에 참여할 수 없기 때문에 데이터베이스를 업데이트하고 이벤트를 publish할 때 일관성을 보장하는 데 문제가 있을 수 있습니다. 자세한 내용은 [Idempotent message processing](https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/containers/aks-mission-critical/mission-critical-data-platform#idempotent-message-processing)에 대한 지침을 참조하십시오.
 
@@ -42,15 +37,9 @@ CQRS는 데이터를 **업데이트**하는 명령과 데이터를 **읽는** �
 
 읽기 저장소는 쓰기 저장소의 읽기 전용 복제본이거나 읽기 및 쓰기 저장소가 모두 다른 구조를 가질 수 있습니다. 여러 읽기 전용 복제본을 사용하면 특히 읽기 전용 복제본이 애플리케이션 인스턴스에 가까운 분산 시나리오에서 쿼리 성능을 향상시킬 수 있습니다.
 
-
-
 읽기 및 쓰기 저장소를 분리하면 각 저장소를 로드에 맞게 적절하게 확장할 수 있습니다. 예를 들어 읽기 저장소는 일반적으로 쓰기 저장소보다 훨씬 더 많은 부하가 발생합니다.
 
-
-
 CQRS의 일부 구현에서는 [Event Sourcing pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)을 사용합니다. 이 패턴을 사용하면 애플리케이션 상태가 일련의 이벤트로 저장됩니다. 각 이벤트는 데이터에 대한 일련의 변경 사항을 나타냅니다. 현재 상태는 이벤트를 재생하여 구성됩니다. CQRS 컨텍스트에서 Event Sourcing의 한 가지 benefit은 동일한 이벤트를 사용하여 다른 구성 요소, 특히 읽기 모델에 알릴 수 있다는 것입니다. 읽기 모델은 이벤트를 사용하여 쿼리에 더 효율적인 현재 상태의 스냅샷을 만듭니다. 그러나 Event Sourcing은 설계에 복잡성을 더합니다.
-
-
 
 ### Benefits of CQRS include:
 
@@ -68,7 +57,7 @@ CQRS의 일부 구현에서는 [Event Sourcing pattern](https://learn.microsoft.
 ## Implementation issues and considerations <a href="#implementation-issues-and-considerations" id="implementation-issues-and-considerations"></a>
 
 * **Complexity**
-  * CQRS의 기본 아이디어는 simple입니다. 그러나  애플리케이션 디자인이 더 복잡(특히 Event Sourcing pattern을 포함하는 경우)해질 수 있습니다.&#x20;
+  * CQRS의 기본 아이디어는 simple입니다. 그러나 애플리케이션 디자인이 더 복잡(특히 Event Sourcing pattern을 포함하는 경우)해질 수 있습니다.
 * **Messaging**
   * CQRS에는 메시징이 필요하지 않지만 메시징을 사용하여 명령을 처리하고 업데이트 이벤트를 게시하는 것이 일반적입니다. 이 경우 애플리케이션은 메시지 실패 또는 중복 메시지를 처리해야 합니다. 우선 순위가 다른 명령을 처리하려면 [Priority Queues](https://learn.microsoft.com/en-us/azure/architecture/patterns/priority-queue)열에 대한 지침을 참조하십시오.
 * **Eventual** **consistency**
@@ -99,24 +88,12 @@ CQRS가 가장 가치 있는 시스템의 제한된 섹션에 적용하는 것�
 
 CQRS pattern은 Event Sourcing pattern과 함께 자주 사용됩니다. CQRS 기반 시스템은 별도의 읽기 및 쓰기 데이터 모델을 사용하며, 각 모델은 관련 작업에 맞게 조정되고 종종 물리적으로 분리된 저장소에 있습니다. Event Sourcing 패턴과 함께 사용할 때 이벤트 저장소는 쓰기 모델이며 공식 정보 소스입니다. CQRS 기반 시스템의 읽기 모델은 데이터의 구체화된 보기(일반적으로 고도로 비정규화된 보기)를 제공합니다. 이러한 보기는 애플리케이션의 인터페이스 및 디스플레이 요구 사항에 맞게 조정되어 디스플레이 및 쿼리 성능을 모두 최대화하는 데 도움이 됩니다
 
-
-
 특정 시점의 실제 데이터가 아닌 쓰기 저장소로 이벤트 스트림을 사용하면 단일 집계에서 업데이트 충돌을 방지하고 성능과 확장성을 최대화할 수 있습니다. 이벤트는 읽기 저장소를 채우는 데 사용되는 데이터의 구체화된 보기를 비동기식으로 생성하는 데 사용할 수 있습니다. 이벤트 저장소는 공식적인 정보 소스이므로 시스템이 발전하거나 읽기 모델을 변경해야 할 때 구체화된 뷰를 삭제하고 모든 과거 이벤트를 재생하여 현재 상태의 새로운 표현을 생성할 수 있습니다. 구체화된 뷰는 사실상 데이터의 내구성 있는 읽기 전용 캐시입니다.
-
-
 
 Event Sourcing pattern과 결합된 CQRS를 사용할 때 다음을 고려하십시오.
 
 * 쓰기 및 읽기 저장소가 분리된 모든 시스템과 마찬가지로 이 패턴을 기반으로 하는 시스템은 eventually 일관성이 있습니다. 생성되는 이벤트와 업데이트되는 데이터 저장소 사이에 약간의 지연이 있습니다.
 * 패턴은 이벤트를 시작 및 처리하고 쿼리 또는 읽기 모델에 필요한 적절한 뷰 또는 객체를 어셈블하거나 업데이트하기 위해 코드를 생성해야 하기 때문에 복잡성을 추가합니다. Event Sourcing 패턴과 함께 사용할 때 CQRS 패턴의 복잡성으로 인해 성공적인 구현이 더 어려워질 수 있으며 시스템 설계에 다른 접근 방식이 필요합니다. 그러나 이벤트 소싱을 사용하면 도메인을 더 쉽게 모델링할 수 있고 데이터 변경 의도가 보존되기 때문에 보기를 다시 작성하거나 새 보기를 만드는 것이 더 쉽습니다.
 * 특정 엔터티 또는 엔터티 컬렉션에 대한 이벤트를 재생하고 처리하여 데이터의 읽기 모델 또는 프로젝션에서 사용할 구체화된 뷰를 생성하려면 상당한 처리 시간과 리소스 사용량이 필요할 수 있습니다. 관련된 모든 이벤트를 검사해야 할 수 있으므로 장기간에 걸쳐 값을 합산하거나 분석해야 하는 경우 특히 그렇습니다. 발생한 특정 작업의 총 수 또는 엔터티의 현재 상태와 같은 예약된 간격으로 데이터의 스냅샷을 구현하여 이 문제를 해결합니다.
-
-
-
-
-
-
-
-
 
 > [https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)
