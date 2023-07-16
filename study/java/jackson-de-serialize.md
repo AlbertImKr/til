@@ -18,10 +18,6 @@ Jackson은 Java 객체와 JSON 데이터 간의 직렬화 및 역직렬화를 �
 * `readValue()` 메서드를 사용하여 JSON 문자열을 Java 객체로 변환할 수 있습니다.
 * `readValue()` 메서드는 다양한 입력 형식을 지원하며, JSON 문자열, 파일, URL, InputStream 등을 처리할 수 있습니다.
 
-##
-
-
-
 ## 역질력 기본 생성자 필수
 
 기본적으로 Jackson은 객체를 역직렬화할 때, 기본 생성자를 사용하여 객체를 인스턴스화합니다. 기본 생성자가 없는 경우, Jackson은 객체를 역직렬화할 수 없으며, `JsonMappingException` 예외가 발생합니다.
