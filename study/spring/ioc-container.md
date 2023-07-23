@@ -35,7 +35,7 @@
 
 *   일반적으로 컴퓨터 프로그래밍에는 여러 단계의 소프트웨어 프로그램 개발이 있습니다.
 
-    <figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * Compile Time
   * Java와 같은 고급 언어로 작성된 명령이나 소스 코드를 컴퓨터가 이해할 수 있는 기계 코드로 변환되여야 한다. 커파일 시간 동안 소스 코드는 .java에서 .class로의 바이트 코드로 변환됩니다. 커파일 시간 동안 컴파일러는 코드의 구문,의미 체계 및 유형을 확인합니다.
   * 구문과 의미를 체크(sytax and semantic)

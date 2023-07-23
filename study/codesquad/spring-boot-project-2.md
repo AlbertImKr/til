@@ -1,6 +1,6 @@
 # Spring Boot Project 2주차 회고
 
-## 1. [CQRS pattern](../cs/design-pattern/cqrs-pattern.md)
+## 1. [CQRS pattern](../cs/design-pattern/cqrs-pattern/)
 
 * 아직 깊게 이해는 못했지만 개념을 찾아서 한번 알아봤습니다.
 
@@ -143,7 +143,7 @@ spring.datasource.url=ENC(w8FSUhvvlH5YMHPkm6SI3O3fbE0Efb0+)
 
 #### Spring Boot 내에서 사용
 
-* &#x20;StringEncryptor를 `@Autowired`하여 사용하면 됩니다.
+* StringEncryptor를 `@Autowired`하여 사용하면 됩니다.
 
 ```java
 public class AppStartupRunner implements CommandLineRunner {
@@ -166,14 +166,12 @@ public class AppStartupRunner implements CommandLineRunner {
 }
 ```
 
-
-
 ## 8. 쿼리에서 `*`를 사용하는 것은 지양한다
 
 * 불필요한 IO
   * `SELECT *`를 사용하면 무시해야할 불필요한 데이터를 반환할 수 있습니다. 그러나 해당 데이터를 가져오는 데 비용이 발생한다. 이로 인해 페이지에서 해당 데이터를 모두 읽을 것이기 때문에 DB 측에서 일부 낭비적인 IO 주기가 발생합니다.
 * 네트워크 트래픽 증가
-  * `SELECT *`는 클라이언트에 필요한 것보다 더 많은 데이터를 반환하므로 클라이언트는 더 많은 네트워크 대역폭을 사용합니다.  이러한 네트워크 대역폭의 증가는 또한 데이터가 클라이언트 애플리케이션(SSMS 또는 Java 애플리케이션 서버일 수 있음)에 도달하는 데 더 오랜 시간이 걸린다는 것을 의미합니다.
+  * `SELECT *`는 클라이언트에 필요한 것보다 더 많은 데이터를 반환하므로 클라이언트는 더 많은 네트워크 대역폭을 사용합니다. 이러한 네트워크 대역폭의 증가는 또한 데이터가 클라이언트 애플리케이션(SSMS 또는 Java 애플리케이션 서버일 수 있음)에 도달하는 데 더 오랜 시간이 걸린다는 것을 의미합니다.
 * 더 많은 애플리케이션 메모리
   * 이러한 데이터 증가로 인해 응용 프로그램은 사용되지 않지만 Microsoft SQL 서버 또는 연결 중인 다른 데이터베이스에서 오는 불필요한 데이터를 보관하기 위해 더 많은 메모리가 필요할 수 있습니다.
 * ResultSet의 열 순서에 대한 의존성
@@ -184,7 +182,7 @@ public class AppStartupRunner implements CommandLineRunner {
 * JOIN 쿼리 충돌
   * JOIN 쿼리에서 SELECT \*를 사용하면 여러 테이블에 동일한 이름(예: 상태, 활성, 이름 등)의 열이 있을 때 복잡해질 수 있습니다
 * 한 테이블에서 다른 테이블로 데이터 복사
-  * 한 테이블에서 다른 테이블로 데이터를 복사하는 일반적인 방법인 INSERT .. SELECT 문에 `SELECT *`를 사용할 때 두 테이블 간에 열 순서가 동일하지 않으면 잘못된 데이터를 잘못된 열에 복사할 가능성이 있습니다.&#x20;
+  * 한 테이블에서 다른 테이블로 데이터를 복사하는 일반적인 방법인 INSERT .. SELECT 문에 `SELECT *`를 사용할 때 두 테이블 간에 열 순서가 동일하지 않으면 잘못된 데이터를 잘못된 열에 복사할 가능성이 있습니다.
   * 일부 프로그래머는 쿼리 파서가 정적 값의 유효성을 검사하기 위해 추가 작업을 수행해야 하기 때문에 EXISTS 코드에서 SELECT \* 대신 SELECT 1을 사용하는 것이 더 빠르다고 생각합니다.
   * 오래 전에는 사실이었을지 모르지만 요즘 파서는 SELECT 목록이 EXISTS 절 내에서 완전히 관련이 없다는 것을 알 만큼 똑똑해졌습니다.
 
@@ -216,7 +214,7 @@ SELECT userName,.... FROM users where id = :id limit 1
 
 ## 12.SQLErrorCodeSQLExceptionTranslator
 
-`SQLExceptionTranslator` 는 `SQLExceptions`와 Spring의 자체 `org.springframework.dao.DataAccessException` 사이에서 변환할 수 있는 클래스에 의해 구현되는 인터페이스입니다.  이는 인식불가능한 data access와 관련되여 있다. 구현은 일반(예: JDBC용 SQLState 코드 사용) 또는 특정상황(예: Oracle 오류 코드 사용)에 정밀도를 높일 수 있습니다.
+`SQLExceptionTranslator` 는 `SQLExceptions`와 Spring의 자체 `org.springframework.dao.DataAccessException` 사이에서 변환할 수 있는 클래스에 의해 구현되는 인터페이스입니다. 이는 인식불가능한 data access와 관련되여 있다. 구현은 일반(예: JDBC용 SQLState 코드 사용) 또는 특정상황(예: Oracle 오류 코드 사용)에 정밀도를 높일 수 있습니다.
 
 * SQLErrorCodeSQLExceptionTranslator는 다음 순서로 일치 규칙을 적용합니다.
   * 하위 클래스에 의해 구현된 모든 custom translation. 일반적으로 제공된 구체적인 `SQLErrorCodeSQLExceptionTranslator`가 사용되므로 이 규칙이 적용되지 않습니다. 실제로 하위 클래스 구현을 제공한 경우에만 적용됩니다.

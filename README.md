@@ -27,7 +27,7 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 ### [CS](study/cs/)
 
 * [디자인 패턴](study/cs/design-pattern/)
-  * [CORS Pattern](study/cs/design-pattern/cqrs-pattern.md)
+  * [CORS Pattern](study/cs/design-pattern/cqrs-pattern/)
   * [Builder Pattern](study/cs/design-pattern/builder-pattern.md)
 * [ORM 도구](study/cs/orm\_tool.md)
 * [디미터 법칙](study/cs/demeter\_law.md)

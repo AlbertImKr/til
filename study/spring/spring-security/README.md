@@ -1,8 +1,6 @@
 # Spring Security
 
-
-
-<figure><img src="../../../.gitbook/assets/image (14) (1) (1).png" alt=""><figcaption><p>스프링 시큐리티의 인증 프로세스에 포함한 주 구성요소와 이들 간의 관계</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (14) (1) (1) (1).png" alt=""><figcaption><p>스프링 시큐리티의 인증 프로세스에 포함한 주 구성요소와 이들 간의 관계</p></figcaption></figure>
 
 <figure><img src="../../../.gitbook/assets/시큐리티.png" alt=""><figcaption><p>AuthenticationProvider는 인증 논리를 구현하고 UserDetailsService를 이용해 사용자 세부 정보를 로드하는 구성 요소이며 사용자 이름으로 사용자를 찾기 위해 loadUserByUsername(String username) 메서드를 호출한다</p></figcaption></figure>
 

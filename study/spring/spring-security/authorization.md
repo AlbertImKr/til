@@ -12,7 +12,7 @@ description: Authorization
 
 ## 권한
 
-<figure><img src="../../../.gitbook/assets/image (9) (1) (1) (1).png" alt=""><figcaption><p>한 사용자는 하나 이상의 권한(사용자가 수행할 수 있는 작업)을 가진다.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (9) (1) (1) (1) (1).png" alt=""><figcaption><p>한 사용자는 하나 이상의 권한(사용자가 수행할 수 있는 작업)을 가진다.</p></figcaption></figure>
 
 ## 역할
 

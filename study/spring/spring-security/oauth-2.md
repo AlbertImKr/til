@@ -12,7 +12,7 @@
 * 웹 애플리케이션과 서버 간의 인증을 위해 사용됩니다.
 * 인증 코드를 얻고, 이를 서버에 교환하여 액세스 토큰을 받습니다
 
-<figure><img src="../../../.gitbook/assets/image (10).png" alt=""><figcaption><p>승인 코드 그랜트 유형</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (10) (1).png" alt=""><figcaption><p>승인 코드 그랜트 유형</p></figcaption></figure>
 
 ### Implicit(암목적)
 
@@ -39,5 +39,4 @@
 * 클라이언트 애플리케이션이 자신의 자격 증명으로 인증하는 방식입니다.
 * 사용자에 대한 액세스 권한 없이 클라이언트 자체의 자원에 접근할 때 사용됩니다.
 
-<figure><img src="../../../.gitbook/assets/image (11) (2).png" alt=""><figcaption><p>클라이언트 자격 증명 그랜트 유형</p></figcaption></figure>
-
+<figure><img src="../../../.gitbook/assets/image (11) (2) (1).png" alt=""><figcaption><p>클라이언트 자격 증명 그랜트 유형</p></figcaption></figure>

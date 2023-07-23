@@ -130,7 +130,7 @@
 * HTTPS를 사용하는 것은 HTTP/1이는 HTTP/2든 간에 표준 HTTP 연결을 암호화하는 데 SSL/TLS를 사용한다는 뜻이다.
 * 공개-비공개키 암호화는 비대칭형 암호화라고 알려져 있는데, 메시지를 암호화하고 복호화하는 데 다른 키를 사용하기 때문이다. 이러한 유형의 암호화는 이전에 한 번도 연결한 적이 없는 서버와 보안 통신을 하는데 필요하지만 느리므로 나머지 연결을 암호화하는 데 사용할 대칭형 암호화키를 합의하는 데 사용한다. 이 합의는 TLS 핸드세이크 도중에 일어나는데, 핸드세이크는 연결의 시작을 일어난다.
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### ALPN
 
@@ -148,7 +148,7 @@
 * ALPN의 전신은 NPN(Next Protocol Negotiation)
 * NPN에서는 클라이언트가 사용되는 프로토클을 결정하지만 ALPN에서는 서버가 정한다는 점이 주된 차이점이다.
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## HTTP/1.1 과 HTTP/2
 
@@ -156,7 +156,7 @@
 
 <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## HTTP/2 푸시란
 
@@ -176,7 +176,7 @@
 
 * HTTP/2 푸시는 HTTP가 항상 ‘하나의 요청 = 하나의 응답’이라는 패러다임을 깨뜨린다. HTTP/2 푸시를 사용하면 서버가 하나의 요청에 대해 여러 응답으로 답할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 * HTTP 푸시가 웹소켓이나 SSE를 대체하는가?
   * HTTP/2는 엄밀하게 양방향은 아니다.
@@ -198,7 +198,7 @@
 * H2PushResource와 같은 웹서버의 이른 푸시 명령을 사용하는 데 따른 단점은 애플리케이션이 이러한 푸시를 개시하게 할 수 없으며, 애플리케이션이 푸시여부를 결정하기에 최적의 위치일 것이라는 점이다. 이 상황을 해결하고자 새로운 HTTP 상태 코드(103 Early Hint)를 사용해서 프리코드 HTTP 링크 헤더를 통한 리소스 요구 사항을 더 이르게 암시할 수 있다.
   * 이 코드를 사용하면 헤더만 있는 이른 응답을 보낼 수 있으며 , 드다음에는 표준 200 등답 코드가 따라온다.
 
-<figure><img src="../../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 브라우저에서 푸시 캐시 동작 방식
 
