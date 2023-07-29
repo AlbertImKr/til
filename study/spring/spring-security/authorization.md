@@ -8,7 +8,7 @@ description: Authorization
 
 * 인증된 호출자가 특정 기능과 데이터에 대한 이용 권리가 있는지 확인하는 프로세스
 
-<figure><img src="../../../.gitbook/assets/image (5) (1).png" alt=""><figcaption><p>클라이언트가 요청하면 인증 필터가 사용자를 인증한다.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption><p>클라이언트가 요청하면 인증 필터가 사용자를 인증한다.</p></figcaption></figure>
 
 ## 권한
 

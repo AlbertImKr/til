@@ -14,7 +14,7 @@ description: Authentication
 
 ## AuthenticationProvide 메서드
 
-<figure><img src="../../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption><p>AuthenticationManager는 사용 가능한 인증 공급자 중 하나에 인증을 위임한다. AuthenticationProvider는 주어진 인증 유형을 지원하지 않거나 객체 유형은 지원하지만 해당 특정 객체를 인증하는 방법을 모를 수 있다. 인증을 평가한 후 요청이 올바른지 판단할 수 있는 AuthenticationProvider가 AuthenticationManager에 응답한다.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption><p>AuthenticationManager는 사용 가능한 인증 공급자 중 하나에 인증을 위임한다. AuthenticationProvider는 주어진 인증 유형을 지원하지 않거나 객체 유형은 지원하지만 해당 특정 객체를 인증하는 방법을 모를 수 있다. 인증을 평가한 후 요청이 올바른지 판단할 수 있는 AuthenticationProvider가 AuthenticationManager에 응답한다.</p></figcaption></figure>
 
 ### authenticate() 구현 방법
 
@@ -57,7 +57,7 @@ description: Authentication
 
 * DelegatingSecurityContextExecutorService는 보안 컨텍스트 전파도 처리한다
 
-<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>DelegatingSecurityContextExecutorService는 ExecutorService를 작성해 작업하기 전에 보안 컨텍스트 세부 정보를 다음 스레드로 전파한다</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>DelegatingSecurityContextExecutorService는 ExecutorService를 작성해 작업하기 전에 보안 컨텍스트 세부 정보를 다음 스레드로 전파한다</p></figcaption></figure>
 
 ## HTTP Basic 인증
 
@@ -71,4 +71,4 @@ Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 
 ## Form Login 인증
 
-<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption><p>Form 기반 로그인을 이용하는 과정</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption><p>Form 기반 로그인을 이용하는 과정</p></figcaption></figure>

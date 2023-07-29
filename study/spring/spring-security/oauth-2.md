@@ -2,7 +2,7 @@
 
 ## 아키텍처의 구성 요소
 
-<figure><img src="../../../.gitbook/assets/image (6) (1).png" alt=""><figcaption><p>OAuth 2 아키텍처의 주 구성 요소</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption><p>OAuth 2 아키텍처의 주 구성 요소</p></figcaption></figure>
 
 ## 그랜트(grant) 유형
 
