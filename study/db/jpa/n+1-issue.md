@@ -235,3 +235,21 @@ Hibernate:
         favoriteda0_.member_id=?
 ------------ 즐겨 찾기 전체 조회 요청 ------------
 ```
+
+## 기타
+
+#### 멤버 조회시 FetchType Lazy 전략 사용
+
+```java
+@Entity
+@Table(name = "member")
+public class Member {
+
+    ...
+    @Basic(fetch = FetchType.LAZY)
+    @Embedded
+    private Favorites favorites;
+    
+    ...
+}
+```
