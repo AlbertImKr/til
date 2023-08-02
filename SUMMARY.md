@@ -52,6 +52,7 @@
   * [Generic](study/java/generic.md)
 * [DB](study/db/README.md)
   * [JPA](study/db/jpa/README.md)
+    * [N+1 Issue](study/db/jpa/n+1-issue.md)
     * [Index](study/db/jpa/index.md)
     * [ElementCollection\&CollectionTable](study/db/jpa/elementcollection-and-collectiontable.md)
     * [orphanRemoval](study/db/jpa/orphanremoval.md)
