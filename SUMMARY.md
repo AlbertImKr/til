@@ -5,6 +5,7 @@
 * [README](README.md)
 * [Spring](study/spring/README.md)
   * [Spring Integration Overview](study/spring/spring-integration-overview/README.md)
+    * [ThreaPollTaskExecutor](study/spring/spring-integration-overview/threapolltaskexecutor.md)
     * [Messaging Bridge](study/spring/spring-integration-overview/messaging-bridge.md)
     * [Channel Adapter](study/spring/spring-integration-overview/channel-adapter.md)
     * [Poller](study/spring/spring-integration-overview/poller.md)
