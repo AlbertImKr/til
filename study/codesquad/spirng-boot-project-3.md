@@ -4,8 +4,8 @@
 
 ## 1. 왜 JPA를 사용하는 가?
 
-{% content-ref url="../db/why-jpa.md" %}
-[why-jpa.md](../db/why-jpa.md)
+{% content-ref url="../db/jpa/why-jpa.md" %}
+[why-jpa.md](../db/jpa/why-jpa.md)
 {% endcontent-ref %}
 
 {% content-ref url="../db/between-jpa-and-jdbc.md" %}
@@ -16,8 +16,8 @@
 
 * 디미터 법칙이란?
 
-{% content-ref url="../cs/demeter_law.md" %}
-[demeter\_law.md](../cs/demeter\_law.md)
+{% content-ref url="../java/demeter_law.md" %}
+[demeter\_law.md](../java/demeter\_law.md)
 {% endcontent-ref %}
 
 * 문제 코드
@@ -70,7 +70,7 @@
 
 ## 8.Entity 에서 `@NotNull` 필드를 삭제
 
-#### DataIntegrityViolationException  발생
+#### DataIntegrityViolationException 발생
 
 ```java
 2023-04-18 06:08:39.320  WARN 67167 --- [nio-8080-exec-2] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 23503, SQLState: 23503
@@ -94,4 +94,3 @@ delete from account where account_id=? [23503-214]
 ## 11. assertSoftly
 
 {% embed url="https://github.com/assertj/assertj-examples/blob/main/assertions-examples/src/test/java/org/assertj/examples/SoftAssertionsExamples.java" %}
-
