@@ -4,6 +4,7 @@
 
 * [README](README.md)
 * [Spring](study/spring/README.md)
+  * [Caching](study/spring/caching.md)
   * [Spring Integration Overview](study/spring/spring-integration-overview/README.md)
     * [ThreadPollTaskExecutor](study/spring/spring-integration-overview/threadpolltaskexecutor.md)
     * [Messaging Bridge](study/spring/spring-integration-overview/messaging-bridge.md)
