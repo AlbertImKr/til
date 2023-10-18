@@ -71,6 +71,6 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 * [Spring Boot Project 3주차 회고](study/codesquad/spirng-boot-project-3.md)
 * [Spring Boot Project 4주차 회고](study/codesquad/spring-boot-project-4.md)
 
-### [DDD](study/ddd/)
+### [DDD](study/java/ddd/)
 
-* [AggregateId](study/ddd/aggregateid.md)
+* [AggregateId](study/java/ddd/aggregateid.md)
