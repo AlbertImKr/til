@@ -15,6 +15,7 @@
     * [Builder Pattern](study/cs/design-pattern/builder-pattern.md)
 * [DB](study/db/README.md)
   * [JPA](study/db/jpa/README.md)
+    * [@Transactional](study/db/jpa/transactional.md)
     * [Why JPA?](study/db/jpa/why-jpa.md)
     * [About JPA](study/db/jpa/about-jpa.md)
     * [N+1 Issue](study/db/jpa/n+1-issue.md)
