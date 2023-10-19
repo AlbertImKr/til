@@ -25,7 +25,7 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 ### [CS](study/cs/)
 
 * [Network](study/cs/network.md)
-* [HTTP](study/cs/http.md)
+* [HTTP](study/cs/http/)
 * [오류 코드](study/cs/erro\_code.md)
 * [ORM 도구](study/cs/orm\_tool.md)
 * [디자인 패턴](study/cs/design-pattern/)
