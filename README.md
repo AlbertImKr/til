@@ -4,73 +4,32 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 
 # README
 
-## 노력은 배신하지 않는다.
+## 안녕하세요! 👋&#x20;
+
+새로운 것을 배우는 것을 좋아하고, 개발에 대한 열정을 가진&#x20;
+
+🌱신입 개발자 Albert입니다.
+
+학습한 내용을 정리하고 기록하는 공간입니다.
+
+## 인생 신조
+
+### 노력은 배신하지 않는다.
 
 ### Efforts do not betray
 
-## 목록:
 
-### [Spring](study/spring/)
 
-* [Spring Integration OverView](study/spring/spring-integration-overview/)
-* [HATEOAS](study/spring/hateoas.md)
-* [스프링 공식문서 번역](study/spring/odt/)
-* [`@Autowired` vs Constructor Dependency Injection](study/spring/autowired-vs-constructor-dependency-injection.md)
-* [Spring Security](study/spring/spring-security/)
-* [IoC Container](study/spring/odt/springcore/ioccontainer.md)
-* [Filter,Interceptor,AOP,Argument Resolver](study/spring/filter-interceptor-aop-argument-resolver.md)
-* [Spring Annotation](study/spring/spring-annotation.md)
-* [About Spring](study/spring/about-spring.md)
+## 내가 생각하는 좋은 개발자의 특징 세 가지
 
-### [CS](study/cs/)
+### 문제 해결 능력
 
-* [Network](study/cs/network.md)
-* [HTTP](study/cs/http/)
-* [오류 코드](study/cs/erro\_code.md)
-* [ORM 도구](study/cs/orm\_tool.md)
-* [디자인 패턴](study/cs/design-pattern/)
+* 단순히 코드를 작성하는 것을 넘어서는 능력이 중요하다고 생각합니다. 클라이언트가 제시한 문제를 분석할 때, 그 문제의 표면적인 측면뿐만 아니라, 그 이면의 원인을 파악하는 것이 필요하다고 봅니다. 단기적인 해결책을 제시하는 것이 아니라 장기적이고 지속 가능한 해결책을 생각하고, 그 표면적인 요구사항 이상의 결과를 도출해야 한다고 믿습니다.
 
-### [Java](study/java/)
+### 신뢰성
 
-* [Jackson de/serialize](study/java/jackson-de-serialize.md)
-* [Collections.singletonList() vs List.of()](study/java/collections.singletonlist-list.of.md)
-* [Manage dependencies in Gradle](study/java/gradle-dependency.md)
-* [Logging Level](study/java/logging-level.md)
-* [Bean Validation](study/java/bean-validation.md)
-* [JVM Internals](study/java/jvm-internals/)
-* [Java Collection Framework](study/java/java-collection-framework.md)
-* [Annotation](study/java/annotation.md)
-* [Generic](study/java/generic.md)
-* [디미터 법칙](study/java/demeter\_law.md)
+* 자신의 코드의 품질에 대한 책임감을 가지고, 버그 없이 깔끔하고 유지보수가 가능한 코드를 작성하는 것이 중요하다고 생각합니다. 또한 팀원들과의 약속을 지키며, 기한도 맞추고, 예상치 못한 문제에 직면했을 때 책임감 있게 문제 해결에 적극적으로 나서는 것이 필요하다고 봅니다.
 
-### [DB](study/db/)
+### **협력과 소통 능력**
 
-* [JPA](study/db/jpa/)
-* [MongoDB](study/db/mongodb/)
-* [Why MySQL?](study/db/why-mysql.md)
-* [About JPA](study/db/jpa/about-jpa.md)
-* [Why JPA?](study/db/jpa/why-jpa.md)
-* [ACID properties of transactions](study/db/acid-properties-of-transactions.md)
-* [Between JPA and JDBC](study/db/between-jpa-and-jdbc.md)
-* [Identifiers in Hibernate/JPA](study/db/identifiers-in-hibernate-jpa.md)
-
-### [Infra](study/infra/)
-
-* [Docker](study/infra/docker/)
-* [Cloud 유형](study/infra/clouds/)
-* [무중단 배포](study/infra/cd/)
-* [코드 자동 배포](study/infra/ci/)
-* [AWS EC2](study/infra/aws-ec2/)
-* [AWS RDS](study/infra/aws-rds.md)
-* [AWS S3](study/infra/aws-s3.md)
-
-### [CodeSquad](./#codesquad)
-
-* [Spring Boot Project 1주차 회고](study/codesquad/spring-boot-project-1.md)
-* [Spring Boot Project 2주차 회고](study/codesquad/spring-boot-project-2.md)
-* [Spring Boot Project 3주차 회고](study/codesquad/spirng-boot-project-3.md)
-* [Spring Boot Project 4주차 회고](study/codesquad/spring-boot-project-4.md)
-
-### [DDD](study/java/ddd/)
-
-* [AggregateId](study/java/ddd/aggregateid.md)
+* 단순히 의견을 나누는 것을 넘어서 자신의 아이디어를 명확하고 간결하게 전달할 수 있는 능력이 중요하다고 생각합니다. 또한, 다른 팀원들의 아이디어에 대해 열린 마음으로 듣고 피드백을 주는 것이 필요하다고 봅니다. 프로젝트 중 발생할 수 있는 갈등 상황에서 중재자 역할을 하여 다른 의견을 조율하여 팀의 목표 달성에 도움을 주는 것이 중요하다고 믿습니다.
