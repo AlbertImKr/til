@@ -103,6 +103,7 @@
   * [Spirng Boot Project 3주차 회고](study/codesquad/spirng-boot-project-3.md)
   * [Spring Boot Project 4주차 회고](study/codesquad/spring-boot-project-4.md)
 * [Foody Moody 프로젝트](study/foody-moody/README.md)
+  * [Server-Sent Events (SSE)](study/foody-moody/server-sent-events-sse.md)
   * [기술 스택 적용 이유](study/foody-moody/undefined.md)
   * [NO-CACHE(HTTP)](study/foody-moody/no-cache-http.md)
   * [Transactional](study/foody-moody/transactional.md)
