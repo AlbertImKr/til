@@ -110,3 +110,5 @@
   * [Transactional](study/foody-moody/transactional.md)
 * [DDD](study/ddd/README.md)
   * [AggregateId](study/ddd/aggregateid.md)
+* [Test](study/test/README.md)
+  * [RestAssured](study/test/restassured.md)
