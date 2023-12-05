@@ -103,6 +103,7 @@
   * [Spirng Boot Project 3주차 회고](study/codesquad/spirng-boot-project-3.md)
   * [Spring Boot Project 4주차 회고](study/codesquad/spring-boot-project-4.md)
 * [Foody Moody 프로젝트](study/foody-moody/README.md)
+  * [HeartCount Asynchronous Issue](study/foody-moody/heartcount-asynchronous-issue.md)
   * [DeferredResult](study/foody-moody/deferredresult.md)
   * [ResponseBodyEmitter](study/foody-moody/responsebodyemitter.md)
   * [SseEmitter (Spring)](study/foody-moody/sseemitter-spring.md)
