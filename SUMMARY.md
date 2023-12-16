@@ -81,6 +81,7 @@
 * [Kafka](study/kafka/README.md)
   * [Error Channel](study/kafka/error-channel.md)
 * [Infra](study/infra/README.md)
+  * [Scale Up || Scale Out](study/infra/scale-up-or-or-scale-out.md)
   * [Docker](study/infra/docker/README.md)
     * [Dockerfile](study/infra/docker/dockerfile.md)
     * [Docker Hub Deploy](study/infra/docker/docker-hub-deploy.md)
