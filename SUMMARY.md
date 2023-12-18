@@ -14,6 +14,7 @@
       * [Event Sourcing and CQRS pattern](study/cs/design-pattern/cqrs-pattern/event-sourcing-and-cqrs-pattern.md)
     * [Builder Pattern](study/cs/design-pattern/builder-pattern.md)
 * [DB](study/db/README.md)
+  * [Normalization & Denormalization](study/db/normalization-and-denormalization.md)
   * [JPA](study/db/jpa/README.md)
     * [@Transactional](study/db/jpa/transactional.md)
     * [Why JPA?](study/db/jpa/why-jpa.md)
