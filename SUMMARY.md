@@ -14,6 +14,8 @@
       * [Event Sourcing and CQRS pattern](study/cs/design-pattern/cqrs-pattern/event-sourcing-and-cqrs-pattern.md)
     * [Builder Pattern](study/cs/design-pattern/builder-pattern.md)
 * [DB](study/db/README.md)
+  * [MySQL](study/db/mysql/README.md)
+    * [MySQL Connectors VS MySQL Shell(Scripting) VS MySQL Workbench](study/db/mysql/mysql-connectors-vs-mysql-shell-scripting-vs-mysql-workbench.md)
   * [Normalization & Denormalization](study/db/normalization-and-denormalization.md)
   * [JPA](study/db/jpa/README.md)
     * [@Transactional](study/db/jpa/transactional.md)
