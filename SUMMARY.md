@@ -16,6 +16,7 @@
 * [DB](study/db/README.md)
   * [MySQL](study/db/mysql/README.md)
     * [MySQL Connectors VS MySQL Shell(Scripting) VS MySQL Workbench](study/db/mysql/mysql-connectors-vs-mysql-shell-scripting-vs-mysql-workbench.md)
+    * [MySQL Storage Engine Architecture](study/db/mysql/mysql-storage-engine-architecture.md)
   * [Normalization & Denormalization](study/db/normalization-and-denormalization.md)
   * [JPA](study/db/jpa/README.md)
     * [@Transactional](study/db/jpa/transactional.md)
