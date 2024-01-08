@@ -4,7 +4,7 @@
 
 <figure><img src="../../../.gitbook/assets/시큐리티.png" alt=""><figcaption><p>AuthenticationProvider는 인증 논리를 구현하고 UserDetailsService를 이용해 사용자 세부 정보를 로드하는 구성 요소이며 사용자 이름으로 사용자를 찾기 위해 loadUserByUsername(String username) 메서드를 호출한다</p></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption><p>스피링 시큐리티의 인증 흐름, 여기에서는 JdbcUserDetailsManager를 UserDetailsService 구성 요소로 이용한다. JdbcUserDetailsManager는 데이터베이스를 이용해 사용자를 관리한다.</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption><p>스피링 시큐리티의 인증 흐름, 여기에서는 JdbcUserDetailsManager를 UserDetailsService 구성 요소로 이용한다. JdbcUserDetailsManager는 데이터베이스를 이용해 사용자를 관리한다.</p></figcaption></figure>
 
 ## 주 계약을 나타내는 인터페이스
 

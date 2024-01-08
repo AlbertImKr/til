@@ -59,7 +59,7 @@
 
 ### HTTP/1.1의 근본적인 성능 문제
 
-<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 대기 시간이 길다.
   * 대기시간은 단일 메시지를 서버에 전송하는 데 걸리는 시간을 측정하는 반면, 대역폭은 사용자가 이 메시지에서 다운로드 할 수 있는 양을 측정한다
@@ -172,7 +172,7 @@
     * CSS 리소스에서 필요한 만큼의 중요한 스타일만 빼내 HTML 파일에 끼워 넣는 것은 이 작업을 돕는 도구가 있음에도 불구하고 복잡하다. 복잡할 뿐만 아니라 이런 절차는 낭비다. 중요한 CSS는 캐시돼 다른 페이지에 재사용될 수 있는 CSS 파일 하나에 저장되기보다는 웹 사이트의 모든 페이지에서 재사용될 수 있는 CSS 파일 하나에 저장되기보다는 웹 사이트의 모든 페이지에 중복돼 저장된다. 더 나쁜 점은 인라인된 중요 CSS가 보통 나중에 로드되는 주 CSS 파일에 여저히 포함된다는 점이다. 페이지마다 중복될 뿐만 아니라 페이지 안에서도 중복된다.
     * 중요하지 않은 CSS파일도 모두 로드하는 자바스크립트르 사용해야 하는 요구 사항을 포함한다. 게다가 이 중요한 CSS파일 중 어떤 것이든 변경하려 한다면 하나의 공통 CSS파일만 갱신하는 대신 모든 페이지를 변경해야 한다
 
-<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * HTTP/2 푸시는 HTTP가 항상 ‘하나의 요청 = 하나의 응답’이라는 패러다임을 깨뜨린다. HTTP/2 푸시를 사용하면 서버가 하나의 요청에 대해 여러 응답으로 답할 수 있다.
 

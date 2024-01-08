@@ -398,77 +398,108 @@ select
 
 * DB 로그 확인 한 실제 쿼리
 
-<pre class="language-sql"><code class="lang-sql"><strong>select feedcollec0_.id                                                  as col_0_0_,  
-</strong>       feedcollec0_.id                                                  as col_1_0_,  
-       feedcollec0_.thumbnail_url                                       as col_2_0_,  
-       member1_.id                                                      as col_3_0_,  
-       member1_.nickname                                                as col_4_0_,  
-       tastemood3_.name                                                 as col_5_0_,  
-       image2_.url                                                      as col_6_0_,  
-       feedcollec0_.title                                               as col_7_0_,  
-       feedcollec0_.description                                         as col_8_0_,  
-       feedcollec4_.count                                               as col_9_0_,  
-       feedcollec0_.follower_count                                      as col_10_0_,  
-       (select count(ids9_.feed_id)  
-        from feed_collection_feed_ids ids9_  
-        where feedcollec0_.id = ids9_.feed_id)                          as col_11_0_,  
-       (select count(ids10_.comment_id)  
-        from feed_collection_comment_ids ids10_  
-        where feedcollec0_.id = ids10_.comment_id)                      as col_12_0_,  
-       exists (select 1  
-               from feed_collection_like feedcollec8_  
-               where feedcollec8_.member_id = '1'  
-                 and feedcollec8_.feed_collection_id = feedcollec0_.id) as col_13_0_,  
-       feedcollec5_.name                                                as col_14_0_,  
-       feedcollec0_.created_at                                          as col_15_0_,  
-       feedcollec0_.updated_at                                          as col_16_0_  
-from feed_collection feedcollec0_  
-inner join member member1_ 
-  on (feedcollec0_.author_id = member1_.id)  
-left join image image2_ 
-  on (member1_.profile_image_id = image2_.id)  
-inner join taste_mood tastemood3_ 
-  on (member1_.taste_mood_id = tastemood3_.id)  
-inner join feed_collection_like_count feedcollec4_ 
-  on (feedcollec0_.id = feedcollec4_.feed_collection_id)  
-left join feed_collection_moods feedcollec6_ 
-  on feedcollec0_.moods_id = feedcollec6_.id  
-left join feed_collection_mood feedcollec5_ 
-  on  (feedcollec5_.id in (
-        select moodlist7_.mood_list_id  
-        from feed_collection_moods_mood_list moodlist7_  
-        where feedcollec6_.id = moodlist7_.feed_collection_moods_id)
- )  
-order by feedcollec0_.created_at desc  
-limit 100, 11
-</code></pre>
+```sql
+select
+        feedcollec0_.id as col_0_0_,
+        feedcollec0_.id as col_1_0_,
+        feedcollec0_.thumbnail_url as col_2_0_,
+        member1_.id as col_3_0_,
+        member1_.nickname as col_4_0_,
+        tastemood3_.name as col_5_0_,
+        image2_.url as col_6_0_,
+        feedcollec0_.title as col_7_0_,
+        feedcollec0_.description as col_8_0_,
+        feedcollec4_.count as col_9_0_,
+        feedcollec0_.follower_count as col_10_0_,
+        (select
+            count(ids9_.feed_id) 
+        from
+            feed_collection_feed_ids ids9_ 
+        where
+            feedcollec0_.id = ids9_.feed_collection_id) as col_11_0_,
+        (select
+            count(ids10_.comment_id) 
+        from
+            feed_collection_comment_ids ids10_ 
+        where
+            feedcollec0_.id = ids10_.feed_collection_id) as col_12_0_,
+        exists (select
+            1 
+        from
+            feed_collection_like feedcollec8_ 
+        where
+            feedcollec8_.member_id=? 
+            and feedcollec8_.feed_collection_id=feedcollec0_.id) as col_13_0_,
+        feedcollec5_.name as col_14_0_,
+        feedcollec0_.created_at as col_15_0_,
+        feedcollec0_.updated_at as col_16_0_ 
+    from
+        feed_collection feedcollec0_ 
+    inner join
+        member member1_ 
+            on (
+                feedcollec0_.author_id=member1_.id
+            ) 
+    inner join
+        image image2_ 
+            on (
+                member1_.profile_image_id=image2_.id
+            ) 
+    inner join
+        taste_mood tastemood3_ 
+            on (
+                member1_.taste_mood_id=tastemood3_.id
+            ) 
+    inner join
+        feed_collection_like_count feedcollec4_ 
+            on (
+                feedcollec0_.id=feedcollec4_.feed_collection_id
+            ) 
+    inner join
+        feed_collection_moods feedcollec6_ 
+            on feedcollec0_.moods_id=feedcollec6_.id 
+    inner join
+        feed_collection_mood feedcollec5_ 
+            on (
+                feedcollec5_.id in (
+                    select
+                        moodlist7_.mood_list_id 
+                from
+                    feed_collection_moods_mood_list moodlist7_ 
+                where
+                    feedcollec6_.id=moodlist7_.feed_collection_moods_id
+            )
+        ) 
+    order by
+        feedcollec0_.created_at desc limit ?
+```
 
 ### 해결방법
 
 index 추가를 하여 조회 성능 향상
 
-### index 추가 검토
+## index 추가 검토
 
-#### FeedCollection 정렬 Query
+### FeedCollection 정렬 Query
 
 ```sql
 order by feedcollec0_.created_at desc 
 ```
 
-**index 확인**
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 -- feed_collection 테이블의 인덱스 확인
 SHOW INDEXES FROM feed_collection;
 ```
 
-**결과**
+<mark style="color:green;">**결과!!**</mark>
 
 <figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
 
 * FeedCollection의 `created_at` 컬럼에 index 존재 하지 않음
 
-**해결**
+<mark style="color:purple;">**해결**</mark>
 
 * `feed_collection` 테이블: `created_at` 컬럼에 index 추가
 
@@ -476,83 +507,83 @@ SHOW INDEXES FROM feed_collection;
 CREATE INDEX idx_feed_collection_created_at ON feed_collection (created_at DESC);
 ```
 
-#### Member 테이블 조인
+### Member 테이블 조인
 
 ```sql
 inner join member member1_ on (feedcollec0_.author_id = member1_.id)
 ```
 
-**index 확인**
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 -- member 테이블의 인덱스 확인 
 SHOW INDEXES FROM member;
 ```
 
-**결과**
+<mark style="color:green;">**결과**</mark>&#x20;
 
 <figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
 
 Member.id가 Primary Key이므로 index 존재한다.
 
-#### Image 테이블 조인
+### Image 테이블 조인
 
 ```sql
 inner join image image2_ on (member1_.profile_image_id = image2_.id)
 ```
 
-**index 확인**
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 -- image 테이블의 인덱스 확인 
 SHOW INDEXES FROM image;
 ```
 
-**결과**
+<mark style="color:green;">**결과**</mark>&#x20;
 
 <figure><img src="../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
 
 Image.id도 Primary Key이므로 index 존재한다.
 
-#### TasteMood 테이블 조인
+### TasteMood 테이블 조인
 
 ```sql
 inner join taste_mood tastemood3_ on (member1_.taste_mood_id = tastemood3_.id) 
 ```
 
-**index 확인**
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 -- taste_mood 테이블의 인덱스 확인 
 SHOW INDEXES FROM taste_mood;
 ```
 
-**결과**
+<mark style="color:green;">**결과**</mark>&#x20;
 
 <figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
 
 TasteMood.id도 Primary Key이므로 index 존재한다.
 
-#### FeedCollectionLikeCount 테이블 조인
+### FeedCollectionLikeCount 테이블 조인
 
 ```sql
 inner join feed_collection_like_count feedcollec4_ on (feedcollec0_.id = feedcollec4_.feed_collection_id)
 ```
 
-**index 확인**
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 -- feed_collection_like_count 테이블의 인덱스 확인 
 SHOW INDEXES FROM feed_collection_like_count;
 ```
 
-**결과**&#x20;
+<mark style="color:green;">**결과**</mark> <mark style="color:green;"></mark><mark style="color:green;">!!</mark>
 
 <figure><img src="../../.gitbook/assets/Pasted image 20231231152255.png" alt=""><figcaption></figcaption></figure>
 
 `feed_collection_like_count` 테이블의 `feed_collection_id` 컬럼에 index가 존재하지 않음&#x20;
 
-**해결**&#x20;
+<mark style="color:purple;">**해결**</mark>
 
 `feed_collection_id` 컬럼에 index 추가
 
@@ -560,25 +591,25 @@ SHOW INDEXES FROM feed_collection_like_count;
 CREATE INDEX idx_feed_collection_like_count_on_feed_collection_id ON feed_collection_like_count (feed_collection_id);
 ```
 
-#### FeedCollectionMoods 테이블 조인
+### FeedCollectionMoods 테이블 조인
 
 ```sql
 inner join feed_collection_moods feedcollec6_ on feedcollec0_.moods_id = feedcollec6_.id 
 ```
 
-**index 확인**
+<mark style="color:orange;">**index 확인**</mark>
 
 ```
 SHOW INDEXES FROM feed_collection_moods;
 ```
 
-**결과**&#x20;
+<mark style="color:green;">**결과**</mark>&#x20;
 
 <figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
 
 FeedCollectionMoods.id 도 primary key이므로 index가 존재한다
 
-#### FeedCollectionMoodsMoodList 테이블 조인
+### FeedCollectionMoodsMoodList 테이블 조인
 
 ```sql
 select moodlist7_.mood_list_id  
@@ -586,19 +617,19 @@ from feed_collection_moods_mood_list moodlist7_
 where feed_collection_moods.id = moodlist7_.feed_collection_moods_id
 ```
 
-**index 확인**
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 SHOW INDEXES FROM feed_collection_moods_mood_list;
 ```
 
-**결과**&#x20;
+<mark style="color:green;">**결과**</mark>&#x20;
 
 <figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
 FeedCollectionMoodsMoodList.mood\_list\_id와 feeed\_collection\_moods\_id에 대한 index가 존재한다
 
-#### FeedCollectionMood 테이블 조인
+### FeedCollectionMood 테이블 조인
 
 ```sql
 inner join feed_collection_mood feedcollec5_ on  
@@ -609,42 +640,40 @@ inner join feed_collection_mood feedcollec5_ on
      )
 ```
 
-index 확인
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 SHOW INDEXES FROM feed_collection_mood;
 ```
 
-결과
+<mark style="color:green;">**결과**</mark>&#x20;
 
 <figure><img src="../../.gitbook/assets/Pasted image 20231231153654.png" alt=""><figcaption></figcaption></figure>
 
 FeedCollectionMood.id 가 primary key이므로 index가 존재한다
 
-#### FeedCollectionFeedIds 테이블 서브 쿼리
+### FeedCollectionFeedIds 테이블 서브 쿼리
 
 ```sql
-select count(ids9_.feed_id) 
+select count(ids9_.feed_collection_id) 
 from feed_collection_feed_ids ids9_ 
-where feedcollec0_.id = ids9_.feed_id
+where feedcollec0_.id = ids9_.feed_collection_id
 ```
 
-index 확인
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 -- feed_collection_feed_ids 테이블에서 feed_id 컬럼의 인덱스 확인 
 SHOW INDEXES FROM feed_collection_feed_ids;
 ```
 
-결과
+<mark style="color:green;">**결과**</mark>&#x20;
 
-<figure><img src="../../.gitbook/assets/Pasted image 20231231155451.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-feed\_id가 index가 존재한다
+feed\_collection\_id가 index가 존재한다
 
-> _여기서 feed\_id는 FeedCollection id다.(edit할 필요가 있다)_
-
-#### FeedCollectionCommentIds 테이블 서버 쿼리
+### FeedCollectionCommentIds 테이블 서버 쿼리
 
 ```sql
 select count(ids10_.comment_id)  
@@ -652,22 +681,20 @@ from feed_collection_comment_ids ids10_
 where feedcollec0_.id = ids10_.comment_id
 ```
 
-**index 확인**
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 -- feed_collection_comment_ids 테이블에서 comment_id 컬럼의 인덱스 확인 
 SHOW INDEXES FROM feed_collection_comment_ids;
 ```
 
-**결과**
+<mark style="color:green;">**결과**</mark>&#x20;
 
-<figure><img src="../../.gitbook/assets/Pasted image 20231231160418.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 comment\_id가 index가 존재한다
 
-> _여기서 comment\_id는 FeedCollection id다.(edit할 필요가 있다)_
-
-#### FeedCollectionLike 테이블 서버 쿼리
+### FeedCollectionLike 테이블 서버 쿼리
 
 ```sql
 select 1  
@@ -676,25 +703,33 @@ where feedcollec8_.member_id = '1'
  and feedcollec8_.feed_collection_id = feedcollec0_.id
 ```
 
-**index 확인**
+<mark style="color:orange;">**index 확인**</mark>
 
 ```sql
 -- feed_collection_like 테이블의 인덱스 확인
 SHOW INDEXES FROM feed_collection_like;
 ```
 
-**결과**&#x20;
+<mark style="color:green;">**결과**</mark> <mark style="color:green;"></mark><mark style="color:green;">!!</mark>
 
 <figure><img src="../../.gitbook/assets/Pasted image 20231231160658.png" alt=""><figcaption></figcaption></figure>
 
 `feed_collection_like` 테이블의 `member_id`,`feed_collection_id` 컬럼에 index 가 없음 해결 `feed_collection_like` 테이블: `member_id`,`feed_collection_id` 컬럼에 index 추가
 
+<mark style="color:purple;">**해결**</mark>
+
+<figure><img src="../../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+
+더미 데이터에서는 feed\_collection\_id의 **cardinality** 가 더 높아서 feed\_collection\_id를 first Index로 하는 것이 유리 하다
+
 ```sql
 CREATE INDEX idx_feed_collection_like_on_member_id_and_feed_collection_id 
-ON feed_collection_like (member_id, feed_collection_id);
+ON feed_collection_like (feed_collection_id,member_id);
 ```
 
-### index 추가 후(Explain)
+## index 추가 후(Explain)
 
 <figure><img src="../../.gitbook/assets/Pasted image 20231231191713.png" alt=""><figcaption></figcaption></figure>
 
@@ -794,7 +829,7 @@ from (select DISTINCT _feedCollection.id
 left outer join feed_collection_moods feedcollec1_ 
        on feedcollec0_.moods_id = feedcollec1_.id  
 order by feedcollec0_.created_at desc  
-limit 100, 10;
+limit 21;
 ```
 
 #### 분석
@@ -809,40 +844,39 @@ limit 100, 10;
 
 개선한 Query
 
-* subSelect를 사용하지 않고 PrimarySelect를 사용해서 데이터를 가져온 다음 **feedcollec0\_.moods\_id** 로 mood를 가져온다&#x20;
+* subSelect를 사용하지 않고 PrimarySelect를 사용해서 데이터를 가져온 다음 **feedcollectionId**로 **Mood**를 가져온다
 
 ```sql
-select feedcollec0_.id                                                                                         as col_0_0_,  
-       feedcollec0_.id                                                                                         as col_1_0_,  
-       feedcollec0_.thumbnail_url                                                                              as col_2_0_,  
-       member1_.id                                                                                             as col_3_0_,  
-       member1_.nickname                                                                                       as col_4_0_,  
-       tastemood3_.name                                                                                        as col_5_0_,  
-       image2_.url                                                                                             as col_6_0_,  
-       feedcollec0_.title                                                                                      as col_7_0_,  
-       feedcollec0_.description                                                                                as col_8_0_,  
-       feedcollec4_.count                                                                                      as col_9_0_,  
-       feedcollec0_.follower_count                                                                             as col_10_0_,  
-       (select count(ids6_.feed_id)  
-        from feed_collection_feed_ids ids6_  
-        where feedcollec0_.id = ids6_.feed_id)                                                                 as col_11_0_,  
-       (select count(ids7_.comment_id)  
-        from feed_collection_comment_ids ids7_  
-        where feedcollec0_.id = ids7_.comment_id)                                                              as col_12_0_,  
-       exists (select 1  
-               from feed_collection_like feedcollec5_  
-               where feedcollec5_.member_id = '2'  
-                 and feedcollec5_.feed_collection_id = feedcollec0_.id)                                        as col_13_0_,  
-       feedcollec0_.moods_id                                                                                   as col_14_0_,  
-       feedcollec0_.created_at                                                                                 as col_15_0_,  
-       feedcollec0_.updated_at                                                                                 as col_16_0_  
-from feed_collection feedcollec0_  
-         inner join member member1_ on (feedcollec0_.author_id = member1_.id)  
-         left outer join image image2_ on (member1_.profile_image_id = image2_.id)  
-         inner join taste_mood tastemood3_ on (member1_.taste_mood_id = tastemood3_.id)  
-         inner join feed_collection_like_count feedcollec4_ on (feedcollec0_.id = feedcollec4_.feed_collection_id)  
-order by feedcollec0_.created_at desc  
-limit 100, 11;
+select feedcollec0_.id                                                  as col_0_0_,
+       feedcollec0_.id                                                  as col_1_0_,
+       feedcollec0_.thumbnail_url                                       as col_2_0_,
+       member1_.id                                                      as col_3_0_,
+       member1_.nickname                                                as col_4_0_,
+       tastemood3_.name                                                 as col_5_0_,
+       image2_.url                                                      as col_6_0_,
+       feedcollec0_.title                                               as col_7_0_,
+       feedcollec0_.description                                         as col_8_0_,
+       feedcollec4_.count                                               as col_9_0_,
+       feedcollec0_.follower_count                                      as col_10_0_,
+       (select count(ids6_.feed_collection_id)
+        from feed_collection_feed_ids ids6_
+        where feedcollec0_.id = ids6_.feed_collection_id)               as col_11_0_,
+       (select count(ids7_.feed_collection_id)
+        from feed_collection_comment_ids ids7_
+        where feedcollec0_.id = ids7_.feed_collection_id)               as col_12_0_,
+       exists (select 1
+               from feed_collection_like feedcollec5_
+               where feedcollec5_.member_id = '2'
+                 and feedcollec5_.feed_collection_id = feedcollec0_.id) as col_13_0_,
+       feedcollec0_.created_at                                          as col_14_0_,
+       feedcollec0_.updated_at                                          as col_15_0_
+from feed_collection feedcollec0_
+         inner join member member1_ on (feedcollec0_.author_id = member1_.id)
+         inner join image image2_ on (member1_.profile_image_id = image2_.id)
+         inner join taste_mood tastemood3_ on (member1_.taste_mood_id = tastemood3_.id)
+         inner join feed_collection_like_count feedcollec4_ on (feedcollec0_.id = feedcollec4_.feed_collection_id)
+order by feedcollec0_.created_at desc
+limit 21;
 ```
 
 <figure><img src="../../.gitbook/assets/Pasted image 20231231214346 (1).png" alt=""><figcaption></figcaption></figure>
