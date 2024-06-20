@@ -98,6 +98,29 @@ equally valid and useful.
 * rjust( ) / ljust( ) / center( )
 * zfill()
 * translate()
+  * maketrans() 세 가지 사용법
+
+<pre class="language-python"><code class="lang-python"># 1. 두 개의 동일한 길이의 문자열 인수 사용
+<strong># 첫 번째 문자열의 각 문자를 두 번째 문자열의 대응하는 문자로 매핑합니다.
+</strong>table = str.maketrans("abc", "123")
+result = "abcdef".translate(table)
+print(result)  # 출력: 123def
+
+# 2.세 개의 인수 사용: 첫 번째와 두 번째 문자열은 매핑, 세 번째 문자열은 제거할 문자
+# 첫 번째 문자열의 문자를 두 번째 문자열의 대응하는 문자로 매핑하고, 세 번째 문자열의 문자는 제거합니다.
+table = str.maketrans("abc", "123", "def")
+result = "abcdef".translate(table)
+print(result)  # 출력: 123
+
+# 3.딕셔너리를 사용한 매핑
+# 문자(유니코드 코드 포인트)를 다른 문자 또는 None으로 매핑하는 딕셔너리를 전달할 수 있습니다.
+# None으로 매핑된 문자는 제거됩니다.
+
+table = str.maketrans({"a": "1", "b": "2", "c": "3", "d": None})
+result = "abcde".translate(table)
+print(result)  # 출력: 123e
+
+</code></pre>
 
 ### 문자열 포메팅
 
