@@ -4,6 +4,8 @@ description: 학습한 내용을 정리하고 기록하는 공간입니다.
 
 # README
 
+[![](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Falbert-im.gitbook.io%2Ftil%2F\&count\_bg=%2379C83D\&title\_bg=%23555555\&icon=\&icon\_color=%23E7E7E7\&title=hits\&edge\_flat=false)](https://hits.seeyoufarm.com)
+
 ## 안녕하세요! 👋 &#x20;
 
 백엔드 개발자 Albert입니다.
