@@ -4,7 +4,7 @@
 
 AWS Cloud에서 제공하는 RDS는 아래 유형 있습니다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 그중 Aurora는 MySQL 및 PostgreSQL만 지원 합니다.
 

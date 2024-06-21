@@ -18,7 +18,7 @@
 
 메시지 라우터는 회신 메시지를 보낼 수 있는 서비스 액티베이터 또는 기타 엔드포인트에서 정적으로 구성된 출력 채널에 대한 **동적 대안**으로 자주 사용됩니다.
 
-<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Message Router</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>Message Router</p></figcaption></figure>
 
 ## **Splitter**
 
@@ -32,7 +32,7 @@
 
 Service Activator는 서비스 인스턴스를 메시징 시스템에 연결하기 위한 일반 끝점입니다.&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>Service Activator</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>Service Activator</p></figcaption></figure>
 
 {% hint style="info" %}
 메시지 채널에서 채널은 폴링 가능하거나 구독 가능할 수 있습니다. 위 다이어그램에서 이것은 "**시계**" 기호와 실선 화살표(**poll**) 및 점선 화살표(**subscribe**)로 표시됩니다

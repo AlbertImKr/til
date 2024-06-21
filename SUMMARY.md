@@ -141,3 +141,4 @@
     * [Data type](study/python/python-basic-grammar/data-type.md)
     * [Operations and syntax](study/python/python-basic-grammar/operations-and-syntax.md)
     * [List,Tuple,Dictionary,Set](study/python/python-basic-grammar/list-tuple-dictionary-set.md)
+    * [Function](study/python/python-basic-grammar/function.md)

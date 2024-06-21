@@ -14,6 +14,8 @@ description: Python 기본 문법
 
 ## 5. [리스트, 튜플, 딕셔너리, 셋](list-tuple-dictionary-set.md)
 
+## 6. 함수
+
 
 
 ## 참조
