@@ -14,9 +14,11 @@ description: Python 기본 문법
 
 ## 5. [리스트, 튜플, 딕셔너리, 셋](list-tuple-dictionary-set.md)
 
-## 6. 함수
+## 6. [함수](function.md)
 
+## 7.  [조건문](conditional-statement.md)
 
+## 8.  [반복문](loop.md)
 
 ## 참조
 

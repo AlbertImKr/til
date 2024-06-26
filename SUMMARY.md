@@ -142,3 +142,5 @@
     * [Operations and syntax](study/python/python-basic-grammar/operations-and-syntax.md)
     * [List,Tuple,Dictionary,Set](study/python/python-basic-grammar/list-tuple-dictionary-set.md)
     * [Function](study/python/python-basic-grammar/function.md)
+    * [Conditional statement](study/python/python-basic-grammar/conditional-statement.md)
+    * [Loop](study/python/python-basic-grammar/loop.md)
