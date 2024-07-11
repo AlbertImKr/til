@@ -54,7 +54,7 @@
 
 ## 구조
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Java Collection Framework</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Java Collection Framework</p></figcaption></figure>
 
 ## Benefits of the Java Collections Framework
 

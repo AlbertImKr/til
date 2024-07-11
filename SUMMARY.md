@@ -141,3 +141,8 @@
     * [Function](study/python/python-basic-grammar/function.md)
     * [Conditional statement](study/python/python-basic-grammar/conditional-statement.md)
     * [Loop](study/python/python-basic-grammar/loop.md)
+* [HTML](study/html/README.md)
+  * [HTML Basic](study/html/html-basic.md)
+  * [HTML Basic Tags](study/html/html-basic-tags.md)
+  * [HTML Form Tags](study/html/html-form-tags.md)
+  * [HTML Table Tags](study/html/html-table-tags.md)

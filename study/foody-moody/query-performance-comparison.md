@@ -669,7 +669,7 @@ SHOW INDEXES FROM feed_collection_feed_ids;
 
 <mark style="color:green;">**결과**</mark>&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 feed\_collection\_id가 index가 존재한다
 
@@ -690,7 +690,7 @@ SHOW INDEXES FROM feed_collection_comment_ids;
 
 <mark style="color:green;">**결과**</mark>&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 comment\_id가 index가 존재한다
 
