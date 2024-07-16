@@ -47,11 +47,11 @@ API 게이트웨이에서 API 정의와 관리를 분리할 수 있습니다.
 
 ## 쓰기 모델을 메인프레임에 유지 <a href="#keeping-the-write-model-on-mainframe" id="keeping-the-write-model-on-mainframe"></a>
 
-<figure><img src="../../../../.gitbook/assets/image (11).png" alt=""><figcaption><p>위의 그림에서 쓰기 모델은 메인프레임에서 현재 트랜잭션 처리를 따르고 분산된 세계에 대한 실시간 가시성을 얻기 위해 데이터 캡처 푸시 데이터를 이벤트 백본으로 변경합니다</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (11) (1).png" alt=""><figcaption><p>위의 그림에서 쓰기 모델은 메인프레임에서 현재 트랜잭션 처리를 따르고 분산된 세계에 대한 실시간 가시성을 얻기 위해 데이터 캡처 푸시 데이터를 이벤트 백본으로 변경합니다</p></figcaption></figure>
 
 ## 일관성 문제 <a href="#the-consistency-challenges" id="the-consistency-challenges"></a>
 
-<figure><img src="../../../../.gitbook/assets/image (10).png" alt=""><figcaption><p>이벤트 소싱 패턴을 사용하면 신뢰의 소스는 ㅇㅟ 다이어그램과 같이 버전 제어 시스템 역할을 하는 이벤트 소스입니다.</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (10) (1).png" alt=""><figcaption><p>이벤트 소싱 패턴을 사용하면 신뢰의 소스는 ㅇㅟ 다이어그램과 같이 버전 제어 시스템 역할을 하는 이벤트 소스입니다.</p></figcaption></figure>
 
 데이터 변경 사항을 동기화하는 단계는 다음과 같습니다.
 

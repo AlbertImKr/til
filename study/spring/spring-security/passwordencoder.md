@@ -49,11 +49,11 @@
 
 ## 동작 방식
 
-<figure><img src="../../../.gitbook/assets/image (7) (1).png" alt=""><figcaption><p>접두사로 판단</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption><p>접두사로 판단</p></figcaption></figure>
 
 ## SSCM 필수 기능
 
-### 스프링 시큐리터 암호화 모듈 SSCM (Single Sign-On(SSO) Client Manager)&#x20;
+### 스프링 시큐리터 암호화 모듈 SSCM (Single Sign-On(SSO) Client Manager)
 
 * 키 생성기
   * 해성 및 암호화 알고리즘을 위한 키를 생성하는 객체

@@ -144,7 +144,7 @@ div 보다 header, footer, main, section, article, nav 등 다양한 시매틱�
 
 <div align="center">
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt="" width="43"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt="" width="43"><figcaption></figcaption></figure>
 
 </div>
 

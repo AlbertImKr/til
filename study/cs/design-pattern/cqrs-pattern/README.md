@@ -12,7 +12,7 @@ CQRS는 데이터 저장소에 대한 읽기 및 업데이트 작업을 구분�
 
 읽기 및 쓰기 워크로드는 성능 및 확장 요구 사항이 매우 다른 비대칭인 경우가 많습니다.
 
-<figure><img src="../../../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 작업의 일부로 필요하지 않더라도 올바르게 업데이트해야 하는 추가 열 또는 속성과 같이 데이터의 읽기 및 쓰기 표현 간에 불일치가 있는 경우가 많습니다.
 * 동일한 데이터 집합에서 작업이 병렬로 수행될 때 데이터 경합이 발생할 수 있습니다.
@@ -37,7 +37,7 @@ CQRS는 데이터를 **업데이트**하는 명령과 데이터를 **읽는** �
 
 그런 다음 절대적인 요구 사항은 아니지만 다음 다이어그램에 표시된 것처럼 모델을 격리할 수 있습니다.
 
-<figure><img src="../../../../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 별도의 쿼리 및 업데이트 모델을 사용하면 설계 및 구현이 간소화됩니다. 그러나 한 가지 단점은 [O/RM 도구](../../orm\_tool.md)와 같은 scaffolding 메커니즘을 사용하여 데이터베이스 스키마에서 CQRS 코드를 자동으로 생성할 수 없다는 것입니다. (그러나 생성된 코드 위에 사용자 customization할 수 있습니다.)
 
@@ -45,7 +45,7 @@ CQRS는 데이터를 **업데이트**하는 명령과 데이터를 **읽는** �
 
 별도의 읽기 및 쓰기 데이터베이스를 사용하는 경우 동기화 상태를 유지해야 합니다. 일반적으로 이것은 쓰기 모델이 데이터베이스를 업데이트할 때마다 이벤트를 publish하도록 함으로써 수행됩니다. 이벤트 사용에 대한 자세한 내용은 [Event-driven architecture style](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/event-driven)을 참조하세요. 메시지 브로커와 데이터베이스는 일반적으로 단일 분산 트랜잭션에 참여할 수 없기 때문에 데이터베이스를 업데이트하고 이벤트를 publish할 때 일관성을 보장하는 데 문제가 있을 수 있습니다. 자세한 내용은 [Idempotent message processing](https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/containers/aks-mission-critical/mission-critical-data-platform#idempotent-message-processing)에 대한 지침을 참조하십시오.
 
-<figure><img src="../../../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 읽기 저장소는 쓰기 저장소의 읽기 전용 복제본이거나 읽기 및 쓰기 저장소가 모두 다른 구조를 가질 수 있습니다. 여러 읽기 전용 복제본을 사용하면 특히 읽기 전용 복제본이 애플리케이션 인스턴스에 가까운 분산 시나리오에서 쿼리 성능을 향상시킬 수 있습니다.
 
@@ -100,7 +100,7 @@ CQRS 패턴을 적용하는 두 번째 단계는 도메인 모델을 별도의 �
 
 완전한 CQRS 패턴 솔루션을 구현하는 CQRS 패턴을 적용하는 세 번째 단계는 레코드 데이터베이스를 별도의 읽기 및 쓰기 데이터베이스로 분할하는 것입니다. 이 다이어그램은 각각 자체 데이터베이스에서 지원하는 쓰기 모델과 읽기 모델을 보여줍니다. 전체 솔루션은 데이터 업데이트를 지원하는 쓰기 솔루션과 데이터 쿼리를 지원하는 읽기 솔루션의 두 가지 주요 부분으로 구성됩니다. 두 부분은 이벤트 버스로 연결됩니다.
 
-<figure><img src="../../../../.gitbook/assets/image (9).png" alt=""><figcaption><p><a href="https://ibm-cloud-architecture.github.io/refarch-eda/patterns/cqrs/">출처</a></p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (9) (1).png" alt=""><figcaption><p><a href="https://ibm-cloud-architecture.github.io/refarch-eda/patterns/cqrs/">출처</a></p></figcaption></figure>
 
 이 단계의 설계는 이전 단계의 설계보다 훨씬 더 복잡합니다. 동일한 데이터의 복사본이 있는 별도의 데이터베이스는 데이터 모델링 및 데이터 사용을 더 쉽게 만들 수 있지만 데이터를 동기화하고 복사본의 일관성을 유지하려면 상당한 오버헤드가 필요합니다.
 

@@ -24,7 +24,7 @@ Spring Integration의 주요 **목표**는 유지 관리 및 테스트 가능한
 
 ### Message
 
-<figure><img src="../../../.gitbook/assets/image (4).png" alt=""><figcaption><p>Message</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4) (1).png" alt=""><figcaption><p>Message</p></figcaption></figure>
 
 **payload**는 모든 유형이 될 수 있으며 **headers**에는 ID, 타임스탬프, 상관 관계 ID 및 반환 주소와 같은 일반적으로 필요한 정보가 포함됩니다. **Headers**는 연결된 전송과 값을 주고 받는 데에도 사용됩니다.
 
@@ -38,7 +38,7 @@ Spring Integration의 주요 **목표**는 유지 관리 및 테스트 가능한
 
 메시지 채널은 메시징 구성 요소를 **분리**하고 메시지 **가로채기**와 **모니터링**을 위한 convenient **point**을 제공한다.
 
-<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption><p>Message Channel</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (1).png" alt=""><figcaption><p>Message Channel</p></figcaption></figure>
 
 메시지 채널은 **point-to-point** 또는 **publish-subscribe semantics**을 따를 수 있습니다.
 

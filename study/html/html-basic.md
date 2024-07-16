@@ -6,7 +6,7 @@ description: 기본
 
 ## Element
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 기본 구조
 
@@ -40,7 +40,7 @@ HTML에서 블록, 인라인, 인라인 블록 요소의 차이점을 정리한 
 
 <table><thead><tr><th width="137">특성</th><th width="199">Block Elements</th><th width="225">Inline Elements</th><th>Inline-Block Elements</th></tr></thead><tbody><tr><td><strong>전체 가로폭</strong></td><td>✅</td><td>❌</td><td>❌</td></tr><tr><td><strong>크기 지정</strong></td><td>✅</td><td>❌</td><td>✅</td></tr><tr><td><strong>여백과 패딩</strong></td><td>all</td><td>좌, 우</td><td>all</td></tr><tr><td><strong>중첩</strong></td><td><p>다른 블록 요소 ✅</p><p>인라인 요소 ✅</p></td><td><p>주로 텍스트 ✅</p><p>다른 인라인 요소 ✅</p></td><td><p>인라인 블록 요소 ✅</p><p>인라인 요소 ✅</p></td></tr><tr><td><strong>예시 요소</strong></td><td><code>&#x3C;div></code>, <code>&#x3C;h1></code>, <code>&#x3C;p></code>, <code>&#x3C;section></code>, <code>&#x3C;header></code>, <code>&#x3C;footer></code></td><td><code>&#x3C;span></code>, <code>&#x3C;a></code>, <code>&#x3C;img></code>, <code>&#x3C;strong></code>, <code>&#x3C;em></code></td><td><code>&#x3C;img></code>, <code>&#x3C;button></code>, <code>&#x3C;input></code>, <code>&#x3C;label></code>, <code>&#x3C;iframe></code></td></tr></tbody></table>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
 ## 마무리
 
